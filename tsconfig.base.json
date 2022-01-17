@@ -1,6 +1,3 @@
 {
-  "extends": "@mskelton/tsconfig/tsconfig",
-  "compilerOptions": {
-    "emitDeclarationOnly": true
-  }
+  "extends": "@mskelton/tsconfig"
 }
