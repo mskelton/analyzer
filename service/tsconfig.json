@@ -1,11 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "lib",
-    "module": "CommonJS",
-    "paths": {
-      "~/fixtures": ["./test/fixtures"]
-    }
-  },
-  "references": [{ "path": "../api" }]
+    "outDir": "lib"
+  }
 }

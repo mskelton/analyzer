@@ -1,12 +1,12 @@
 import { test as base } from "@playwright/test"
-import { API } from "api"
+import { AnalyzerClient } from "api"
 
 interface BaseFixtures {
-  api: API
+  client: AnalyzerClient
 }
 
 export const test = base.extend<BaseFixtures>({
-  api: async ({}, use) => {
-    await use(new API())
+  client: async ({}, use) => {
+    await use(new AnalyzerClient())
   },
 })

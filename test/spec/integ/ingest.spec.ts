@@ -1,9 +1,9 @@
 import { Trade } from "api"
-import { expect, test } from "~/fixtures"
+import { expect, test } from "fixtures"
 
 test.describe("Trade ingestion", () => {
-  test("one trade", async ({ api }) => {
-    const res = await api.ingest({
+  test("one trade", async ({ client }) => {
+    const res = await client.ingest({
       action: "TRADE_ACTION_DEAL",
       order: "12345",
       orderType: "ORDER_TYPE_BUY",
@@ -15,8 +15,8 @@ test.describe("Trade ingestion", () => {
     expect(res.data).toBeNull()
   })
 
-  test("multiple trades", async ({ api }) => {
-    const res = await api.ingest([
+  test("multiple trades", async ({ client }) => {
+    const res = await client.ingest([
       {
         action: "TRADE_ACTION_DEAL",
         order: "12345",
@@ -37,8 +37,8 @@ test.describe("Trade ingestion", () => {
     expect(res.data).toBeNull()
   })
 
-  test("updates an existing trade", async ({ api }) => {
-    const res = await api.ingest({
+  test("updates an existing trade", async ({ client }) => {
+    const res = await client.ingest({
       action: "TRADE_ACTION_DEAL",
       order: "12345",
       orderType: "ORDER_TYPE_BUY",
@@ -50,8 +50,8 @@ test.describe("Trade ingestion", () => {
     expect(res.data).toBeNull()
   })
 
-  test("fails to ingest trade without required data", async ({ api }) => {
-    const res = await api.ingest({ order: "12345" } as Trade)
+  test("fails to ingest trade without required data", async ({ client }) => {
+    const res = await client.ingest({ order: "12345" } as Trade)
 
     expect(res.status).toBe(400)
     expect(res.data).toEqual({

@@ -1,2 +1,2 @@
-export { API } from "./api/API"
+export { AnalyzerClient } from "./clients/AnalyzerClient"
 export type { Trade } from "./models/trade"

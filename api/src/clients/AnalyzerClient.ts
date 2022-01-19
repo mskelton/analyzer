@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios"
-import { Trade } from "~/models/trade"
+import { Trade } from "../models/trade"
 
-export class API {
+export class AnalyzerClient {
   private axios: AxiosInstance
 
   constructor() {

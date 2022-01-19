@@ -1,9 +1,7 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "lib",
-    "paths": {
-      "~/models/*": ["./src/models/*"]
-    }
+    "rootDir": "src",
+    "outDir": "lib"
   }
 }
