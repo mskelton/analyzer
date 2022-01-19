@@ -1,9 +1,10 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "jsx": "react-jsx",
     "rootDir": "src",
-    "outDir": "lib",
-    "module": "CommonJS"
+    "outDir": "lib"
   },
+  "include": ["remix.env.d.ts", "src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "../api" }]
 }

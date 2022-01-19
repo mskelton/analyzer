@@ -5,7 +5,7 @@ export class AnalyzerClient {
   private axios: AxiosInstance
 
   constructor() {
-    this.axios = axios.create({ baseURL: "https://localhost:3000" })
+    this.axios = axios.create({ baseURL: "https://localhost:3001" })
   }
 
   ingest(trades: Trade | Trade[]) {

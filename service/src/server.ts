@@ -17,6 +17,6 @@ app
   .use(auth.allowedMethods())
   .use(ingest.routes())
   .use(ingest.allowedMethods())
-  .listen(3000, () => {
-    console.log("🚀 Service listening on http://localhost:3000")
+  .listen(3001, () => {
+    console.log("🚀 Service listening on http://localhost:3001")
   })

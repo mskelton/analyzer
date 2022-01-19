@@ -1,0 +1,21 @@
+{
+  "version": "ca9cbfce",
+  "entry": {
+    "module": "/build/entry.client-2T44PQL7.js",
+    "imports": [
+      "/build/_shared/chunk-MWFXHGI4.js"
+    ]
+  },
+  "routes": {
+    "root": {
+      "id": "root",
+      "path": "",
+      "module": "/build/root-T7DQCGFX.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": true,
+      "hasErrorBoundary": true
+    }
+  },
+  "url": "/build/manifest-CA9CBFCE.js"
+}
