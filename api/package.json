@@ -1,0 +1,8 @@
+{
+  "name": "api",
+  "types": "./src/index.ts",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "axios": "^0.25.0"
+  }
+}

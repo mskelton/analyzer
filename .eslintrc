@@ -9,5 +9,18 @@
       "files": ["service/test/**"],
       "extends": "plugin:playwright/playwright-test"
     }
-  ]
+  ],
+  "rules": {
+    "sort/imports": [
+      "warn",
+      {
+        "groups": [
+          { "type": "side-effect", "order": 1 },
+          { "regex": "^[.~]+\\/", "order": 4 },
+          { "type": "dependency", "order": 2 },
+          { "type": "other", "order": 3 }
+        ]
+      }
+    ]
+  }
 }

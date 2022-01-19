@@ -1,5 +1,5 @@
-import { Trade } from "../../src/models/trade"
-import { expect, test } from "../fixtures"
+import { Trade } from "api"
+import { expect, test } from "~/fixtures"
 
 test.describe("Trade ingestion", () => {
   test("one trade", async ({ api }) => {
