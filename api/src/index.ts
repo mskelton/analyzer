@@ -1,2 +1,2 @@
 export { AnalyzerClient } from "./clients/AnalyzerClient"
-export type { Trade } from "./models/trade"
+export type { Position } from "./models/ingest"

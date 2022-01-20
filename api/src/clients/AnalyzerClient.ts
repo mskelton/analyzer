@@ -1,16 +1,12 @@
-import axios, { AxiosInstance } from "axios"
-import { Trade } from "../models/trade"
+import axios from "axios"
+import { IngestClient } from "./IngestClient"
 
 export class AnalyzerClient {
-  private axios: AxiosInstance
+  public ingest: IngestClient
 
   constructor() {
-    this.axios = axios.create({ baseURL: "https://localhost:3001" })
-  }
+    const instance = axios.create({ baseURL: "https://localhost:3001" })
 
-  ingest(trades: Trade | Trade[]) {
-    return this.axios.post("/ingest", {
-      trades: Array.isArray(trades) ? trades : [trades],
-    })
+    this.ingest = new IngestClient(instance)
   }
 }
