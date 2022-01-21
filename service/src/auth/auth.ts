@@ -1,7 +1,7 @@
 import * as Router from "@koa/router"
 
-export const router = new Router({ prefix: "/ingest" })
+export const router = new Router({ prefix: "/auth" })
 
 router.get("/", (ctx) => {
-  ctx.body = "ingest"
+  ctx.body = "auth"
 })
