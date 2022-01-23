@@ -21,11 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint, ts]
     steps:
+      - uses: actions/checkout@v1
       - name: Deploy
         uses: ./.github/actions/deploy
 
   integ:
-    name: Integ tests
+    name: Integration tests
     runs-on: ubuntu-latest
     needs: [deploy-temp]
     steps:
@@ -33,9 +34,18 @@ jobs:
       - run: yarn test:integ
 
   e2e:
-    name: Integ tests
+    name: End-to-end tests
     runs-on: ubuntu-latest
     needs: [deploy-temp]
     steps:
       - uses: mskelton/setup-yarn@v1
       - run: yarn test:e2e
+
+  deploy-prod:
+    name: Deploy to prod environment
+    runs-on: ubuntu-latest
+    needs: [integ, e2e]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Deploy
+        uses: ./.github/actions/deploy
