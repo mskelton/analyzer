@@ -2,15 +2,43 @@ name: Build
 on: [push]
 jobs:
   lint:
+    id: lint
     name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: mskelton/setup-yarn@v1
       - run: yarn lint
       - run: yarn prettier --check .
+
   ts:
-    name: Type check
+    id: ts
+    name: TypeScript
     runs-on: ubuntu-latest
     steps:
       - uses: mskelton/setup-yarn@v1
       - run: yarn ts
+
+  deploy-temp:
+    id: deploy-temp
+    name: Deploy to temp environment
+    runs-on: ubuntu-latest
+    needs: [lint, ts]
+    steps:
+      - name: Deploy
+        uses: ./.github/actions/deploy
+
+  integ:
+    name: Integ tests
+    runs-on: ubuntu-latest
+    needs: [deploy-temp]
+    steps:
+      - uses: mskelton/setup-yarn@v1
+      - run: yarn test:integ
+
+  e2e:
+    name: Integ tests
+    runs-on: ubuntu-latest
+    needs: [deploy-temp]
+    steps:
+      - uses: mskelton/setup-yarn@v1
+      - run: yarn test:e2e
