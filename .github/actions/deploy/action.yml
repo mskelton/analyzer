@@ -17,6 +17,6 @@ runs:
   steps:
     - id: deploy
       shell: bash
-      run:
-        - echo "::set-output name=app-url::http://localhost:3000"
-        - echo "::set-output name=service-url::http://localhost:3001"
+      run: |
+        echo "::set-output name=app-url::http://localhost:3000"
+        echo "::set-output name=service-url::http://localhost:3001"
