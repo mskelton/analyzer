@@ -6,11 +6,9 @@ export class OrdersClient extends BaseClient {
     return this.axios.get<Order>(`/orders/${ticket}`)
   }
 
-  updateOrder(order: Order) {
-    return this.updateOrders([order])
-  }
-
-  updateOrders(orders: Order[]) {
-    return this.axios.put<void>("/orders", { orders })
+  ingest(orders: Order | Order[]) {
+    return this.axios.post("/orders", {
+      orders: Array.isArray(orders) ? orders : [orders],
+    })
   }
 }

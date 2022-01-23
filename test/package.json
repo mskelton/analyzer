@@ -2,6 +2,7 @@
   "name": "test",
   "dependencies": {
     "api": "workspace:*",
-    "fixtures": "link:./fixtures"
+    "fixtures": "link:./fixtures",
+    "utils": "link:./utils"
   }
 }

@@ -5,7 +5,7 @@ import { createOrder } from "utils/order"
 test.describe("Order ingestion", () => {
   test("single order", async ({ client }) => {
     const req = createOrder()
-    const res = await client.orders.updateOrder(req)
+    const res = await client.orders.ingest(req)
     expect(res.status).toBe(203)
     expect(res.data).toBeNull()
 
@@ -19,7 +19,7 @@ test.describe("Order ingestion", () => {
       createOrder({ symbol: "USDCAD", type: "ORDER_TYPE_BUY", volume: 0.1 }),
       createOrder({ symbol: "EURUSD", type: "ORDER_TYPE_SELL", volume: 0.01 }),
     ]
-    const res = await client.orders.updateOrders(req)
+    const res = await client.orders.ingest(req)
     expect(res.status).toBe(203)
     expect(res.data).toBeNull()
 
@@ -36,9 +36,9 @@ test.describe("Order ingestion", () => {
 
   test("updates an existing order", async ({ client }) => {
     const req = createOrder({ pricing: { open: 1.1 } })
-    await client.orders.updateOrder(req)
+    await client.orders.ingest(req)
 
-    const res = await client.orders.updateOrder({
+    const res = await client.orders.ingest({
       ...req,
       comment: "updated",
       pricing: { current: 1.2, open: 1.1 },
@@ -52,7 +52,7 @@ test.describe("Order ingestion", () => {
   })
 
   test("fails to ingest order without required data", async ({ client }) => {
-    const res = await client.orders.updateOrder({ ticket: 12345 } as Order)
+    const res = await client.orders.ingest({ ticket: 12345 } as Order)
 
     expect(res.status).toBe(400)
     expect(res.data).toEqual({
