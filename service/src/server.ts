@@ -2,7 +2,6 @@ import * as Router from "@koa/router"
 import * as Koa from "koa"
 import * as bodyParser from "koa-bodyparser"
 import { router as auth } from "./auth"
-import { prisma } from "./db"
 import { router as orders } from "./orders"
 
 const app = new Koa()
@@ -20,9 +19,6 @@ app
   .use(auth.allowedMethods())
   .use(orders.routes())
   .use(orders.allowedMethods())
-
-prisma.$connect().then(() => {
-  app.listen(3001, () => {
+  .listen(3001, () => {
     console.log("🚀 Service listening on http://localhost:3001")
   })
-})
