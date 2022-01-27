@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "@koa/router": "^10.1.1",
+    "@prisma/client": "^3.8.1",
     "api": "workspace:*",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
-    "mongoose": "6.0.5",
     "prisma": "^3.8.1"
   },
   "devDependencies": {

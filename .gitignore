@@ -9,6 +9,3 @@ node_modules/
 # Outputs
 lib/
 tsconfig.tsbuildinfo
-
-# Environment variables
-.env
