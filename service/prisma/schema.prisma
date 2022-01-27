@@ -1,0 +1,55 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  accounts Account[]
+
+  email    String @unique
+  name     String
+}
+
+model Account {
+  id     String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  deals  Deal[]
+
+  name   String
+}
+
+model Deal {
+  id        String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  accountId String  @db.ObjectId
+  account   Account @relation(fields: [accountId], references: [id])
+
+  ticket         Int
+  symbol         String
+  type           String
+  volume         Int
+  reason         String
+
+  // Timing
+  openedAt       Int
+  closedAt       Int?
+
+  // Pricing
+  openPrice      Int
+  currentPrice   Int?
+  stopLimitPrice Int?
+
+  // Misc
+  sl             Int?
+  tp             Int?
+  comment        String?
+  magic          Int?
+
+  @@unique([accountId, ticket])
+}

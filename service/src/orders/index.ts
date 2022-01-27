@@ -1,10 +1,12 @@
 import * as Router from "@koa/router"
-import { OrderModel } from "../db/orders"
+import { prisma } from "../db"
 
 export const router = new Router({ prefix: "/orders" })
 
 router.get("/:ticket", async (ctx) => {
-  const order = await OrderModel.findOne.byTicket(+ctx.params.ticket).exec()
+  const order = await prisma.order.findUnique({ where: {} })
+  // const order = await OrderModel.findOne.byTicket(+ctx.params.ticket).exec()
+  // order.timing
 
   if (order) {
     ctx.body = order
