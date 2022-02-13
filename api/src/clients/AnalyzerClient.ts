@@ -1,12 +1,12 @@
 import axios from "axios"
-import { OrdersClient } from "./OrdersClient"
+import { DealsClient } from "./DealClient"
 
 export class AnalyzerClient {
-  public orders: OrdersClient
+  public deals: DealsClient
 
   constructor() {
     const instance = axios.create({ baseURL: "http://localhost:3001" })
 
-    this.orders = new OrdersClient(instance)
+    this.deals = new DealsClient(instance)
   }
 }

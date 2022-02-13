@@ -4,9 +4,8 @@
 #property description "Sends data to Analyzer for processing. For this EA to work properly, you must first allow it to access the Analyzer server. Go to Main Menu->Tools->Options and select the Expert Advisors tab. Then, check \"Allow WebRequest for listed URL\" and enter \"https://mskelton.dev\" to allow publishing trades to Analyzer."
 #property strict
 
-input int INTERVAL = 5;                          // Interval (minutes)
-input string SERVICE_URL = "https://google.com"; // Analyzer service URL
-// input string SERVICE_URL = "http://127.0.0.1:3001/orders/last-updated"; // Analyzer service URL
+input int INTERVAL = 5;                                      // Interval (minutes)
+input string BASE_URL = "https://mskelton.dev/analyzer/api"; // Analyzer service URL
 
 int OnInit()
 {
@@ -40,7 +39,7 @@ datetime getLastUpdateTime()
   //   char data[], result[];
 
   //   ResetLastError();
-  //   int res = WebRequest("GET", SERVICE_URL, NULL, NULL, 500, data, 0, result, headers);
+  //   int res = WebRequest("GET", BASE_URL, NULL, NULL, 500, data, 0, result, headers);
 
   //   if (res == 200)
   //   {
@@ -55,7 +54,7 @@ datetime getLastUpdateTime()
   //   }
   //   else
   //   {
-  //     PrintFormat("Downloading '%s' failed, error code %d", SERVICE_URL, res);
+  //     PrintFormat("Downloading '%s' failed, error code %d", BASE_URL, res);
   //   }
 
   return 0;

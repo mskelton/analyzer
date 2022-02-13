@@ -1,5 +1,8 @@
 {
   "C_Cpp.errorSquiggles": "Disabled",
+  "search.exclude": {
+    "ea/Include/**": true
+  },
   "files.associations": {
     "*.mql5": "cpp"
   }
