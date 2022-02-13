@@ -4,6 +4,12 @@
     "ea/Include/**": true
   },
   "files.associations": {
-    "*.mql5": "cpp"
+    "*.mq5": "cpp",
+    "*.mqh": "cpp",
+    "*.pro": "prolog",
+    ".stylelintrc": "json",
+    ".releaserc": "json",
+    "*.mql5": "cpp",
+    "bitset": "cpp"
   }
 }

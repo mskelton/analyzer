@@ -26,10 +26,28 @@ void OnTimer()
 
   for (int i = 0; i < total; i++)
   {
+    JsonBuilder json;
     ulong ticket = HistoryDealGetTicket(i);
-    string type = EnumToString(ENUM_DEAL_TYPE(HistoryDealGetInteger(ticket, DEAL_TYPE)));
 
-    Print("deal #", ticket, " of type ", type);
+    json.str("comment", HistoryDealGetString(ticket, DEAL_COMMENT));
+    json.num("commission", HistoryDealGetDouble(ticket, DEAL_COMMISSION));
+    json.str("entry", EnumToString(ENUM_DEAL_ENTRY(HistoryDealGetInteger(ticket, DEAL_ENTRY))));
+    json.num("fee", HistoryDealGetDouble(ticket, DEAL_FEE));
+    json.num("magic", HistoryDealGetInteger(ticket, DEAL_MAGIC));
+    json.num("order", HistoryDealGetInteger(ticket, DEAL_ORDER));
+    json.num("price", HistoryDealGetDouble(ticket, DEAL_PRICE));
+    json.num("profit", HistoryDealGetDouble(ticket, DEAL_PROFIT));
+    json.str("reason", EnumToString(ENUM_DEAL_REASON(HistoryDealGetInteger(ticket, DEAL_REASON))));
+    json.num("sl", HistoryDealGetDouble(ticket, DEAL_SL));
+    json.num("swap", HistoryDealGetDouble(ticket, DEAL_SWAP));
+    json.str("symbol", HistoryDealGetString(ticket, DEAL_SYMBOL));
+    json.num("ticket", ticket);
+    json.num("time", HistoryDealGetInteger(ticket, DEAL_TIME));
+    json.num("tp", HistoryDealGetDouble(ticket, DEAL_TP));
+    json.str("type", EnumToString(ENUM_DEAL_TYPE(HistoryDealGetInteger(ticket, DEAL_TYPE))));
+    json.num("volume", HistoryDealGetDouble(ticket, DEAL_VOLUME));
+
+    Print("deal #", ticket, json.toString());
   }
 }
 
@@ -59,3 +77,30 @@ datetime getLastUpdateTime()
 
   return 0;
 }
+
+class JsonBuilder
+{
+  string json;
+
+  template <typename T>
+  void set(string key, T value)
+  {
+    if (StringLen(json) > 0)
+      json += ",";
+
+    json += "\"" + key + "\":" + value;
+  }
+
+public:
+  void str(string key, string value)
+  {
+    GetPointer(this).set(key, "\"" + value + "\"");
+  }
+
+  void num(string key, double value)
+  {
+    GetPointer(this).set(key, string(value));
+  }
+
+  string toString() { return "{" + json + "}"; }
+};

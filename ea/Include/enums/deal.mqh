@@ -65,6 +65,26 @@ typedef enum ENUM_DEAL_PROPERTY_DOUBLE {
    * Fee for making a deal charged immediately after performing a deal
    */
   DEAL_FEE,
+  /**
+   * Stop Loss level
+   *
+   * Entry and reversal deals use the Stop Loss values from the original order
+   * based on which the position was opened or reversed
+   *
+   * Exit deals use the Stop Loss of a position as at the time of position
+   * closing
+   */
+  DEAL_SL,
+  /**
+   * Take Profit level
+   *
+   * Entry and reversal deals use the Take Profit values from the original order
+   * based on which the position was opened or reversed
+   *
+   * Exit deals use the Take Profit value of a position as at the time of
+   * position closing
+   */
+  DEAL_TP
 } ENUM_DEAL_PROPERTY_DOUBLE;
 
 typedef enum ENUM_DEAL_PROPERTY_STRING {
