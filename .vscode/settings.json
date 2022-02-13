@@ -11,6 +11,7 @@
     ".releaserc": "json",
     "*.mql5": "cpp",
     "bitset": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "iosfwd": "cpp"
   }
 }

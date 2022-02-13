@@ -21,6 +21,7 @@ router.get("/:ticket", async (ctx) => {
 
 router.post("/", (ctx) => {
   const body = ctx.request.body
+  console.log(body)
 
   ctx.status = 203
 })

@@ -54,53 +54,66 @@ void OnTimer()
   if (total)
   {
     Print("Sending data to Analyzer...");
+    sendData("{\"deals\": " + json.toArray() + "}");
   }
 }
 
-datetime getLastUpdateTime()
+long getLastUpdateTime()
 {
-  // string headers;
-  // char data[], result[];
+  char data[];
+  request_result res = request("GET", BASE_URL + "/deals/last-updated", NULL, data);
 
-  // ResetLastError();
-  // int res = WebRequest("GET", BASE_URL + "/deals/last-updated", NULL, NULL, 500, data, 0, result, headers);
+  if (res.ok)
+  {
+    return StringToInteger(res.data);
+  }
 
-  // if (res == 200)
-  // {
-  // }
-  // else if (res == -1)
-  // {
-  //   MessageBox("Add the URL '" + BASE_URL + "' to the list of allowed URLs on tab 'Expert Advisors'", "Error", MB_ICONINFORMATION);
-  // }
-  // else
-  // {
-  //   PrintFormat("Get last update time failed with error code %d", res);
-  // }
-
-  return 0;
+  PrintFormat("Failed to get last updated time with status code %d", res.status);
+  return TimeCurrent();
 }
 
-void sendData()
+void sendData(string stringData)
 {
-  // string headers;
-  // char data[], result[];
+  // Convert the data string to the appropriate format
+  uchar jsonData[];
+  StringToCharArray(stringData, jsonData, 0, StringLen(stringData));
 
-  // ResetLastError();
-  // int res = WebRequest("GET", BASE_URL + "/deals/last-updated", NULL, NULL, 500, data, 0, result, headers);
+  request_result res = request("POST", BASE_URL + "/deals", "Content-Type:application/json", jsonData);
 
-  // if (res == 200)
-  // {
-  // }
-  // else if (res == -1)
-  // {
-  //   MessageBox("Add the URL '" + BASE_URL + "' to the list of allowed URLs on tab 'Expert Advisors'", "Error", MB_ICONINFORMATION);
-  // }
-  // else
-  // {
-  //   PrintFormat("Get last update time failed with error code %d", res);
-  // }
+  if (res.ok)
+  {
+    Print("Successfully sent data to Analyzer.");
+  }
+  else
+  {
+    PrintFormat("Failed to send data to Analyzer with status code %d", res.status);
+  }
+}
 
-  return 0;
+struct request_result
+{
+  bool ok;
+  int status;
+  string data;
+};
+
+request_result request(const string method, const string url, const string headers, char &data[])
+{
+  ResetLastError();
+
+  char serverResult[];
+  string serverHeaders;
+
+  int status = WebRequest(method, url, headers, 500, data, serverResult, serverHeaders);
+  bool ok = status >= 200 && status < 300;
+
+  if (status == -1)
+  {
+    MessageBox("Add the URL '" + BASE_URL + "' to the list of allowed URLs on tab 'Expert Advisors'", "Error", MB_ICONINFORMATION);
+  }
+
+  request_result res = {ok, status, CharArrayToString(serverResult)};
+  return res;
 }
 
 class JsonBuilder
