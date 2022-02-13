@@ -13,18 +13,26 @@ The service and app can be started with a single command thanks to
 yarn dev
 ```
 
+### Database instrumentation
+
+The service uses MongoDB as the primary data source. This can be run locally
+using Docker by executing the following command:
+
+```sh
+docker-compose up -d
+```
+
 ### EA
 
-To install the EA, run the following command to symlink it to the MT5 Experts
+To install the EA, run the following command to symlink it to the MT5 `Experts`
 folder:
 
 ```sh
-ln -s ~/dev/analyzer/ea/Analyzer.mq5 \
-   ~/Library/Application\ Support/MetaTrader\ 5/Bottles/metatrader5/drive_c/Program\ Files/MetaTrader\ 5/MQL5/Experts/Analyzer.mq5
+ln -s ~/dev/analyzer/ea/Analyzer.mq5 ~/Library/Application\ Support/MetaTrader\ 5/Bottles/metatrader5/drive_c/Program\ Files/MetaTrader\ 5/MQL5/Experts/Analyzer.mq5
 ```
 
-Unfortunately, we do not currently support compiling the EA without using the
-MetaEditor GUI.
+_Unfortunately, we do not currently support compiling the EA without using the
+MetaEditor GUI._
 
 ### Testing
 

@@ -20,15 +20,15 @@ model Account {
   id     String @id @default(dbgenerated()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
   user   User   @relation(fields: [userId], references: [id])
-  deals  Deal[]
+  // deals  Deal[]
 
   name   String
 }
 
 model Deal {
   id        String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  accountId String  @db.ObjectId
-  account   Account @relation(fields: [accountId], references: [id])
+  // accountId String  @db.ObjectId
+  // account   Account @relation(fields: [accountId], references: [id])
 
   comment String?
   commission Float?
@@ -48,5 +48,5 @@ model Deal {
   type String
   volume Float?
 
-  @@unique([accountId, ticket])
+  // @@unique([accountId, ticket])
 }

@@ -24,8 +24,9 @@ router.post("/", async (ctx) => {
   const { deals } = ctx.request.body as { deals: Deal[] }
 
   await prisma.deal.createMany({
-    data: deals.map((deal) => ({ ...deal, accountId: "1" })),
+    data: deals,
+    // data: deals.map((deal) => ({ ...deal, accountId: "1" })),
   })
 
-  ctx.status = 203
+  ctx.status = 201
 })

@@ -6,7 +6,7 @@ test.describe("Deal creation", () => {
   test("single deal", async ({ client }) => {
     const req = createDeal()
     const res = await client.deals.create(req)
-    expect(res.status).toBe(203)
+    expect(res.status).toBe(201)
     expect(res.data).toBeNull()
 
     const { data: deal } = await client.deals.get(req.ticket)
@@ -20,7 +20,7 @@ test.describe("Deal creation", () => {
       createDeal({ symbol: "EURUSD", type: "DEAL_TYPE_SELL", volume: 0.01 }),
     ]
     const res = await client.deals.create(req)
-    expect(res.status).toBe(203)
+    expect(res.status).toBe(201)
     expect(res.data).toBeNull()
 
     const { data: deal1 } = await client.deals.get(req[0].ticket)
