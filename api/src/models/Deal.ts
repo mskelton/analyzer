@@ -1,16 +1,16 @@
 export interface Deal {
   comment?: string
-  commission: number
+  commission?: number
   entry:
     | "DEAL_ENTRY_IN"
     | "DEAL_ENTRY_OUT"
     | "DEAL_ENTRY_INOUT"
     | "DEAL_ENTRY_OUT_BY"
-  fee: number
+  fee?: number
   magic?: number
   order: number
   price: number
-  profit: number
+  profit?: number
   reason:
     | "DEAL_REASON_CLIENT"
     | "DEAL_REASON_MOBILE"
@@ -23,7 +23,7 @@ export interface Deal {
     | "DEAL_REASON_VMARGIN"
     | "DEAL_REASON_SPLIT"
   sl?: number
-  swap: number
+  swap?: number
   symbol: string
   ticket: number
   time: number

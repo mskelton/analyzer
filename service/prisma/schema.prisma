@@ -31,16 +31,16 @@ model Deal {
   account   Account @relation(fields: [accountId], references: [id])
 
   comment String?
-  commission Float
+  commission Float?
   entry String
-  fee Float
+  fee Float?
   magic Int?
   order Int
   price Float
-  profit Float
+  profit Float?
   reason String
   sl Float?
-  swap Float
+  swap Float?
   symbol String
   ticket Int
   time Int

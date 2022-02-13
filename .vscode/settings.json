@@ -10,6 +10,7 @@
     ".stylelintrc": "json",
     ".releaserc": "json",
     "*.mql5": "cpp",
-    "bitset": "cpp"
+    "bitset": "cpp",
+    "string": "cpp"
   }
 }
