@@ -8,8 +8,8 @@ export interface Deal {
     | "DEAL_ENTRY_OUT_BY"
   fee?: number
   magic?: number
-  order: number
-  price: number
+  order?: number
+  price?: number
   profit?: number
   reason:
     | "DEAL_REASON_CLIENT"
@@ -24,7 +24,7 @@ export interface Deal {
     | "DEAL_REASON_SPLIT"
   sl?: number
   swap?: number
-  symbol: string
+  symbol?: string
   ticket: number
   time: number
   tp?: number
@@ -47,5 +47,5 @@ export interface Deal {
     | "DEAL_DIVIDEND"
     | "DEAL_DIVIDEND_FRANKED"
     | "DEAL_TAX"
-  volume: number
+  volume?: number
 }

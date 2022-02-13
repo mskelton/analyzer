@@ -35,18 +35,18 @@ model Deal {
   entry String
   fee Float?
   magic Int?
-  order Int
-  price Float
+  order Int?
+  price Float?
   profit Float?
   reason String
   sl Float?
   swap Float?
-  symbol String
+  symbol String?
   ticket Int
   time Int
   tp Float?
   type String
-  volume Float
+  volume Float?
 
   @@unique([accountId, ticket])
 }

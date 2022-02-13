@@ -1,10 +1,11 @@
 import * as Router from "@koa/router"
+import { Deal } from "api"
 import { prisma } from "../db"
 
 export const router = new Router({ prefix: "/deals" })
 
 router.get("/last-updated", (ctx) => {
-  ctx.body = new Date().getTime()
+  ctx.body = 0
 })
 
 router.get("/:ticket", async (ctx) => {
@@ -19,9 +20,12 @@ router.get("/:ticket", async (ctx) => {
   }
 })
 
-router.post("/", (ctx) => {
-  const body = ctx.request.body
-  console.log(body)
+router.post("/", async (ctx) => {
+  const { deals } = ctx.request.body as { deals: Deal[] }
+
+  await prisma.deal.createMany({
+    data: deals.map((deal) => ({ ...deal, accountId: "1" })),
+  })
 
   ctx.status = 203
 })

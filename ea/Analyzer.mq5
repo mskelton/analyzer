@@ -122,12 +122,12 @@ class JsonBuilder {
   }
 
   void setInt(string key, ulong value) {
-    if (!value)
+    if (value)
       GetPointer(this).set(key, string(value));
   }
 
   void setDouble(string key, double value) {
-    if (!value)
+    if (value)
       GetPointer(this).set(key, string(value));
   }
 

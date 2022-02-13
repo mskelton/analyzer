@@ -6,6 +6,7 @@ node_modules/
 !.yarn/releases
 !.yarn/sdks
 
-# Outputs
+# Misc
 lib/
+mocks/
 tsconfig.tsbuildinfo
