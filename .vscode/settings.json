@@ -1,4 +1,5 @@
 {
+  "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, ColumnLimit: 0}",
   "C_Cpp.errorSquiggles": "Disabled",
   "search.exclude": {
     "ea/Include/**": true

@@ -4,11 +4,10 @@
 #property description "Sends data to Analyzer for processing. For this EA to work properly, you must first allow it to access the Analyzer server. Go to Main Menu->Tools->Options and select the Expert Advisors tab. Then, check \"Allow WebRequest for listed URL\" and enter \"https://mskelton.dev\" to allow publishing trades to Analyzer."
 #property strict
 
-input int INTERVAL = 5;                                      // Interval (minutes)
-input string BASE_URL = "https://mskelton.dev/analyzer/api"; // Analyzer service URL
+input int INTERVAL = 5;                                       // Interval (minutes)
+input string BASE_URL = "https://mskelton.dev/analyzer/api";  // Analyzer service URL
 
-int OnInit()
-{
+int OnInit() {
   // Setup a timer to send data to Analyzer and manually trigger the timer
   // once to send the initial data.
   EventSetTimer(INTERVAL * 60);
@@ -17,16 +16,14 @@ int OnInit()
   return INIT_SUCCEEDED;
 }
 
-void OnTimer()
-{
+void OnTimer() {
   Print("Searching for new trades to ingest...");
 
   HistorySelect(getLastUpdateTime(), TimeCurrent());
   int total = HistoryDealsTotal();
   JsonBuilder json;
 
-  for (int i = 0; i < total; i++)
-  {
+  for (int i = 0; i < total; i++) {
     JsonBuilder deal;
     ulong ticket = HistoryDealGetTicket(i);
 
@@ -51,20 +48,17 @@ void OnTimer()
     json.append(deal.toObject());
   }
 
-  if (total)
-  {
+  if (total) {
     Print("Sending data to Analyzer...");
     sendData("{\"deals\": " + json.toArray() + "}");
   }
 }
 
-long getLastUpdateTime()
-{
+long getLastUpdateTime() {
   char data[];
   request_result res = request("GET", BASE_URL + "/deals/last-updated", NULL, data);
 
-  if (res.ok)
-  {
+  if (res.ok) {
     return StringToInteger(res.data);
   }
 
@@ -72,33 +66,27 @@ long getLastUpdateTime()
   return TimeCurrent();
 }
 
-void sendData(string stringData)
-{
+void sendData(string stringData) {
   // Convert the data string to the appropriate format
   uchar jsonData[];
   StringToCharArray(stringData, jsonData, 0, StringLen(stringData));
 
   request_result res = request("POST", BASE_URL + "/deals", "Content-Type:application/json", jsonData);
 
-  if (res.ok)
-  {
+  if (res.ok) {
     Print("Successfully sent data to Analyzer.");
-  }
-  else
-  {
+  } else {
     PrintFormat("Failed to send data to Analyzer with status code %d", res.status);
   }
 }
 
-struct request_result
-{
+struct request_result {
   bool ok;
   int status;
   string data;
 };
 
-request_result request(const string method, const string url, const string headers, char &data[])
-{
+request_result request(const string method, const string url, const string headers, char &data[]) {
   ResetLastError();
 
   char serverResult[];
@@ -107,8 +95,7 @@ request_result request(const string method, const string url, const string heade
   int status = WebRequest(method, url, headers, 500, data, serverResult, serverHeaders);
   bool ok = status >= 200 && status < 300;
 
-  if (status == -1)
-  {
+  if (status == -1) {
     MessageBox("Add the URL '" + BASE_URL + "' to the list of allowed URLs on tab 'Expert Advisors'", "Error", MB_ICONINFORMATION);
   }
 
@@ -116,36 +103,30 @@ request_result request(const string method, const string url, const string heade
   return res;
 }
 
-class JsonBuilder
-{
+class JsonBuilder {
   string json;
 
   template <typename T>
-  void set(string key, T value)
-  {
+  void set(string key, T value) {
     GetPointer(this).append("\"" + key + "\":" + value);
   }
 
-public:
-  void append(string value)
-  {
+ public:
+  void append(string value) {
     json += (StringLen(json) ? "," : "") + value;
   }
 
-  void setString(string key, string value)
-  {
+  void setString(string key, string value) {
     if (StringLen(value))
       GetPointer(this).set(key, "\"" + value + "\"");
   }
 
-  void setInt(string key, ulong value)
-  {
+  void setInt(string key, ulong value) {
     if (!value)
       GetPointer(this).set(key, string(value));
   }
 
-  void setDouble(string key, double value)
-  {
+  void setDouble(string key, double value) {
     if (!value)
       GetPointer(this).set(key, string(value));
   }
