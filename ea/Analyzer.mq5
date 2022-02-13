@@ -42,7 +42,7 @@ void OnTimer()
     json.num("swap", HistoryDealGetDouble(ticket, DEAL_SWAP));
     json.str("symbol", HistoryDealGetString(ticket, DEAL_SYMBOL));
     json.num("ticket", ticket);
-    json.num("time", HistoryDealGetInteger(ticket, DEAL_TIME));
+    json.num("time", HistoryDealGetInteger(ticket, DEAL_TIME_MSC));
     json.num("tp", HistoryDealGetDouble(ticket, DEAL_TP));
     json.str("type", EnumToString(ENUM_DEAL_TYPE(HistoryDealGetInteger(ticket, DEAL_TYPE))));
     json.num("volume", HistoryDealGetDouble(ticket, DEAL_VOLUME));
@@ -85,10 +85,7 @@ class JsonBuilder
   template <typename T>
   void set(string key, T value)
   {
-    if (StringLen(json) > 0)
-      json += ",";
-
-    json += "\"" + key + "\":" + value;
+    json += (StringLen(json) > 0 ? "," : "") + "\"" + key + "\":" + value;
   }
 
 public:

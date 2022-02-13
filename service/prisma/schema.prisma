@@ -30,26 +30,23 @@ model Deal {
   accountId String  @db.ObjectId
   account   Account @relation(fields: [accountId], references: [id])
 
-  ticket         Int
-  symbol         String
-  type           String
-  volume         Int
-  reason         String
-
-  // Timing
-  openedAt       Int
-  closedAt       Int?
-
-  // Pricing
-  openPrice      Int
-  currentPrice   Int?
-  stopLimitPrice Int?
-
-  // Misc
-  sl             Int?
-  tp             Int?
-  comment        String?
-  magic          Int?
+  comment String?
+  commission Float
+  entry String
+  fee Float
+  magic Int?
+  order Int
+  price Float
+  profit Float
+  reason String
+  sl Float?
+  swap Float
+  symbol String
+  ticket Int
+  time Int
+  tp Float?
+  type String
+  volume Float
 
   @@unique([accountId, ticket])
 }
