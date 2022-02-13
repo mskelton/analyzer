@@ -23,6 +23,9 @@ ln -s ~/dev/analyzer/ea/Analyzer.mq5 \
    ~/Library/Application\ Support/MetaTrader\ 5/Bottles/metatrader5/drive_c/Program\ Files/MetaTrader\ 5/MQL5/Experts/Analyzer.mq5
 ```
 
+Unfortunately, we do not currently support compiling the EA without using the
+MetaEditor GUI.
+
 ### Testing
 
 Service integration tests and app end-to-end tests are run with

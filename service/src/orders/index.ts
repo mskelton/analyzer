@@ -3,8 +3,12 @@ import { prisma } from "../db"
 
 export const router = new Router({ prefix: "/orders" })
 
+router.get("/last-updated", (ctx) => {
+  ctx.body = new Date().getTime()
+})
+
 router.get("/:ticket", async (ctx) => {
-  const order = await prisma.order.findUnique({ where: {} })
+  const order = await prisma.deal.findUnique({ where: {} })
   // const order = await OrderModel.findOne.byTicket(+ctx.params.ticket).exec()
   // order.timing
 
