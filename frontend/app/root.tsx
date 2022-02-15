@@ -1,6 +1,9 @@
-import type { LinksFunction } from "remix"
+import type { LinksFunction, MetaFunction } from "remix"
 import { Outlet, useCatch } from "remix"
 import { Document } from "./common/Document"
+import { NotFound } from "./common/NotFound"
+import stylesUrl from "./tailwind.css"
+import { metadata } from "./utils/metadata"
 
 export const links: LinksFunction = () => {
   return [
@@ -13,7 +16,25 @@ export const links: LinksFunction = () => {
       href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap",
       rel: "stylesheet",
     },
+    { href: stylesUrl, rel: "stylesheet" },
   ]
+}
+
+export const meta: MetaFunction = ({ location }) => {
+  // const image = metadata.url + metadata.siteLogo
+
+  return {
+    charset: "utf-8",
+    // "og:image": image,
+    "og:site_name": "Analyzer",
+    "og:type": "website",
+    "og:url": metadata.url + location.pathname,
+    robots: "follow, index",
+    "twitter:card": "summary",
+    // "twitter:image": image,
+    "twitter:site": "@mskelton0",
+    viewport: "width=device-width, initial-scale=1",
+  }
 }
 
 export function CatchBoundary() {
