@@ -6,7 +6,7 @@ Forex trading analysis and sharing tool.
 
 ## Development
 
-The service and app can be started with a single command thanks to
+The service and frontend can be started with a single command thanks to
 [concurrently](https://www.npmjs.com/package/concurrently).
 
 ```sh
@@ -36,7 +36,7 @@ MetaEditor GUI._
 
 ### Testing
 
-Service integration tests and app end-to-end tests are run with
+Service integration tests and frontend end-to-end tests are run with
 [Playwright](https://playwright.dev).
 
 ```sh

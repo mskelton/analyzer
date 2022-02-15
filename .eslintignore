@@ -1,4 +1,3 @@
 # Outputs
-app/build/
-app/public/build/
+build/
 lib/

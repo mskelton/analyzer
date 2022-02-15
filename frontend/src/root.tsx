@@ -1,5 +1,6 @@
 import type { LinksFunction } from "remix"
 import { Outlet, useCatch } from "remix"
+import { Document } from "./common/Document"
 
 export const links: LinksFunction = () => {
   return [
@@ -19,8 +20,8 @@ export function CatchBoundary() {
   const { status } = useCatch()
 
   switch (status) {
-    // case 404:
-    //   return <NotFound />
+    case 404:
+      return <NotFound />
 
     default:
       throw new Error(`Unexpected caught response with status: ${status}`)
@@ -31,28 +32,21 @@ export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error)
 
   return (
-    // <Document theme="dark" title="Uh-oh!">
-    <>
+    <Document title="Uh-oh! - Analyzer">
       <h1>App Error</h1>
       <pre>{error.message}</pre>
       <p>
         Replace this UI with what you want users to see when your app throws
         uncaught errors.
       </p>
-    </>
-    // </Document>
+    </Document>
   )
 }
 
 export default function App() {
   return (
-    // <Document theme={data.theme}>
-    <>
+    <Document title="Analyzer">
       <Outlet />
-      <footer>
-        <p>This page was rendered at </p>
-      </footer>
-    </>
-    // </Document>
+    </Document>
   )
 }

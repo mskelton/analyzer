@@ -2,7 +2,7 @@
   "extends": ["@mskelton", "@mskelton/eslint-config/typescript"],
   "overrides": [
     {
-      "files": ["app/**"],
+      "files": ["frontend/**"],
       "extends": "@mskelton/eslint-config/react",
       "rules": {
         "react/react-in-jsx-scope": "off"

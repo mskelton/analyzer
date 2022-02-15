@@ -1,14 +1,14 @@
 name: Deploy
-description: Deploy the app, service, and databases
+description: Deploy the frontend, service, and databases
 inputs:
   env:
     description: Environment to deploy to
     default: temp
     required: true
 outputs:
-  app-url:
-    description: App URL
-    value: ${{ steps.deploy.outputs.app-url }}
+  frontend-url:
+    description: Frontend URL
+    value: ${{ steps.deploy.outputs.frontend-url }}
   service-url:
     description: Service URL
     value: ${{ steps.deploy.outputs.service-url }}
@@ -18,5 +18,5 @@ runs:
     - id: deploy
       shell: bash
       run: |
-        echo "::set-output name=app-url::http://localhost:3000"
+        echo "::set-output name=frontend-url::http://localhost:3000"
         echo "::set-output name=service-url::http://localhost:3001"

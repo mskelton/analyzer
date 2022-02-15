@@ -5,8 +5,19 @@ node_modules/
 !.yarn/plugins
 !.yarn/releases
 !.yarn/sdks
+!.yarn/versions
+
+# Remix
+.cache/
+frontend/app/tailwind.css
+build/
+
+# Environment
+.env*
+!.env.sample
 
 # Misc
 lib/
 mocks/
 tsconfig.tsbuildinfo
+test-results/
