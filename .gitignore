@@ -9,7 +9,7 @@ node_modules/
 
 # Remix
 .cache/
-frontend/app/tailwind.css
+app/tailwind.css
 build/
 
 # Environment

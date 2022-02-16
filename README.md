@@ -6,7 +6,7 @@ Forex trading analysis and sharing tool.
 
 ## Development
 
-The service and frontend can be started with a single command thanks to
+The app and CSS watcher can be started with a single command thanks to
 [concurrently](https://www.npmjs.com/package/concurrently).
 
 ```sh
@@ -15,8 +15,8 @@ yarn dev
 
 ### Database instrumentation
 
-The service uses MongoDB as the primary data source. This can be run locally
-using Docker by executing the following command:
+The app uses MongoDB as the primary data source. This can be run locally using
+Docker by executing the following command:
 
 ```sh
 docker-compose up -d
@@ -36,10 +36,8 @@ MetaEditor GUI._
 
 ### Testing
 
-Service integration tests and frontend end-to-end tests are run with
-[Playwright](https://playwright.dev).
+End-to-end tests are run with [Playwright](https://playwright.dev).
 
 ```sh
-yarn test:integ
-yarn test:e2e
+yarn test
 ```

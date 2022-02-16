@@ -9,7 +9,7 @@
     "build": "yarn build:css --minify && remix build",
     "dev:app": "remix dev",
     "dev:css": "yarn build:css --watch",
-    "dev": "concurrently -n frontend,css -c 'blue.bold,magenta.bold' 'yarn dev:app' 'yarn dev:css'",
+    "dev": "concurrently -n app,css -c 'blue.bold,magenta.bold' 'yarn dev:app' 'yarn dev:css'",
     "format": "prettier --write .",
     "lint": "eslint .",
     "postinstall": "remix setup node",
