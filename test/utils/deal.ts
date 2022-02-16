@@ -1,7 +1,7 @@
-import { Deal } from "api"
+import { Deal } from "@prisma/client"
 import { randomTicket } from "./random"
 
-export function createDeal(partialDeal: Partial<Deal> = {}): Deal {
+export function createDeal(partialDeal: Partial<Deal> = {}) {
   return {
     entry: "DEAL_ENTRY_IN",
     price: 1,

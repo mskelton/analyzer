@@ -1,4 +1,5 @@
-import { ActionFunction, Link, MetaFunction } from "remix"
+import { ActionFunction, Link, MetaFunction, redirect } from "remix"
+import { login } from "~/api/auth"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
@@ -12,7 +13,17 @@ export const meta: MetaFunction = () => {
   })
 }
 
-export const action: ActionFunction = () => {}
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData()
+
+  const email = formData.get("email") as string
+  const password = formData.get("password") as string
+
+  // TODO: Validate form data
+  await login(email, password)
+
+  return redirect("/dashboard")
+}
 
 export default function Login() {
   return (
@@ -44,7 +55,7 @@ export default function Login() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
-                className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
@@ -59,7 +70,7 @@ export default function Login() {
             </div>
 
             <Link
-              className="text-primary-600 hover:text-primary-500 text-sm font-medium"
+              className="text-sm font-medium text-primary-600 hover:text-primary-500"
               to="/forgot-password"
             >
               Forgot your password?

@@ -1,7 +1,0 @@
-{
-  "extends": "@mskelton/tsconfig",
-  "compilerOptions": {
-    "composite": true,
-    "declaration": true
-  }
-}

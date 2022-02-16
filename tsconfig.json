@@ -1,4 +1,12 @@
 {
-  "files": [],
-  "references": [{ "path": "api" }, { "path": "service" }]
+  "extends": "@mskelton/tsconfig",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "rootDir": "app",
+    "noEmit": true,
+    "paths": {
+      "~/*": ["./app/*"]
+    }
+  },
+  "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx"]
 }

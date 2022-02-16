@@ -1,8 +1,0 @@
-{
-  "name": "api",
-  "types": "./lib/index.d.ts",
-  "exports": "./lib/index.js",
-  "dependencies": {
-    "axios": "^0.25.0"
-  }
-}

@@ -1,9 +1,9 @@
 import { ActionFunction, Form, MetaFunction, redirect } from "remix"
+import { signUp } from "~/api/auth"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
 import { TextField } from "~/components/common/TextField"
-import { client } from "~/utils/client.server"
 import { seo } from "~/utils/seo"
 
 export const meta: MetaFunction = () => {
@@ -21,7 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   const password = formData.get("password") as string
 
   // TODO: Validate form data
-  await client.auth.signUp(name, email, password)
+  await signUp(name, email, password)
 
   return redirect("/dashboard")
 }
