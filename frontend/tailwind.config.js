@@ -5,14 +5,15 @@ const colors = require("tailwindcss/colors")
 module.exports = {
   content: ["./app/**/*.{ts,tsx}"],
   darkMode: "media",
+  plugins: [require("@tailwindcss/forms")],
   theme: {
     extend: {
       colors: {
         gray: colors.neutral,
-        primary: colors.teal,
+        primary: colors.indigo,
       },
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
     },
   },

@@ -8,6 +8,7 @@ export const seo = ({ description, title, ...rest }: SEOOptions) => ({
   description,
   "og:description": description,
   "og:title": title,
+  title,
   "twitter:description": description,
   "twitter:title": title,
   ...rest,

@@ -8,13 +8,13 @@ export interface DocumentProps {
 
 export function Document({ children, title }: DocumentProps) {
   return (
-    <html lang="en">
+    <html className="h-full bg-gray-50" lang="en">
       <head>
         <Meta />
         {title && <title>{title}</title>}
         <Links />
       </head>
-      <body className="bg-white text-black antialiased dark:bg-gray-900 dark:text-white">
+      <body className="h-full">
         {children}
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}

@@ -1,7 +1,7 @@
 import type { LinksFunction, MetaFunction } from "remix"
 import { Outlet, useCatch } from "remix"
-import { Document } from "./common/Document"
-import { NotFound } from "./common/NotFound"
+import { Document } from "./components/Document"
+import { NotFound } from "./components/NotFound"
 import stylesUrl from "./tailwind.css"
 import { metadata } from "./utils/metadata"
 
@@ -13,10 +13,13 @@ export const links: LinksFunction = () => {
       rel: "preconnect",
     },
     {
-      href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap",
+      href: "https://rsms.me/inter/inter.css",
       rel: "stylesheet",
     },
-    { href: stylesUrl, rel: "stylesheet" },
+    {
+      href: stylesUrl,
+      rel: "stylesheet",
+    },
   ]
 }
 

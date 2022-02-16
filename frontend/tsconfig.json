@@ -3,7 +3,10 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "rootDir": "app",
-    "outDir": "lib"
+    "outDir": "lib",
+    "paths": {
+      "~/*": ["./app/*"]
+    }
   },
   "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx"],
   "references": [{ "path": "../api" }]
