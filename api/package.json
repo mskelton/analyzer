@@ -1,7 +1,7 @@
 {
   "name": "api",
-  "types": "./src/index.ts",
-  "exports": "./src/index.ts",
+  "types": "./lib/index.d.ts",
+  "exports": "./lib/index.js",
   "dependencies": {
     "axios": "^0.25.0"
   }

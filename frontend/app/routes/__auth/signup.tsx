@@ -1,8 +1,9 @@
-import { MetaFunction } from "remix"
+import { ActionFunction, Form, MetaFunction, redirect } from "remix"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
 import { TextField } from "~/components/common/TextField"
+import { client } from "~/utils/client.server"
 import { seo } from "~/utils/seo"
 
 export const meta: MetaFunction = () => {
@@ -10,6 +11,19 @@ export const meta: MetaFunction = () => {
     description: `Create your Analyzer account to start monitoring your Forex performance.`,
     title: "Sign Up - Analyzer",
   })
+}
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData()
+
+  const name = formData.get("name") as string
+  const email = formData.get("email") as string
+  const password = formData.get("password") as string
+
+  // TODO: Validate form data
+  await client.auth.signUp(name, email, password)
+
+  return redirect("/dashboard")
 }
 
 export default function SignUp() {
@@ -24,7 +38,7 @@ export default function SignUp() {
       </AuthHeader>
 
       <AuthCard>
-        <form action="#" className="flex flex-col gap-6" method="POST">
+        <Form className="flex flex-col gap-6" method="post">
           <TextField
             autoComplete="name"
             label="Full name"
@@ -47,7 +61,7 @@ export default function SignUp() {
           />
 
           <AuthButton className="mt-4">Sign in</AuthButton>
-        </form>
+        </Form>
       </AuthCard>
     </div>
   )

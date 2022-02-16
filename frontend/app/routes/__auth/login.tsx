@@ -1,4 +1,4 @@
-import { Link, MetaFunction } from "remix"
+import { ActionFunction, Link, MetaFunction } from "remix"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
@@ -11,6 +11,8 @@ export const meta: MetaFunction = () => {
     title: "Login - Analyzer",
   })
 }
+
+export const action: ActionFunction = () => {}
 
 export default function Login() {
   return (
