@@ -21,3 +21,4 @@ lib/
 mocks/
 tsconfig.tsbuildinfo
 test-results/
+trace/

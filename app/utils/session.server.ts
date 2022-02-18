@@ -7,10 +7,10 @@ export const storage = createCookieSessionStorage({
     domain: prod ? "mskelton.dev" : undefined,
     httpOnly: true,
     maxAge: 60 * 60 * 24 * 7,
-    name: "sessionId",
+    name: "__session",
     path: prod ? "/analyzer" : "/",
     sameSite: "lax",
-    // secrets: ["s3cret1"],
+    secrets: [process.env.SESSION_SECRET!],
     secure: true,
   },
 })
