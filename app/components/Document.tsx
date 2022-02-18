@@ -17,7 +17,7 @@ export function Document({ children, title }: DocumentProps) {
       <body className="h-full">
         {children}
         <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        <LiveReload />
       </body>
     </html>
   )
