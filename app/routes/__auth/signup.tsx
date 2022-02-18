@@ -1,5 +1,5 @@
 import { ActionFunction, Form, MetaFunction, redirect } from "remix"
-import { signUp } from "~/api/auth"
+import { signUp } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"

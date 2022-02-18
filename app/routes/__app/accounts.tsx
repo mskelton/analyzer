@@ -1,5 +1,5 @@
 import { LoaderFunction } from "remix"
-import { getAccounts } from "~/api/accounts"
+import { getAccounts } from "~/api/accounts.server"
 import { AccountsTable } from "~/components/accounts/AccountsTable"
 
 export const loader: LoaderFunction = async () => {

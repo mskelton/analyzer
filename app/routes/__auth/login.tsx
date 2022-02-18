@@ -1,10 +1,21 @@
-import { ActionFunction, Link, MetaFunction, redirect } from "remix"
-import { login } from "~/api/auth"
+import {
+  ActionFunction,
+  json,
+  Link,
+  LoaderFunction,
+  MetaFunction,
+  redirect,
+  useActionData,
+} from "remix"
+import invariant from "tiny-invariant"
+import { login } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
+import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
 import { seo } from "~/utils/seo"
+import { getUserId, getUserSession, storage } from "~/utils/session.server"
 
 export const meta: MetaFunction = () => {
   return seo({
@@ -13,19 +24,40 @@ export const meta: MetaFunction = () => {
   })
 }
 
+export const loader: LoaderFunction = async ({ request }) => {
+  // Redirect to the home page if they are already signed in.
+  return (await getUserId(request)) ? redirect("/dashboard") : null
+}
+
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
+  const email = formData.get("email")
+  const password = formData.get("password")
 
-  const email = formData.get("email") as string
-  const password = formData.get("password") as string
+  // Validate form data
+  invariant(typeof email === "string")
+  invariant(typeof password === "string")
 
-  // TODO: Validate form data
-  await login(email, password)
+  try {
+    const user = await login(email, password)
+    const session = await getUserSession(request)
 
-  return redirect("/dashboard")
+    // Set the logged in user in the session and redirect to the dashboard
+    session.set("userId", user.id)
+
+    return redirect("/dashboard", {
+      headers: {
+        "Set-Cookie": await storage.commitSession(session),
+      },
+    })
+  } catch (err) {
+    return json({ error: "Invalid email or password" }, { status: 400 })
+  }
 }
 
 export default function Login() {
+  const data = useActionData<{ error: string }>()
+
   return (
     <div data-testid="sign-up">
       <AuthHeader
@@ -37,6 +69,12 @@ export default function Login() {
       </AuthHeader>
 
       <AuthCard>
+        {data?.error && (
+          <Alert className="mb-6" type="danger">
+            {data.error}
+          </Alert>
+        )}
+
         <form action="#" className="flex flex-col gap-6" method="POST">
           <TextField
             autoComplete="email"

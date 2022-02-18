@@ -1,5 +1,4 @@
-import type { LinksFunction, MetaFunction } from "remix"
-import { Outlet, useCatch } from "remix"
+import { LinksFunction, MetaFunction, Outlet, useCatch } from "remix"
 import { Document } from "./components/Document"
 import { NotFound } from "./components/NotFound"
 import stylesUrl from "./tailwind.css"

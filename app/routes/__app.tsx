@@ -1,7 +1,8 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline"
 import { Fragment } from "react"
-import { Link, NavLink, Outlet } from "remix"
+import { LoaderFunction, NavLink, Outlet, redirect } from "remix"
+import { getUserId } from "~/utils/session.server"
 
 const user = {
   email: "tom@example.com",
@@ -17,11 +18,17 @@ const navigation = [
 const userNavigation = [
   { href: "#", name: "Your Profile" },
   { href: "#", name: "Settings" },
-  { href: "#", name: "Sign out" },
 ]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
+}
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await getUserId(request)
+
+  // Redirect to login if the user is not authenticated
+  return userId ? null : redirect("/login")
 }
 
 export default function App() {
@@ -101,6 +108,22 @@ export default function App() {
                             )}
                           </Menu.Item>
                         ))}
+
+                        <Menu.Item>
+                          {({ active }) => (
+                            <form action="/logout" method="post">
+                              <button
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                                type="submit"
+                              >
+                                Sign out
+                              </button>
+                            </form>
+                          )}
+                        </Menu.Item>
                       </Menu.Items>
                     </Transition>
                   </Menu>
