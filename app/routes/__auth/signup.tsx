@@ -1,9 +1,10 @@
-import { ActionFunction, Form, json, MetaFunction } from "remix"
+import { ActionFunction, Form, json, MetaFunction, useActionData } from "remix"
 import invariant from "tiny-invariant"
 import { signUp } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
+import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
 import { seo } from "~/utils/seo"
 import { commitUser } from "~/utils/session.server"
@@ -36,6 +37,8 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function SignUp() {
+  const data = useActionData<{ error: string }>()
+
   return (
     <div data-testid="sign-up">
       <AuthHeader
@@ -47,11 +50,18 @@ export default function SignUp() {
       </AuthHeader>
 
       <AuthCard>
+        {data?.error && (
+          <Alert className="mb-6" type="danger">
+            {data.error}
+          </Alert>
+        )}
+
         <Form className="flex flex-col gap-6" method="post">
           <TextField
             autoComplete="name"
             label="Full name"
             name="name"
+            required
             type="text"
           />
 
@@ -59,6 +69,7 @@ export default function SignUp() {
             autoComplete="email"
             label="Email address"
             name="email"
+            required
             type="email"
           />
 
@@ -66,6 +77,7 @@ export default function SignUp() {
             autoComplete="password"
             label="Password"
             name="password"
+            required
             type="password"
           />
 
