@@ -24,6 +24,17 @@ export async function getUserId(request: Request) {
   return session.get("userId") ?? null
 }
 
+export async function commitUser(request: Request, userId: string) {
+  const session = await getUserSession(request)
+  session.set("userId", userId)
+
+  return redirect("/dashboard", {
+    headers: {
+      "Set-Cookie": await storage.commitSession(session),
+    },
+  })
+}
+
 export async function requireUser(request: Request) {
   const userId = await getUserId(request)
 

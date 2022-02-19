@@ -15,7 +15,7 @@ import { AuthHeader } from "~/components/auth/AuthHeader"
 import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
 import { seo } from "~/utils/seo"
-import { getUserId, getUserSession, storage } from "~/utils/session.server"
+import { commitUser, getUserId } from "~/utils/session.server"
 
 export const meta: MetaFunction = () => {
   return seo({
@@ -40,18 +40,10 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const user = await login(email, password)
-    const session = await getUserSession(request)
 
-    // Set the logged in user in the session and redirect to the dashboard
-    session.set("userId", user.id)
-
-    return redirect("/dashboard", {
-      headers: {
-        "Set-Cookie": await storage.commitSession(session),
-      },
-    })
+    return commitUser(request, user.id)
   } catch (err) {
-    return json({ error: "Invalid email or password" }, { status: 400 })
+    return json({ error: (err as Error).message }, { status: 400 })
   }
 }
 
@@ -75,7 +67,7 @@ export default function Login() {
           </Alert>
         )}
 
-        <form action="#" className="flex flex-col gap-6" method="POST">
+        <form className="flex flex-col gap-6" method="post">
           <TextField
             autoComplete="email"
             label="Email address"

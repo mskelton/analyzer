@@ -1,10 +1,12 @@
-import { ActionFunction, Form, MetaFunction, redirect } from "remix"
+import { ActionFunction, Form, json, MetaFunction } from "remix"
+import invariant from "tiny-invariant"
 import { signUp } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
 import { TextField } from "~/components/common/TextField"
 import { seo } from "~/utils/seo"
+import { commitUser } from "~/utils/session.server"
 
 export const meta: MetaFunction = () => {
   return seo({
@@ -15,15 +17,22 @@ export const meta: MetaFunction = () => {
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
+  const name = formData.get("name")
+  const email = formData.get("email")
+  const password = formData.get("password")
 
-  const name = formData.get("name") as string
-  const email = formData.get("email") as string
-  const password = formData.get("password") as string
+  // Validate form data
+  invariant(typeof name === "string")
+  invariant(typeof email === "string")
+  invariant(typeof password === "string")
 
-  // TODO: Validate form data
-  await signUp(name, email, password)
+  try {
+    const user = await signUp(name, email, password)
 
-  return redirect("/dashboard")
+    return commitUser(request, user.id)
+  } catch (err) {
+    return json({ error: (err as Error).message }, { status: 400 })
+  }
 }
 
 export default function SignUp() {

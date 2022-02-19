@@ -8,20 +8,21 @@ export async function login(email: string, password: string) {
     return user
   }
 
-  throw new Error("Login failed, invalid email or password.")
+  throw new Error("Invalid email or password")
 }
 
 export async function signUp(name: string, email: string, password: string) {
   const user = await prisma.user.findUnique({ where: { email } })
 
   if (user) {
-    throw new Error("Email is invalid or already taken.")
+    throw new Error("User already exists")
   }
 
-  const salt = await bcrypt.genSalt(10)
-  const hash = await bcrypt.hash(password, salt)
-
-  await prisma.user.create({
-    data: { email, name, password: hash },
+  return prisma.user.create({
+    data: {
+      email,
+      name,
+      password: await bcrypt.hash(password, 10),
+    },
   })
 }
