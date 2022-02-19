@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { Link } from "react-router-dom"
+import { AnalyzerLogo } from "../common/AnalyzerLogo"
 
 export interface AuthHeaderProps {
   children: ReactNode
@@ -16,11 +17,7 @@ export function AuthHeader({
 }: AuthHeaderProps) {
   return (
     <div>
-      <img
-        alt="Analyzer"
-        className="mx-auto h-12 w-auto"
-        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-      />
+      <AnalyzerLogo className="mx-auto h-12 w-auto" />
 
       <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
         {children}

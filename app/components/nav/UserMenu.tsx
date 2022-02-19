@@ -9,7 +9,7 @@ const user = {
 
 export function UserMenu() {
   return (
-    <Menu as="div" className="relative ml-3">
+    <Menu as="div" className="relative">
       <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800">
         <span className="sr-only">Open user menu</span>
         <img alt="" className="h-8 w-8 rounded-full" src={user.imageUrl} />

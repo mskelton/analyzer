@@ -1,4 +1,4 @@
-import { createCookieSessionStorage } from "remix"
+import { createCookieSessionStorage, redirect } from "remix"
 
 const prod = process.env.NODE_ENV === "production"
 
@@ -22,4 +22,14 @@ export function getUserSession(request: Request) {
 export async function getUserId(request: Request) {
   const session = await getUserSession(request)
   return session.get("userId") ?? null
+}
+
+export async function requireUser(request: Request) {
+  const userId = await getUserId(request)
+
+  if (!userId) {
+    throw redirect("/login")
+  }
+
+  return null
 }
