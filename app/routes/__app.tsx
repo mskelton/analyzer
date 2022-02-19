@@ -1,5 +1,6 @@
 import { Disclosure } from "@headlessui/react"
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline"
+import clsx from "clsx"
 import { LoaderFunction, NavLink, Outlet, redirect } from "remix"
 import { UserMenu } from "~/components/header/UserMenu"
 import { getUserId } from "~/utils/session.server"
@@ -14,10 +15,6 @@ const navigation = [
   { current: false, href: "/dashboard", name: "Dashboard" },
   { current: false, href: "/accounts", name: "Accounts" },
 ]
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ")
-}
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request)
@@ -49,7 +46,7 @@ export default function App() {
                         <NavLink
                           key={item.name}
                           className={({ isActive }) =>
-                            classNames(
+                            clsx(
                               isActive
                                 ? "bg-gray-900 text-white"
                                 : "text-gray-300 hover:bg-gray-700 hover:text-white",
