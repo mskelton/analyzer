@@ -1,12 +1,30 @@
-import { ActionFunction, Link, redirect } from "remix"
+import { ActionFunction, json, Link, redirect } from "remix"
+import invariant from "tiny-invariant"
 import { PageHeader } from "~/components/common/PageHeader"
 import { Select } from "~/components/common/Select"
 import { TextField } from "~/components/common/TextField"
+import { db } from "~/db/db.server"
+import { getUserId } from "~/utils/session.server"
 
 export const action: ActionFunction = async ({ request }) => {
-  console.log("request", request)
+  const formData = await request.formData()
+  const name = formData.get("name")
+  const broker = formData.get("broker")
+  const type = formData.get("type")
 
-  return redirect("..")
+  // Validate form data
+  invariant(typeof name === "string")
+  invariant(typeof broker === "string")
+  invariant(type === "DEMO" || type === "LIVE")
+
+  try {
+    const userId = await getUserId(request)
+    await db.account.create({ data: { broker, name, type, userId } })
+
+    return redirect("/accounts")
+  } catch (err) {
+    return json({ error: (err as Error).message }, { status: 400 })
+  }
 }
 
 export default function NewAccount() {
@@ -19,6 +37,7 @@ export default function NewAccount() {
           <div className="px-4 py-6 sm:px-0">
             <form className="flex flex-col gap-5" method="post">
               <TextField
+                autoComplete="off"
                 label="Account name"
                 name="name"
                 placeholder="ex. Growth account"
@@ -27,6 +46,7 @@ export default function NewAccount() {
               />
 
               <TextField
+                autoComplete="off"
                 label="Broker"
                 name="broker"
                 placeholder="ex. OspreyFX"
