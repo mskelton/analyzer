@@ -4,14 +4,18 @@
 
 @layer components {
   .btn {
-    @apply inline-flex items-center rounded-md px-4 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    @apply inline-flex items-center rounded-md border px-4 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
   }
 
   .btn-primary {
-    @apply btn bg-primary-600 font-medium text-white shadow-sm hover:bg-primary-700 focus-visible:ring-primary-500;
+    @apply btn border-transparent bg-primary-600 font-medium text-white shadow-sm hover:bg-primary-700 focus-visible:ring-primary-500;
   }
 
   .btn-secondary {
-    @apply btn bg-primary-100 font-medium text-primary-700 hover:bg-primary-200 focus-visible:ring-primary-500;
+    @apply btn border-transparent bg-primary-100 font-medium text-primary-700 hover:bg-primary-200 focus-visible:ring-primary-500;
+  }
+
+  .btn-white {
+    @apply btn border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus-visible:ring-primary-500;
   }
 }

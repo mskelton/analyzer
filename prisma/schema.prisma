@@ -17,6 +17,11 @@ model User {
   name     String
 }
 
+enum AccountType {
+  DEMO
+  LIVE
+}
+
 model Account {
   id     String @id @default(dbgenerated()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
@@ -24,6 +29,8 @@ model Account {
   // deals  Deal[]
 
   name   String
+  broker String
+  type   AccountType
 }
 
 model Deal {
@@ -31,23 +38,23 @@ model Deal {
   // accountId String  @db.ObjectId
   // account   Account @relation(fields: [accountId], references: [id])
 
-  comment String?
+  comment    String?
   commission Float?
-  entry String
-  fee Float?
-  magic Int?
-  order Int?
-  price Float?
-  profit Float?
-  reason String
-  sl Float?
-  swap Float?
-  symbol String?
-  ticket Int
-  time Int
-  tp Float?
-  type String
-  volume Float?
+  entry      String
+  fee        Float?
+  magic      Int?
+  order      Int?
+  price      Float?
+  profit     Float?
+  reason     String
+  sl         Float?
+  swap       Float?
+  symbol     String?
+  ticket     Int
+  time       Int
+  tp         Float?
+  type       String
+  volume     Float?
 
   // @@unique([accountId, ticket])
 }
