@@ -5,15 +5,15 @@ import {
 } from "@heroicons/react/solid"
 
 const colors = {
-  danger: "bg-red-100 text-red-800",
-  success: "bg-green-100 text-green-800",
-  warning: "bg-amber-100 text-amber-800",
+  danger: "bg-red-50 text-red-800",
+  success: "bg-green-50 text-green-800",
+  warning: "bg-amber-50 text-amber-800",
 }
 
 const icons = {
-  danger: <XCircleIcon className="text-red-500" />,
-  success: <CheckCircleIcon className="text-green-500" />,
-  warning: <ExclamationIcon className="text-amber-500" />,
+  danger: <XCircleIcon className="text-red-400" />,
+  success: <CheckCircleIcon className="text-green-400" />,
+  warning: <ExclamationIcon className="text-amber-400" />,
 }
 
 export interface BadgeProps {
@@ -24,11 +24,9 @@ export interface BadgeProps {
 
 export function Alert({ children, className, type }: BadgeProps) {
   return (
-    <div
-      className={`${className} ${colors[type]} flex items-center gap-2 rounded-md p-4 text-sm`}
-    >
-      <span className="h-5 w-5">{icons[type]}</span>
-      <span>{children}</span>
+    <div className={`${className} ${colors[type]} flex gap-3 rounded-md p-4`}>
+      <span className="h-5 w-5 flex-shrink-0">{icons[type]}</span>
+      <p className="text-sm font-medium">{children}</p>
     </div>
   )
 }
