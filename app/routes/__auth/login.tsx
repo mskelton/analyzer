@@ -20,7 +20,7 @@ import { commitUser, getUserId } from "~/utils/session.server"
 export const meta: MetaFunction = () => {
   return seo({
     description: "Login to your Analyzer account.",
-    title: "Login - Analyzer",
+    title: "Login",
   })
 }
 

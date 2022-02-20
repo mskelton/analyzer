@@ -12,7 +12,7 @@ import { commitUser } from "~/utils/session.server"
 export const meta: MetaFunction = () => {
   return seo({
     description: `Create your Analyzer account to start monitoring your Forex performance.`,
-    title: "Sign Up - Analyzer",
+    title: "Sign Up",
   })
 }
 

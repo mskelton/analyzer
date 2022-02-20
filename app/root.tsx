@@ -1,6 +1,7 @@
 import { LinksFunction, MetaFunction, Outlet, useCatch } from "remix"
 import { Document } from "./components/Document"
 import { NotFound } from "./components/NotFound"
+import { ServerError } from "./components/ServerError"
 import stylesUrl from "./tailwind.css"
 import { metadata } from "./utils/metadata"
 
@@ -54,16 +55,7 @@ export function CatchBoundary() {
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error)
 
-  return (
-    <Document title="Uh-oh! - Analyzer">
-      <h1>App Error</h1>
-      <pre>{error.message}</pre>
-      <p>
-        Replace this UI with what you want users to see when your app throws
-        uncaught errors.
-      </p>
-    </Document>
-  )
+  return <ServerError error={error} />
 }
 
 export default function App() {

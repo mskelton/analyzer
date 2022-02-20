@@ -8,7 +8,7 @@ import { seo } from "~/utils/seo"
 export const meta: MetaFunction = () => {
   return seo({
     description: `Forgot your password? No problem, we'll send you a link to reset it.`,
-    title: "Forgot password - Analyzer",
+    title: "Forgot password",
   })
 }
 
