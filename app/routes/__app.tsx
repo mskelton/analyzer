@@ -1,11 +1,16 @@
 import { LoaderFunction, Outlet } from "remix"
+import { getUser } from "~/api/user.server"
 import { Nav } from "~/components/nav/Nav"
+import { gravatar } from "~/utils/gravatar.server"
 import { requireUser } from "~/utils/session.server"
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await requireUser(request)
+  const userId = await requireUser(request)
+  const user = await getUser(userId)
 
-  return null
+  return {
+    user: { avatar: gravatar(user.email) },
+  }
 }
 
 export default function App() {

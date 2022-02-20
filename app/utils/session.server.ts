@@ -42,5 +42,5 @@ export async function requireUser(request: Request) {
     throw redirect("/login")
   }
 
-  return null
+  return userId
 }
