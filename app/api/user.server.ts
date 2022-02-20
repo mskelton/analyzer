@@ -1,7 +1,7 @@
-import { prisma } from "~/db"
+import { db } from "~/db"
 
-export async function getUser(id: string) {
-  return prisma.user.findUnique({
+export function getUser(id: string) {
+  return db.user.findUnique({
     rejectOnNotFound: true,
     where: { id },
   })

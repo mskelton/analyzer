@@ -15,4 +15,4 @@ global._prisma ??= new PrismaClient({
   datasources: { db: { url: databaseURL } },
 })
 
-export const prisma = global._prisma
+export const db = global._prisma

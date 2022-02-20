@@ -3,9 +3,13 @@ import { getAccounts } from "~/api/accounts.server"
 import { AccountsTable } from "~/components/accounts/AccountsTable"
 import { EmptyState } from "~/components/common/EmptyState"
 import { useAccounts } from "~/hooks/useAccounts"
+import { getUserId } from "~/utils/session.server"
 
-export const loader: LoaderFunction = async () => {
-  return { accounts: await getAccounts() }
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await getUserId(request)
+  const accounts = await getAccounts(userId)
+
+  return { accounts }
 }
 
 export default function Accounts() {
