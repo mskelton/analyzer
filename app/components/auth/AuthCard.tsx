@@ -6,6 +6,8 @@ export interface AuthCardProps {
 
 export function AuthCard({ children }: AuthCardProps) {
   return (
-    <div className="mt-8 rounded-md bg-white p-8 shadow-md">{children}</div>
+    <div className="mt-8 bg-white py-8 px-4 shadow sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:px-10">
+      {children}
+    </div>
   )
 }

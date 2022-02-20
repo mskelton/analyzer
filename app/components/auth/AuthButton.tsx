@@ -7,7 +7,7 @@ export function AuthButton({
 }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
-      className={cx("btn-primary w-full rounded", className)}
+      className={cx("btn-primary mt-2 block w-full rounded", className)}
       {...props}
     />
   )

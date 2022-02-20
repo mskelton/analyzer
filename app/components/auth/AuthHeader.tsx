@@ -16,7 +16,7 @@ export function AuthHeader({
   hintLinkText,
 }: AuthHeaderProps) {
   return (
-    <div>
+    <div className="sm:mx-auto sm:w-full sm:max-w-md">
       <AnalyzerLogo className="mx-auto h-12 w-auto" />
 
       <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

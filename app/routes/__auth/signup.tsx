@@ -1,4 +1,4 @@
-import { ActionFunction, Form, json, MetaFunction, useActionData } from "remix"
+import { ActionFunction, json, MetaFunction, useActionData } from "remix"
 import invariant from "tiny-invariant"
 import { signUp } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
@@ -56,7 +56,7 @@ export default function SignUp() {
           </Alert>
         )}
 
-        <Form className="flex flex-col gap-6" method="post">
+        <form className="flex flex-col gap-6" method="post">
           <TextField
             autoComplete="name"
             label="Full name"
@@ -82,7 +82,7 @@ export default function SignUp() {
           />
 
           <AuthButton className="mt-4">Sign in</AuthButton>
-        </Form>
+        </form>
       </AuthCard>
     </div>
   )

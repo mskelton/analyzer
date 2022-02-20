@@ -21,7 +21,7 @@ export function TextField({ extra, label, name, ...props }: TextFieldProps) {
       </div>
 
       <input
-        className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+        className="mt-2 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none sm:text-sm"
         id={name}
         name={name}
         {...props}
