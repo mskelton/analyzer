@@ -1,6 +1,5 @@
 import { Link } from "remix"
 import { useAccounts } from "~/hooks/useAccounts"
-import { timeAgo } from "~/utils/date"
 import { Badge } from "../common/Badge"
 import { TableHeader } from "../common/TableHeader"
 
@@ -37,7 +36,7 @@ export function AccountsTable() {
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4">
-                      {account.type === "live" ? (
+                      {account.type === "LIVE" ? (
                         <Badge type="success">Live</Badge>
                       ) : (
                         <Badge type="warning">Demo</Badge>
@@ -45,7 +44,8 @@ export function AccountsTable() {
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                      {timeAgo(account.lastUpdated)}
+                      Never
+                      {/* {timeAgo(account.lastUpdated)} */}
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
