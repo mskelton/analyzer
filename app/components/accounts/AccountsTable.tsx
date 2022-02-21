@@ -1,5 +1,6 @@
 import { Link } from "remix"
 import { useAccounts } from "~/hooks/useAccounts"
+import { parseArn } from "~/utils/arn"
 import { timeAgo } from "~/utils/date"
 import { Badge } from "../common/Badge"
 import { TableHeader } from "../common/TableHeader"
@@ -56,7 +57,7 @@ export function AccountsTable() {
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                       <Link
                         className="text-primary-600 hover:text-primary-900"
-                        to={account.externalId}
+                        to={parseArn(account.arn).id}
                       >
                         Edit
                       </Link>

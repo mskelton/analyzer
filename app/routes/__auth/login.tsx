@@ -42,7 +42,7 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const user = await login(email, password)
 
-    return commitUser(request, user.id)
+    return commitUser(request, user.arn)
   } catch (err) {
     return json({ error: (err as Error).message }, { status: 400 })
   }
@@ -71,6 +71,7 @@ export default function Login() {
         <form className="flex flex-col gap-6" method="post">
           <TextField
             autoComplete="email"
+            autoFocus
             label="Email address"
             name="email"
             type="email"
