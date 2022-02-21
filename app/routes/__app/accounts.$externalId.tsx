@@ -14,6 +14,7 @@ import {
   validateAccountData,
 } from "~/api/accounts.server"
 import { AccountForm } from "~/components/accounts/AccountForm"
+import { DeleteAccount } from "~/components/accounts/DeleteAccount"
 import { PageHeader } from "~/components/common/PageHeader"
 
 export const meta: MetaFunction = ({ data }) => {
@@ -50,15 +51,7 @@ export default function EditAccount() {
 
   return (
     <>
-      <PageHeader
-        extra={
-          <form method="post">
-            <button className="btn-danger" name="_method" value="delete">
-              Delete account
-            </button>
-          </form>
-        }
-      >
+      <PageHeader extra={<DeleteAccount />}>
         Editing &quot;{account.name}&quot;
       </PageHeader>
       <AccountForm />
