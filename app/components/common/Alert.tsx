@@ -20,8 +20,10 @@ export interface BadgeProps {
 
 export function Alert({ children, className, type }: BadgeProps) {
   return (
-    <div className={`${className} ${colors[type]} flex gap-3 rounded-md p-4`}>
-      <span className="h-5 w-5 flex-shrink-0">{icons[type]}</span>
+    <div
+      className={`${className} ${colors[type]} flex items-center gap-3 rounded-md p-4`}
+    >
+      <span className="flex-shrink-0 text-lg">{icons[type]}</span>
       <p className="text-sm font-medium">{children}</p>
     </div>
   )
