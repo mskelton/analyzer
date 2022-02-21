@@ -1,5 +1,7 @@
 import * as bcrypt from "bcrypt"
 import { db } from "~/db/db.server"
+import { createArn } from "~/utils/arn"
+import { generateId } from "~/utils/id.server"
 
 export async function login(email: string, password: string) {
   const user = await db.user.findUnique({ where: { email } })
@@ -20,6 +22,7 @@ export async function signUp(name: string, email: string, password: string) {
 
   return db.user.create({
     data: {
+      arn: createArn("user", await generateId()),
       email,
       name,
       password: await bcrypt.hash(password, 10),

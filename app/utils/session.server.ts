@@ -19,14 +19,14 @@ export function getUserSession(request: Request) {
   return storage.getSession(request.headers.get("Cookie"))
 }
 
-export async function getUserId(request: Request) {
+export async function getUserArn(request: Request): Promise<string | null> {
   const session = await getUserSession(request)
-  return session.get("userId") ?? null
+  return session.get("userArn") ?? null
 }
 
-export async function commitUser(request: Request, userId: string) {
+export async function commitUser(request: Request, userArn: string) {
   const session = await getUserSession(request)
-  session.set("userId", userId)
+  session.set("userArn", userArn)
 
   return redirect("/dashboard", {
     headers: {
@@ -36,11 +36,11 @@ export async function commitUser(request: Request, userId: string) {
 }
 
 export async function requireUser(request: Request) {
-  const userId = await getUserId(request)
+  const userArn = await getUserArn(request)
 
-  if (!userId) {
+  if (!userArn) {
     throw redirect("/login")
   }
 
-  return userId
+  return userArn
 }

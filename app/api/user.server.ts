@@ -1,8 +1,8 @@
 import { db } from "~/db/db.server"
 
-export function getUser(id: string) {
+export function getUser(arn: string) {
   return db.user.findUnique({
     rejectOnNotFound: true,
-    where: { id },
+    where: { arn },
   })
 }

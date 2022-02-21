@@ -10,6 +10,7 @@ datasource db {
 
 model User {
   id       String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  arn      String @unique
   accounts Account[]
 
   email    String @unique
@@ -24,10 +25,9 @@ enum AccountType {
 
 model Account {
   id           String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  externalId   String @unique
-
-  userId       String @db.ObjectId
-  user         User   @relation(fields: [userId], references: [id])
+  arn          String @unique
+  userArn      String
+  user         User   @relation(fields: [userArn], references: [arn])
   deals        Deal[]
 
   name         String
@@ -38,8 +38,9 @@ model Account {
 
 model Deal {
   id         String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  accountId  String  @db.ObjectId
-  account    Account @relation(fields: [accountId], references: [id])
+  arn        String  @unique
+  accountArn String
+  account    Account @relation(fields: [accountArn], references: [arn])
 
   comment    String?
   commission Float?
@@ -59,5 +60,5 @@ model Deal {
   type       String
   volume     Float?
 
-  @@unique([accountId, ticket])
+  @@unique([accountArn, ticket])
 }

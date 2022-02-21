@@ -4,15 +4,13 @@ import { AccountsTable } from "~/components/accounts/AccountsTable"
 import { EmptyState } from "~/components/common/EmptyState"
 import { PageHeader } from "~/components/common/PageHeader"
 import { useAccounts } from "~/hooks/useAccounts"
-import { getUserId } from "~/utils/session.server"
 
 export const meta: MetaFunction = () => {
   return { title: "Accounts" }
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const userId = await getUserId(request)
-  const accounts = await getAccounts(userId)
+  const accounts = await getAccounts(request)
 
   return { accounts }
 }

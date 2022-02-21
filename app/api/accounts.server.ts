@@ -1,15 +1,17 @@
 import { Account } from "@prisma/client"
 import invariant from "tiny-invariant"
 import { db } from "~/db/db.server"
+import { createArn, parseArn } from "~/utils/arn"
 import { generateId } from "~/utils/id.server"
-import { getUserId } from "~/utils/session.server"
+import { requireUser } from "~/utils/session.server"
 
-export function getAccounts(userId: string) {
-  return db.account.findMany({ where: { userId } })
+export async function getAccounts(request: Request) {
+  const userArn = await requireUser(request)
+  return db.account.findMany({ where: { userArn } })
 }
 
-export function getAccount(externalId: string) {
-  return db.account.findUnique({ where: { externalId } })
+export function getAccount(arn: string) {
+  return db.account.findUnique({ where: { arn } })
 }
 
 export type EditableAccountData = Pick<Account, "broker" | "name" | "type">
@@ -33,22 +35,17 @@ export async function createAccount(
   request: Request,
   data: EditableAccountData
 ) {
-  return db.account.create({
-    data: {
-      ...data,
-      externalId: await generateId(),
-      userId: await getUserId(request),
-    },
-  })
+  const userArn = await requireUser(request)
+  const { userId } = parseArn(userArn)
+  const arn = createArn("account", userId, await generateId())
+
+  return db.account.create({ data: { ...data, arn, userArn } })
 }
 
-export async function updateAccount(
-  externalId: string,
-  data: EditableAccountData
-) {
-  return db.account.update({ data, where: { externalId } })
+export async function updateAccount(arn: string, data: EditableAccountData) {
+  return db.account.update({ data, where: { arn } })
 }
 
-export async function deleteAccount(externalId: string) {
-  return db.account.delete({ where: { externalId } })
+export async function deleteAccount(arn: string) {
+  return db.account.delete({ where: { arn } })
 }

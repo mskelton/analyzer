@@ -16,7 +16,7 @@ import { AuthHeader } from "~/components/auth/AuthHeader"
 import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
 import { seo } from "~/utils/seo"
-import { commitUser, getUserId } from "~/utils/session.server"
+import { commitUser, getUserArn } from "~/utils/session.server"
 
 export const meta: MetaFunction = () => {
   return seo({
@@ -27,7 +27,7 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async ({ request }) => {
   // Redirect to the home page if they are already signed in.
-  return (await getUserId(request)) ? redirect("/dashboard") : null
+  return (await getUserArn(request)) ? redirect("/dashboard") : null
 }
 
 export const action: ActionFunction = async ({ request }) => {

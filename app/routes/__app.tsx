@@ -5,8 +5,8 @@ import { gravatar } from "~/utils/gravatar.server"
 import { requireUser } from "~/utils/session.server"
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const userId = await requireUser(request)
-  const user = await getUser(userId)
+  const userArn = await requireUser(request)
+  const user = await getUser(userArn)
 
   return {
     user: { avatar: gravatar(user.email) },
