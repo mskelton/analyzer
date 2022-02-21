@@ -19,6 +19,7 @@ export function AccountsTable() {
                   <TableHeader>Name</TableHeader>
                   <TableHeader>Broker</TableHeader>
                   <TableHeader>Type</TableHeader>
+                  <TableHeader>Token</TableHeader>
                   <TableHeader>Last Updated</TableHeader>
                   <TableHeader>
                     <span className="sr-only">Edit</span>
@@ -48,7 +49,13 @@ export function AccountsTable() {
                       )}
                     </td>
 
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                      <code className="rounded-md bg-gray-100 py-1 px-2 text-xs">
+                        {account.token}
+                      </code>
+                    </td>
+
+                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
                       {account.lastUpdated
                         ? timeAgo(account.lastUpdated)
                         : "Never"}
