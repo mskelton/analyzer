@@ -1,12 +1,16 @@
 import { LoaderFunction } from "remix"
 import { getAccountFromToken } from "~/api/accounts.server"
+import { db } from "~/db/db.server"
 
 export const loader: LoaderFunction = async ({ request }) => {
   const account = await getAccountFromToken(request)
-  const lastUpdated = "0"
+  const deal = await db.deal.findFirst({
+    orderBy: { time: "desc" },
+    select: { time: true },
+    where: { accountArn: account.arn },
+  })
 
-  return new Response(lastUpdated, {
-    headers: { "Content-Type": "text/plain" },
+  return new Response((deal?.time ?? 0).toString(), {
     status: 200,
   })
 }

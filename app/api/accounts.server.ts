@@ -58,8 +58,8 @@ export async function deleteAccount(arn: string) {
 }
 
 export async function getAccountFromToken(request: Request) {
-  const auth = request.headers.get("Authorization") ?? ""
-  const token = auth.replace("Bearer ", "")
+  const auth = request.headers.get("Authorization")
+  const token = auth?.replace("Bearer ", "")
 
   if (!token) {
     throw new Response("Missing required auth", { status: 401 })
