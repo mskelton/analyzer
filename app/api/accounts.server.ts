@@ -43,17 +43,12 @@ export async function createAccount(
 }
 
 export async function updateAccount(
-  request: Request,
   externalId: string,
   data: EditableAccountData
 ) {
-  const userId = await getUserId(request)
-
   return db.account.update({ data, where: { externalId } })
 }
 
-export async function deleteAccount(request: Request, externalId: string) {
-  const userId = await getUserId(request)
-
+export async function deleteAccount(externalId: string) {
   return db.account.delete({ where: { externalId } })
 }

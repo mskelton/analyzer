@@ -34,10 +34,10 @@ export const action: ActionFunction = async ({ params, request }) => {
 
   try {
     if (method === "delete") {
-      await deleteAccount(request, externalId)
+      await deleteAccount(externalId)
     } else {
       const data = await validateAccountData(formData)
-      await updateAccount(request, externalId, data)
+      await updateAccount(externalId, data)
     }
 
     return redirect("/accounts")
