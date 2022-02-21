@@ -8,7 +8,8 @@ export const meta: MetaFunction = () => {
 }
 
 export const action: ActionFunction = async ({ request }) => {
-  const data = await validateAccountData(request)
+  const formData = await request.formData()
+  const data = await validateAccountData(formData)
 
   try {
     await createAccount(request, data)

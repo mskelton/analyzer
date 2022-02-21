@@ -18,4 +18,8 @@
   .btn-white {
     @apply btn border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus-visible:ring-primary-500;
   }
+
+  .btn-danger {
+    @apply btn border-transparent bg-red-600 font-medium text-white shadow-sm hover:bg-red-700 focus-visible:ring-red-500;
+  }
 }

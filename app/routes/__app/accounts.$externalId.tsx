@@ -8,6 +8,7 @@ import {
   useLoaderData,
 } from "remix"
 import {
+  deleteAccount,
   getAccount,
   updateAccount,
   validateAccountData,
@@ -26,10 +27,17 @@ export const loader: LoaderFunction = async ({ params }) => {
 }
 
 export const action: ActionFunction = async ({ params, request }) => {
-  const data = await validateAccountData(request)
+  const formData = await request.formData()
+  const method = formData.get("_method")
+  const externalId = params.externalId!
 
   try {
-    await updateAccount(params.externalId!, data)
+    if (method === "delete") {
+      await deleteAccount(request, externalId)
+    } else {
+      const data = await validateAccountData(formData)
+      await updateAccount(request, externalId, data)
+    }
 
     return redirect("/accounts")
   } catch (err) {
@@ -42,7 +50,17 @@ export default function EditAccount() {
 
   return (
     <>
-      <PageHeader>Editing &quot;{account.name}&quot;</PageHeader>
+      <PageHeader
+        extra={
+          <form method="post">
+            <button className="btn-danger" name="_method" value="delete">
+              Delete account
+            </button>
+          </form>
+        }
+      >
+        Editing &quot;{account.name}&quot;
+      </PageHeader>
       <AccountForm />
     </>
   )

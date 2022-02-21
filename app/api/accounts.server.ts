@@ -15,9 +15,8 @@ export function getAccount(externalId: string) {
 export type EditableAccountData = Pick<Account, "broker" | "name" | "type">
 
 export async function validateAccountData(
-  request: Request
+  formData: FormData
 ): Promise<EditableAccountData> {
-  const formData = await request.formData()
   const name = formData.get("name")
   const broker = formData.get("broker")
   const type = formData.get("type")
@@ -44,8 +43,17 @@ export async function createAccount(
 }
 
 export async function updateAccount(
+  request: Request,
   externalId: string,
   data: EditableAccountData
 ) {
+  const userId = await getUserId(request)
+
   return db.account.update({ data, where: { externalId } })
+}
+
+export async function deleteAccount(request: Request, externalId: string) {
+  const userId = await getUserId(request)
+
+  return db.account.delete({ where: { externalId } })
 }

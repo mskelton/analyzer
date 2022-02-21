@@ -22,6 +22,7 @@ export function AccountForm() {
           <form className="flex flex-col gap-5" method="post">
             <TextField
               autoComplete="off"
+              autoFocus
               defaultValue={data?.account.name}
               label="Account name"
               name="name"
@@ -55,7 +56,12 @@ export function AccountForm() {
                 Cancel
               </Link>
 
-              <button className="btn-primary" type="submit">
+              <button
+                className="btn-primary"
+                name="_method"
+                type="submit"
+                value="save"
+              >
                 Save
               </button>
             </div>
