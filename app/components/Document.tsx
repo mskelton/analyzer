@@ -8,7 +8,7 @@ export interface DocumentProps {
 
 export function Document({ children, title }: DocumentProps) {
   return (
-    <html className="h-full bg-gray-50" lang="en">
+    <html className="h-full bg-gray-100" lang="en">
       <head>
         <Meta />
         {title && <title>{title}</title>}
