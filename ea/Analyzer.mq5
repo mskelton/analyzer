@@ -59,6 +59,8 @@ void OnTimer() {
   if (total) {
     Print("Sending data to Analyzer...");
     sendData("{\"deals\": " + json.toArray() + "}");
+  } else {
+    Print("No new trades found");
   }
 }
 
@@ -82,7 +84,7 @@ void sendData(string stringData) {
   request_result res = request("POST", BASE_URL + "/api/deals", "Content-Type:application/json", jsonData);
 
   if (res.ok) {
-    Print("Successfully sent data to Analyzer.");
+    Print("Successfully sent data to Analyzer");
   } else {
     PrintFormat("Failed to send data to Analyzer with status code %d", res.status);
   }
