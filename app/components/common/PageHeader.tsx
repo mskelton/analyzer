@@ -1,5 +1,5 @@
 export interface PageHeaderProps {
-  children: string
+  children: React.ReactNode
   extra?: React.ReactNode
 }
 

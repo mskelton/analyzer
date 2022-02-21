@@ -4,13 +4,16 @@ import clsx from "clsx"
 import { Fragment, useState } from "react"
 
 export interface SelectProps {
+  defaultValue?: string
   label: string
   name: string
   options: { id: string; name: string }[]
 }
 
-export function Select({ label, name, options }: SelectProps) {
-  const [selected, setSelected] = useState(options[0])
+export function Select({ defaultValue, label, name, options }: SelectProps) {
+  const [selected, setSelected] = useState(
+    () => options.find((o) => o.id === defaultValue) ?? options[0]
+  )
 
   return (
     <Listbox onChange={setSelected} value={selected}>
