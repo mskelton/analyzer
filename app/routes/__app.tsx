@@ -2,10 +2,10 @@ import { LoaderFunction, Outlet } from "remix"
 import { getUser } from "~/api/user.server"
 import { Nav } from "~/components/nav/Nav"
 import { gravatar } from "~/utils/gravatar.server"
-import { requireUser } from "~/utils/session.server"
+import { getUserArn } from "~/utils/session.server"
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const userArn = await requireUser(request)
+  const userArn = await getUserArn(request)
   const user = await getUser(userArn)
 
   return {

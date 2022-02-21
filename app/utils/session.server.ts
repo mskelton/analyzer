@@ -1,4 +1,5 @@
 import { createCookieSessionStorage, redirect } from "remix"
+import { parseArn } from "./arn"
 
 const prod = process.env.NODE_ENV === "production"
 
@@ -19,9 +20,22 @@ export function getUserSession(request: Request) {
   return storage.getSession(request.headers.get("Cookie"))
 }
 
-export async function getUserArn(request: Request): Promise<string | null> {
+export async function getUserArn<T extends boolean = true>(
+  request: Request,
+  throwIfMissing?: T
+): Promise<T extends true ? string : string | undefined> {
   const session = await getUserSession(request)
-  return session.get("userArn") ?? null
+  const arn = session.get("userArn") as string | undefined
+
+  if (throwIfMissing && !arn) {
+    throw redirect("/login")
+  }
+
+  return arn!
+}
+
+export async function getUserId(request: Request) {
+  return parseArn(await getUserArn(request)).userId
 }
 
 export async function commitUser(request: Request, userArn: string) {
@@ -33,14 +47,4 @@ export async function commitUser(request: Request, userArn: string) {
       "Set-Cookie": await storage.commitSession(session),
     },
   })
-}
-
-export async function requireUser(request: Request) {
-  const userArn = await getUserArn(request)
-
-  if (!userArn) {
-    throw redirect("/login")
-  }
-
-  return userArn
 }

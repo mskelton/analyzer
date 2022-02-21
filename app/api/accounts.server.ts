@@ -3,10 +3,10 @@ import invariant from "tiny-invariant"
 import { db } from "~/db/db.server"
 import { createArn, parseArn } from "~/utils/arn"
 import { generateId } from "~/utils/id.server"
-import { requireUser } from "~/utils/session.server"
+import { getUserArn } from "~/utils/session.server"
 
 export async function getAccounts(request: Request) {
-  const userArn = await requireUser(request)
+  const userArn = await getUserArn(request)
   return db.account.findMany({ where: { userArn } })
 }
 
@@ -35,7 +35,7 @@ export async function createAccount(
   request: Request,
   data: EditableAccountData
 ) {
-  const userArn = await requireUser(request)
+  const userArn = await getUserArn(request)
   const { userId } = parseArn(userArn)
   const arn = createArn("account", userId, await generateId())
 

@@ -1,4 +1,5 @@
 import { Account } from "@prisma/client"
+import { Params } from "react-router-dom"
 import {
   ActionFunction,
   json,
@@ -16,28 +17,35 @@ import {
 import { AccountForm } from "~/components/accounts/AccountForm"
 import { DeleteAccount } from "~/components/accounts/DeleteAccount"
 import { PageHeader } from "~/components/common/PageHeader"
+import { createArn } from "~/utils/arn"
+import { getUserId } from "~/utils/session.server"
+
+async function getAccountArn(request: Request, params: Params) {
+  const userId = await getUserId(request)
+  return createArn("account", userId, params.externalId!)
+}
 
 export const meta: MetaFunction = ({ data }) => {
   return { title: data.account.name }
 }
 
-export const loader: LoaderFunction = async ({ params }) => {
-  return {
-    account: await getAccount(params.externalId!),
-  }
+export const loader: LoaderFunction = async ({ params, request }) => {
+  const arn = await getAccountArn(request, params)
+
+  return { account: await getAccount(arn) }
 }
 
 export const action: ActionFunction = async ({ params, request }) => {
   const formData = await request.formData()
   const method = formData.get("_method")
-  const externalId = params.externalId!
+  const arn = await getAccountArn(request, params)
 
   try {
     if (method === "delete") {
-      await deleteAccount(externalId)
+      await deleteAccount(arn)
     } else {
       const data = await validateAccountData(formData)
-      await updateAccount(externalId, data)
+      await updateAccount(arn, data)
     }
 
     return redirect("/accounts")
