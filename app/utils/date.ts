@@ -8,9 +8,9 @@ const hours = minutes * 24
 const days = hours * 7
 const weeks = days * 7
 
-export function timeAgo(date: number) {
+export function timeAgo(date: Date) {
   const now = new Date().getTime()
-  const diff = Math.round((now - date) / 1000)
+  const diff = Math.round((now - date.getTime()) / 1000)
 
   switch (true) {
     case diff < seconds:

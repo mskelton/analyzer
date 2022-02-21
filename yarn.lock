@@ -1824,6 +1824,7 @@ __metadata:
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     eslint-plugin-sort: ^2.4.0
+    nanoid: ^3.3.1
     postcss: ^8.4.6
     prettier: ^2.5.1
     prettier-plugin-tailwindcss: ^0.1.7
@@ -5707,6 +5708,15 @@ __metadata:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 183d7da5c910a717a6058c7d4485d69de6f50fe3eb903830fa965430c7bbd516d70b9eb523a25cf32550bebe835a7adf080b6059808d50c9a8895fa9204e7499
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "nanoid@npm:3.3.1"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 4ef0969e1bbe866fc223eb32276cbccb0961900bfe79104fa5abe34361979dead8d0e061410a5c03bc3d47455685adf32c09d6f27790f4a6898fb51f7df7ec86
   languageName: node
   linkType: hard
 

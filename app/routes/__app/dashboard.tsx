@@ -1,3 +1,13 @@
+import { MetaFunction } from "remix"
+import { seo } from "~/utils/seo"
+
+export const meta: MetaFunction = () => {
+  return seo({
+    description: `Track and analyzer your forex performance across your accounts.`,
+    title: "Dashboard",
+  })
+}
+
 export default function Dashboard() {
   return (
     <>

@@ -1,10 +1,10 @@
-import { ActionFunction, json, Link, redirect } from "remix"
+import { ActionFunction, json, Link, redirect, useActionData } from "remix"
 import invariant from "tiny-invariant"
+import { createAccount } from "~/api/accounts.server"
+import { Alert } from "~/components/common/Alert"
 import { PageHeader } from "~/components/common/PageHeader"
 import { Select } from "~/components/common/Select"
 import { TextField } from "~/components/common/TextField"
-import { db } from "~/db/db.server"
-import { getUserId } from "~/utils/session.server"
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
@@ -18,8 +18,7 @@ export const action: ActionFunction = async ({ request }) => {
   invariant(type === "DEMO" || type === "LIVE")
 
   try {
-    const userId = await getUserId(request)
-    await db.account.create({ data: { broker, name, type, userId } })
+    await createAccount(request, { broker, name, type })
 
     return redirect("/accounts")
   } catch (err) {
@@ -28,6 +27,8 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function NewAccount() {
+  const data = useActionData<{ error: string }>()
+
   return (
     <>
       <PageHeader>Create Account</PageHeader>
@@ -35,6 +36,12 @@ export default function NewAccount() {
       <main>
         <div className="mx-auto max-w-xl py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
+            {data?.error && (
+              <Alert className="mb-5" type="danger">
+                {data.error}
+              </Alert>
+            )}
+
             <form className="flex flex-col gap-5" method="post">
               <TextField
                 autoComplete="off"
