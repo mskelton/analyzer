@@ -3,15 +3,20 @@ import invariant from "tiny-invariant"
 import { db } from "~/db/db.server"
 import { createArn, parseArn } from "~/utils/arn"
 import { generateId } from "~/utils/id.server"
-import { getUserArn } from "~/utils/session.server"
+import { getUserArn, getUserId } from "~/utils/session.server"
 
 export async function getAccounts(request: Request) {
   const userArn = await getUserArn(request)
   return db.account.findMany({ where: { userArn } })
 }
 
-export function getAccount(arn: string) {
+export async function getAccount(request: Request, externalId: string) {
+  const arn = await getAccountArn(request, externalId)
   return db.account.findUnique({ where: { arn } })
+}
+
+export async function getAccountArn(request: Request, externalId: string) {
+  return createArn("account", await getUserId(request), externalId)
 }
 
 export type EditableAccountData = Pick<Account, "broker" | "name" | "type">
