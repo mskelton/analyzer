@@ -74,7 +74,7 @@ export default function SignUp() {
           />
 
           <TextField
-            autoComplete="password"
+            autoComplete="current-password"
             label="Password"
             name="password"
             required

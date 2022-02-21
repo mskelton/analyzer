@@ -1,8 +1,4 @@
-import {
-  CheckCircleIcon,
-  ExclamationIcon,
-  XCircleIcon,
-} from "@heroicons/react/solid"
+import { HiCheckCircle, HiExclamation, HiXCircle } from "react-icons/hi"
 
 const colors = {
   danger: "bg-red-50 text-red-800",
@@ -11,9 +7,9 @@ const colors = {
 }
 
 const icons = {
-  danger: <XCircleIcon className="text-red-400" />,
-  success: <CheckCircleIcon className="text-green-400" />,
-  warning: <ExclamationIcon className="text-amber-400" />,
+  danger: <HiXCircle className="text-red-400" />,
+  success: <HiCheckCircle className="text-green-400" />,
+  warning: <HiExclamation className="text-amber-400" />,
 }
 
 export interface BadgeProps {

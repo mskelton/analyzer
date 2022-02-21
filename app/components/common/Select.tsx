@@ -1,7 +1,7 @@
 import { Listbox, Transition } from "@headlessui/react"
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid"
 import clsx from "clsx"
 import { Fragment, useState } from "react"
+import { HiCheck, HiSelector } from "react-icons/hi"
 
 export interface SelectProps {
   defaultValue?: string
@@ -29,7 +29,7 @@ export function Select({ defaultValue, label, name, options }: SelectProps) {
             <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 sm:text-sm">
               <span className="block truncate">{selected.name}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                <SelectorIcon
+                <HiSelector
                   aria-hidden="true"
                   className="h-5 w-5 text-gray-400"
                 />
@@ -73,7 +73,7 @@ export function Select({ defaultValue, label, name, options }: SelectProps) {
                               "absolute inset-y-0 right-0 flex items-center pr-4"
                             )}
                           >
-                            <CheckIcon aria-hidden="true" className="h-5 w-5" />
+                            <HiCheck aria-hidden="true" className="h-5 w-5" />
                           </span>
                         ) : null}
                       </>

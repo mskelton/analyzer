@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { IconContext } from "react-icons"
 import { Links, LiveReload, Meta, Scripts } from "remix"
 
 export interface DocumentProps {
@@ -15,7 +16,10 @@ export function Document({ children, title }: DocumentProps) {
         <Links />
       </head>
       <body className="h-full">
-        {children}
+        <IconContext.Provider value={{ size: "inherit" }}>
+          {children}
+        </IconContext.Provider>
+
         <Scripts />
         <LiveReload />
       </body>

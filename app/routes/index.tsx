@@ -1,7 +1,7 @@
 import { Popover, Transition } from "@headlessui/react"
-import { MenuIcon, XIcon } from "@heroicons/react/outline"
-import { ChevronRightIcon } from "@heroicons/react/solid"
 import { Fragment } from "react"
+import { HiChevronRight, HiMenu, HiX } from "react-icons/hi"
+import { Link } from "react-router-dom"
 import { HeroPattern } from "~/components/marketing/HeroPattern"
 
 const navigation = [
@@ -40,7 +40,7 @@ export default function Home() {
                 <div className="-mr-2 flex items-center md:hidden">
                   <Popover.Button className="focus-ring-inset inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white">
                     <span className="sr-only">Open main menu</span>
-                    <MenuIcon aria-hidden="true" className="h-6 w-6" />
+                    <HiMenu aria-hidden="true" className="h-6 w-6" />
                   </Popover.Button>
                 </div>
               </div>
@@ -57,12 +57,12 @@ export default function Home() {
               </div>
             </div>
             <div className="hidden md:flex">
-              <a
+              <Link
                 className="inline-flex items-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
-                href="#"
+                to="/login"
               >
                 Log in
-              </a>
+              </Link>
             </div>
           </nav>
 
@@ -91,7 +91,7 @@ export default function Home() {
                   <div className="-mr-2">
                     <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                       <span className="sr-only">Close menu</span>
-                      <XIcon aria-hidden="true" className="h-6 w-6" />
+                      <HiX aria-hidden="true" className="h-6 w-6" />
                     </Popover.Button>
                   </div>
                 </div>
@@ -130,7 +130,7 @@ export default function Home() {
                       We&rsquo;re hiring
                     </span>
                     <span className="ml-4 text-sm">Visit our careers page</span>
-                    <ChevronRightIcon
+                    <HiChevronRight
                       aria-hidden="true"
                       className="ml-2 h-5 w-5 text-gray-500"
                     />
@@ -263,7 +263,11 @@ export default function Home() {
                     </div>
 
                     <div className="mt-6">
-                      <form action="#" className="space-y-6" method="POST">
+                      <form
+                        action="/signup"
+                        className="space-y-6"
+                        method="post"
+                      >
                         <div>
                           <label className="sr-only" htmlFor="name">
                             Full name
@@ -280,15 +284,15 @@ export default function Home() {
                         </div>
 
                         <div>
-                          <label className="sr-only" htmlFor="mobile-or-email">
-                            Mobile number or email
+                          <label className="sr-only" htmlFor="email">
+                            Email
                           </label>
                           <input
                             autoComplete="email"
                             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            id="mobile-or-email"
-                            name="mobile-or-email"
-                            placeholder="Mobile number or email"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
                             required
                             type="text"
                           />

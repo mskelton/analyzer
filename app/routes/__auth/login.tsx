@@ -1,3 +1,4 @@
+import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa"
 import {
   ActionFunction,
   json,
@@ -92,6 +93,51 @@ export default function Login() {
 
           <AuthButton>Sign in</AuthButton>
         </form>
+
+        <div className="mt-6">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="bg-white px-2 text-gray-500">
+                Or continue with
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-3 gap-3">
+            <div>
+              <a
+                className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
+                href="#"
+              >
+                <span className="sr-only">Sign in with Facebook</span>
+                <FaGoogle className="h-5 w-5" />
+              </a>
+            </div>
+
+            <div>
+              <a
+                className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
+                href="#"
+              >
+                <span className="sr-only">Sign in with Twitter</span>
+                <FaTwitter className="h-5 w-5" />
+              </a>
+            </div>
+
+            <div>
+              <a
+                className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
+                href="#"
+              >
+                <span className="sr-only">Sign in with GitHub</span>
+                <FaGithub className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
       </AuthCard>
     </div>
   )
