@@ -56,3 +56,23 @@ export async function updateAccount(arn: string, data: EditableAccountData) {
 export async function deleteAccount(arn: string) {
   return db.account.delete({ where: { arn } })
 }
+
+export async function getAccountFromToken(request: Request) {
+  const auth = request.headers.get("Authorization") ?? ""
+  const token = auth.replace("Bearer ", "")
+
+  if (!token) {
+    throw new Response("Missing required auth", { status: 401 })
+  }
+
+  const account = await db.account.findUnique({
+    include: { user: true },
+    where: { token },
+  })
+
+  if (!account) {
+    throw new Response("Account not found", { status: 403 })
+  }
+
+  return account
+}

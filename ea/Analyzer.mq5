@@ -17,7 +17,6 @@ const string BASE_URL = "https://mskelton.dev/analyzer";
 #endif
 
 int OnInit() {
-  Print(BASE_URL);
   // Setup a timer to send data to Analyzer and manually trigger the timer
   // once to send the initial data.
   EventSetTimer(INTERVAL * 60);
@@ -100,8 +99,9 @@ request_result request(const string method, const string url, const string heade
 
   char serverResult[];
   string serverHeaders;
+  string tokenHeader = "Authorization: Bearer " + TOKEN + "\r\n";
 
-  int status = WebRequest(method, url, headers, 500, data, serverResult, serverHeaders);
+  int status = WebRequest(method, url, tokenHeader + headers, 500, data, serverResult, serverHeaders);
   bool ok = status >= 200 && status < 300;
 
   if (status == -1) {
