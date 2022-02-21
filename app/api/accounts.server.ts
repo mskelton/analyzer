@@ -39,7 +39,14 @@ export async function createAccount(
   const { userId } = parseArn(userArn)
   const arn = createArn("account", userId, await generateId())
 
-  return db.account.create({ data: { ...data, arn, userArn } })
+  return db.account.create({
+    data: {
+      ...data,
+      arn,
+      token: await generateId(12),
+      userArn,
+    },
+  })
 }
 
 export async function updateAccount(arn: string, data: EditableAccountData) {

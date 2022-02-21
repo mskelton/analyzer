@@ -30,6 +30,7 @@ model Account {
   user         User   @relation(fields: [userArn], references: [arn])
   deals        Deal[]
 
+  token        String @unique
   name         String
   broker       String
   type         AccountType

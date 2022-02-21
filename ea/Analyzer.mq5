@@ -4,10 +4,20 @@
 #property description "Sends data to Analyzer for processing. For this EA to work properly, you must first allow it to access the Analyzer server. Go to Main Menu->Tools->Options and select the Expert Advisors tab. Then, check \"Allow WebRequest for listed URL\" and enter \"https://mskelton.dev\" to allow publishing trades to Analyzer."
 #property strict
 
-input int INTERVAL = 5;                                       // Interval (minutes)
-input string BASE_URL = "https://mskelton.dev/analyzer/api";  // Analyzer service URL
+input int INTERVAL = 5;  // Interval (minutes)
+input string TOKEN;      // Analyzer account token
+
+// When defined, uses the ngrok URL which points to the local dev server
+#define LOCAL
+
+#ifdef LOCAL
+const string BASE_URL = "http://597d-75-100-204-33.ngrok.io";
+#else
+const string BASE_URL = "https://mskelton.dev/analyzer";
+#endif
 
 int OnInit() {
+  Print(BASE_URL);
   // Setup a timer to send data to Analyzer and manually trigger the timer
   // once to send the initial data.
   EventSetTimer(INTERVAL * 60);
@@ -55,7 +65,7 @@ void OnTimer() {
 
 long getLastUpdateTime() {
   char data[];
-  request_result res = request("GET", BASE_URL + "/deals/last-updated", NULL, data);
+  request_result res = request("GET", BASE_URL + "/api/deals/last-updated", NULL, data);
 
   if (res.ok) {
     return StringToInteger(res.data);
@@ -70,7 +80,7 @@ void sendData(string stringData) {
   uchar jsonData[];
   StringToCharArray(stringData, jsonData, 0, StringLen(stringData));
 
-  request_result res = request("POST", BASE_URL + "/deals", "Content-Type:application/json", jsonData);
+  request_result res = request("POST", BASE_URL + "/api/deals", "Content-Type:application/json", jsonData);
 
   if (res.ok) {
     Print("Successfully sent data to Analyzer.");

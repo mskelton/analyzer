@@ -22,7 +22,7 @@ export async function signUp(name: string, email: string, password: string) {
 
   return db.user.create({
     data: {
-      arn: createArn("user", await generateId()),
+      arn: createArn("user", await generateId(), ""),
       email,
       name,
       password: await bcrypt.hash(password, 10),

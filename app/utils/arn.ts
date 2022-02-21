@@ -1,6 +1,6 @@
 export type ArnType = "user" | "account" | "deal"
 
-export function createArn(type: ArnType, userId: string, id = "") {
+export function createArn(type: ArnType, userId: string, id: string | number) {
   return `arn:${type}:${userId}:${id}`
 }
 
