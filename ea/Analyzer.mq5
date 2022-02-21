@@ -32,7 +32,6 @@ void OnTimer() {
     deal.setString("entry", EnumToString(ENUM_DEAL_ENTRY(HistoryDealGetInteger(ticket, DEAL_ENTRY))));
     deal.setDouble("fee", HistoryDealGetDouble(ticket, DEAL_FEE));
     deal.setInt("magic", HistoryDealGetInteger(ticket, DEAL_MAGIC));
-    deal.setInt("order", HistoryDealGetInteger(ticket, DEAL_ORDER));
     deal.setDouble("price", HistoryDealGetDouble(ticket, DEAL_PRICE));
     deal.setDouble("profit", HistoryDealGetDouble(ticket, DEAL_PROFIT));
     deal.setString("reason", EnumToString(ENUM_DEAL_REASON(HistoryDealGetInteger(ticket, DEAL_REASON))));

@@ -47,7 +47,6 @@ model Deal {
   entry      String
   fee        Float?
   magic      Int?
-  order      Int?
   price      Float?
   profit     Float?
   reason     String

@@ -7,12 +7,6 @@ declare global {
   var _prisma: PrismaClient | undefined
 }
 
-const databaseURL =
-  process.env.DATABASE_URL ??
-  "mongodb://root:local@localhost/analyzer?authSource=admin"
-
-global._prisma ??= new PrismaClient({
-  datasources: { db: { url: databaseURL } },
-})
+global._prisma ??= new PrismaClient()
 
 export const db = global._prisma
