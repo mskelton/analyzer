@@ -3,7 +3,7 @@ import { LoaderFunction, MetaFunction, useLoaderData } from "remix"
 import { getAccountArn, getAccounts } from "~/api/accounts.server"
 import { PageHeader } from "~/components/common/PageHeader"
 import { TableHeader } from "~/components/common/TableHeader"
-import { db } from "~/db/db.server"
+import { db } from "~/db.server"
 import { parseArn } from "~/utils/arn"
 import { timeAgo } from "~/utils/date"
 

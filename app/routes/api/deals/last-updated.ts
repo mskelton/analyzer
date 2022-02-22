@@ -1,6 +1,6 @@
 import { LoaderFunction } from "remix"
 import { getAccountFromToken } from "~/api/accounts.server"
-import { db } from "~/db/db.server"
+import { db } from "~/db.server"
 
 export const loader: LoaderFunction = async ({ request }) => {
   const account = await getAccountFromToken(request)

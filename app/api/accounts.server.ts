@@ -1,6 +1,6 @@
 import { Account } from "@prisma/client"
 import invariant from "tiny-invariant"
-import { db } from "~/db/db.server"
+import { db } from "~/db.server"
 import { createArn, parseArn } from "~/utils/arn"
 import { generateId } from "~/utils/id.server"
 import { getUserArn, getUserId } from "~/utils/session.server"

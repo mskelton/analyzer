@@ -1,5 +1,5 @@
 import * as bcrypt from "bcrypt"
-import { db } from "~/db/db.server"
+import { db } from "~/db.server"
 import { createArn } from "~/utils/arn"
 import { generateId } from "~/utils/id.server"
 

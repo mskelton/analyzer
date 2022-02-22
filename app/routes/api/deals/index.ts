@@ -1,7 +1,7 @@
 import { Deal } from "@prisma/client"
 import { ActionFunction } from "remix"
 import { getAccountFromToken } from "~/api/accounts.server"
-import { db } from "~/db/db.server"
+import { db } from "~/db.server"
 import { createArn, parseArn } from "~/utils/arn"
 import { generateId } from "~/utils/id.server"
 
