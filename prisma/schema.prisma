@@ -29,6 +29,7 @@ model Account {
   userArn      String
   user         User   @relation(fields: [userArn], references: [arn])
   deals        Deal[]
+  widgets      Widget[]
 
   token        String @unique
   name         String
@@ -61,4 +62,14 @@ model Deal {
   volume     Float?
 
   @@unique([accountArn, ticket])
+}
+
+model Widget {
+  id         String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  arn        String  @unique
+  accountArn String
+  account    Account @relation(fields: [accountArn], references: [arn])
+
+  name       String
+  value      Json
 }
