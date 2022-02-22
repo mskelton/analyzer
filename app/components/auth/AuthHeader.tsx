@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Link } from "react-router-dom"
+import { Link } from "remix"
 import { AnalyzerLogo } from "../common/AnalyzerLogo"
 
 export interface AuthHeaderProps {

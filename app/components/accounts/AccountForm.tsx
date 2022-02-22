@@ -1,6 +1,5 @@
 import { Account } from "@prisma/client"
-import { Link } from "react-router-dom"
-import { useLoaderData } from "remix"
+import { Link, useLoaderData } from "remix"
 import { useFormError } from "~/hooks/useFormError"
 import { Alert } from "../common/Alert"
 import { Select } from "../common/Select"

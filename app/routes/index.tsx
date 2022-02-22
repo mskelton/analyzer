@@ -2,7 +2,7 @@ import { Popover, Transition } from "@headlessui/react"
 import { Fragment } from "react"
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa"
 import { HiChevronRight, HiMenu, HiX } from "react-icons/hi"
-import { Link } from "react-router-dom"
+import { Link } from "remix"
 import { HeroPattern } from "~/components/marketing/HeroPattern"
 
 const navigation = [

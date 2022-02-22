@@ -24,17 +24,13 @@ export const links: LinksFunction = () => {
 }
 
 export const meta: MetaFunction = ({ location }) => {
-  // const image = metadata.url + metadata.siteLogo
-
   return {
     charset: "utf-8",
-    // "og:image": image,
     "og:site_name": "Analyzer",
     "og:type": "website",
     "og:url": metadata.url + location.pathname,
     robots: "follow, index",
     "twitter:card": "summary",
-    // "twitter:image": image,
     "twitter:site": "@mskelton0",
     viewport: "width=device-width, initial-scale=1",
   }

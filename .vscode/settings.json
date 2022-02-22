@@ -6,13 +6,6 @@
   },
   "files.associations": {
     "*.mq5": "cpp",
-    "*.mqh": "cpp",
-    "*.pro": "prolog",
-    ".stylelintrc": "json",
-    ".releaserc": "json",
-    "*.mql5": "cpp",
-    "bitset": "cpp",
-    "string": "cpp",
-    "iosfwd": "cpp"
+    "*.mqh": "cpp"
   }
 }
