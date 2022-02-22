@@ -6,7 +6,6 @@ import {
   LoaderFunction,
   MetaFunction,
   redirect,
-  useActionData,
 } from "remix"
 import invariant from "tiny-invariant"
 import { login } from "~/api/auth.server"
@@ -15,6 +14,7 @@ import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
 import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
+import { useFormError } from "~/hooks/useFormError"
 import { seo } from "~/utils/seo"
 import { commitUser, getUserArn } from "~/utils/session.server"
 
@@ -49,7 +49,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function Login() {
-  const data = useActionData<{ error: string }>()
+  const { error } = useFormError()
 
   return (
     <div data-testid="sign-up">
@@ -62,9 +62,9 @@ export default function Login() {
       </AuthHeader>
 
       <AuthCard>
-        {data?.error && (
+        {error && (
           <Alert className="mb-6" type="danger">
-            {data.error}
+            {error}
           </Alert>
         )}
 

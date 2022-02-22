@@ -1,12 +1,13 @@
 import { Account } from "@prisma/client"
 import { Link } from "react-router-dom"
-import { useActionData, useLoaderData } from "remix"
+import { useLoaderData } from "remix"
+import { useFormError } from "~/hooks/useFormError"
 import { Alert } from "../common/Alert"
 import { Select } from "../common/Select"
 import { TextField } from "../common/TextField"
 
 export function AccountForm() {
-  const { error } = useActionData<{ error: string }>() ?? {}
+  const { error } = useFormError()
   const data = useLoaderData<{ account: Account } | undefined>()
 
   return (

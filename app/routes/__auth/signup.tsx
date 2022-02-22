@@ -1,4 +1,4 @@
-import { ActionFunction, json, MetaFunction, useActionData } from "remix"
+import { ActionFunction, json, MetaFunction } from "remix"
 import invariant from "tiny-invariant"
 import { signUp } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
@@ -6,6 +6,7 @@ import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
 import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
+import { useFormError } from "~/hooks/useFormError"
 import { seo } from "~/utils/seo"
 import { commitUser } from "~/utils/session.server"
 
@@ -37,7 +38,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function SignUp() {
-  const data = useActionData<{ error: string }>()
+  const { error } = useFormError()
 
   return (
     <div data-testid="sign-up">
@@ -50,9 +51,9 @@ export default function SignUp() {
       </AuthHeader>
 
       <AuthCard>
-        {data?.error && (
+        {error && (
           <Alert className="mb-6" type="danger">
-            {data.error}
+            {error}
           </Alert>
         )}
 
