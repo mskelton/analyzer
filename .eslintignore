@@ -1,3 +1,3 @@
-# Outputs
 build/
 lib/
+db/seed.js

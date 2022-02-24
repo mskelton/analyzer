@@ -2,6 +2,9 @@ version: "3"
 services:
   mongodb:
     image: prismagraphql/mongo-single-replica:5.0.3
+    restart: always
+    volumes:
+      - ./db/seed.js:/docker-entrypoint-initdb.d/seed.js:ro
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=local
