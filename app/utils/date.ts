@@ -1,38 +1,20 @@
-const formatter = new Intl.RelativeTimeFormat(undefined, {
-  numeric: "auto",
-})
+/**
+ * Returns a new Date object based on a given epoch with the time set to
+ * midnight, the start of the current day.
+ */
+export function midnight(time: number) {
+  const date = new Date(time)
 
-const seconds = 60
-const minutes = seconds * 60
-const hours = minutes * 24
-const days = hours * 7
-const weeks = days * 7
+  // Everything we do is UTC based.
+  date.setUTCHours(0, 0, 0, 0)
 
-export function timeAgo(date: Date) {
-  const now = new Date().getTime()
-  const diff = Math.round((now - date.getTime()) / 1000)
+  return date
+}
 
-  switch (true) {
-    case diff < seconds:
-      return formatter.format(-diff, "seconds")
-
-    case diff < minutes:
-      return formatter.format(Math.round(-diff / seconds), "minutes")
-
-    case diff < hours:
-      return formatter.format(Math.round(-diff / minutes), "hours")
-
-    case diff < days:
-      return formatter.format(Math.round(-diff / hours), "days")
-
-    case diff < weeks:
-      return formatter.format(Math.round(-diff / days), "weeks")
-
-    default:
-      return new Date(date).toLocaleDateString(undefined, {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      })
-  }
+/**
+ * Returns the number of days between two dates.
+ */
+export function dateDiff(a: Date | number, b: Date | number) {
+  const diff = new Date(a).getTime() - new Date(b).getTime()
+  return Math.ceil(Math.abs(diff / 864e5))
 }

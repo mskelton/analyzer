@@ -5,7 +5,7 @@ import { PageHeader } from "~/components/common/PageHeader"
 import { TableHeader } from "~/components/common/TableHeader"
 import { db } from "~/db.server"
 import { parseArn } from "~/utils/arn"
-import { timeAgo } from "~/utils/date"
+import { timeAgo } from "~/utils/timeAgo"
 
 export const meta: MetaFunction = () => {
   return { title: "Dashboard" }

@@ -1,7 +1,7 @@
 import { Link } from "remix"
 import { useAccounts } from "~/hooks/useAccounts"
 import { parseArn } from "~/utils/arn"
-import { timeAgo } from "~/utils/date"
+import { timeAgo } from "~/utils/timeAgo"
 import { Badge } from "../common/Badge"
 import { TableHeader } from "../common/TableHeader"
 

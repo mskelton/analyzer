@@ -1,4 +1,6 @@
 import { Deal } from "@prisma/client"
+import { dateDiff, midnight } from "~/utils/date"
+import { safeAdd } from "~/utils/math"
 import { Metric } from "./Metric.server"
 
 export class BalanceMetric extends Metric<number[]> {
@@ -7,7 +9,7 @@ export class BalanceMetric extends Metric<number[]> {
   }
 
   onSetup(deal: Deal) {
-    const totalDays = this.daysBetween(Date.now(), deal.time) + 1
+    const totalDays = dateDiff(Date.now(), deal.time) + 1
 
     this.value = new Array(totalDays).fill(0)
   }
@@ -15,8 +17,8 @@ export class BalanceMetric extends Metric<number[]> {
   digest(deal: Deal) {
     super.digest(deal)
 
-    const index = this.getDayIndex(deal)
     const profit = this.getProfit(deal)
+    const index = dateDiff(midnight(deal.time), midnight(this.start.time))
 
     this.value[index] += profit
   }
@@ -33,34 +35,14 @@ export class BalanceMetric extends Metric<number[]> {
         return deal.profit!
 
       case deal.entry === "DEAL_ENTRY_OUT":
-        return this.add(deal.profit, deal.swap)
+        return safeAdd(deal.profit, deal.swap)
 
       case deal.entry === "DEAL_ENTRY_IN":
-        return this.add(deal.fee, deal.commission)
+        return safeAdd(deal.fee, deal.commission)
 
       default:
         console.log(deal)
         throw new Error("Unhandled deal")
     }
-  }
-
-  private add(a: number | null, b: number | null) {
-    return (a ?? 0) + (b ?? 0)
-  }
-
-  private getDayIndex(deal: Deal) {
-    return this.daysBetween(this.sod(deal.time), this.sod(this.start.time))
-  }
-
-  private sod(time: number) {
-    const date = new Date(time)
-    date.setUTCHours(0, 0, 0, 0)
-
-    return date
-  }
-
-  private daysBetween(a: Date | number, b: Date | number) {
-    const diff = new Date(a).getTime() - new Date(b).getTime()
-    return Math.ceil(Math.abs(diff / 864e5))
   }
 }

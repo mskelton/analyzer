@@ -3,7 +3,6 @@ import { Document } from "./components/Document"
 import { NotFound } from "./components/NotFound"
 import { ServerError } from "./components/ServerError"
 import stylesUrl from "./tailwind.css"
-import { metadata } from "./utils/metadata"
 
 export const links: LinksFunction = () => {
   return [
@@ -28,7 +27,7 @@ export const meta: MetaFunction = ({ location }) => {
     charset: "utf-8",
     "og:site_name": "Analyzer",
     "og:type": "website",
-    "og:url": metadata.url + location.pathname,
+    "og:url": "https://mskelton.dev/analyzer" + location.pathname,
     robots: "follow, index",
     "twitter:card": "summary",
     "twitter:site": "@mskelton0",
