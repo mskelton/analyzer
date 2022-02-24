@@ -5,15 +5,16 @@
 #property strict
 
 input int INTERVAL = 5;  // Interval (minutes)
-input string TOKEN;      // Analyzer account token
 
 // When defined, uses the ngrok URL which points to the local dev server
 #define LOCAL
 
 #ifdef LOCAL
-input string BASE_URL = "http://1f99-69-131-85-248.ngrok.io";  // Analyzer URL
+input string BASE_URL = "http://a831-69-131-85-248.ngrok.io";  // Analyzer URL
+input string TOKEN = "74e8u3j1zucq";                           // Analyzer account token
 #else
-const string BASE_URL = "https://mskelton.dev/analyzer";
+const string BASE_URL = "https://mskelton.dev/analyzer";  // Analyzer URL
+input string TOKEN;                                       // Analyzer account token
 #endif
 
 int OnInit() {

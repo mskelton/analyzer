@@ -1,6 +1,13 @@
 db.auth("root", "local")
 db = db.getSiblingDB("analyzer")
 
+db.User.insert({
+  arn: "arn:user:jii36zh8:",
+  email: "mdskelton99@gmail.com",
+  password: "$2b$10$/QBjegkftcQFSIS2soi/uOldyWzcib0V9Qpeu9ArCjPOAsaX5PHYS",
+  name: "Mark Skelton",
+})
+
 db.Account.insert({
   arn: "arn:account:jii36zh8:ecowczk9",
   userArn: "arn:user:jii36zh8:",
@@ -10,9 +17,4 @@ db.Account.insert({
   type: "LIVE",
 })
 
-db.User.insert({
-  arn: "arn:user:jii36zh8:",
-  email: "mdskelton99@gmail.com",
-  password: "$2b$10$/QBjegkftcQFSIS2soi/uOldyWzcib0V9Qpeu9ArCjPOAsaX5PHYS",
-  name: "Mark Skelton",
-})
+db.Deal.createIndex({ accountArn: 1, ticket: 1 }, { unique: true })
