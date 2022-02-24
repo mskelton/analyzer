@@ -70,7 +70,10 @@ long getLastUpdateTime() {
   request_result res = request("GET", BASE_URL + "/api/deals/last-updated", NULL, data);
 
   if (res.ok) {
-    return StringToInteger(res.data);
+    // The last updated time is the time of the last deal uploaded to Analyzer.
+    // As such, we have to add one second to the time to get the next set of
+    // deals without including any of the deals that were already uploaded.
+    return StringToInteger(res.data) + 1;
   }
 
   PrintFormat("Failed to get last updated time with status code %d", res.status);
