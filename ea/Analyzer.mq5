@@ -11,7 +11,7 @@ input string TOKEN;      // Analyzer account token
 #define LOCAL
 
 #ifdef LOCAL
-const string BASE_URL = "http://597d-75-100-204-33.ngrok.io";
+input string BASE_URL = "http://1f99-69-131-85-248.ngrok.io";  // Analyzer URL
 #else
 const string BASE_URL = "https://mskelton.dev/analyzer";
 #endif

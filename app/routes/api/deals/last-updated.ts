@@ -10,7 +10,10 @@ export const loader: LoaderFunction = async ({ request }) => {
     where: { accountArn: account.arn },
   })
 
-  return new Response((deal?.time ?? 0).toString(), {
+  // Convert the time to seconds which is what the EA expects
+  const time = (deal?.time ?? 0) / 1000
+
+  return new Response(time.toString(), {
     status: 200,
   })
 }
