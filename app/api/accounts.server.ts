@@ -7,7 +7,17 @@ import { getUserArn, getUserId } from "~/utils/session.server"
 
 export async function getAccounts(request: Request) {
   const userArn = await getUserArn(request)
-  return db.account.findMany({ where: { userArn } })
+
+  return db.account.findMany({
+    include: {
+      deals: {
+        orderBy: { time: "desc" },
+        select: { time: true },
+        take: 1,
+      },
+    },
+    where: { userArn },
+  })
 }
 
 export async function getAccount(request: Request, externalId: string) {
