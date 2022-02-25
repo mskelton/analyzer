@@ -71,7 +71,6 @@ export async function getAccountFromToken(request: Request) {
   }
 
   const account = await db.account.findUnique({
-    include: { user: true },
     where: { token },
   })
 
