@@ -1,16 +1,15 @@
 import { Deal } from "@prisma/client"
-import { db } from "~/db.server"
 
 export abstract class Metric<T> {
-  protected lastUpdated = 0
+  protected updatedAt = 0
   protected start: Deal = null!
 
-  constructor(private arn: string, protected key: string, protected value: T) {}
+  constructor(protected key: string, protected value: T) {}
 
   abstract onSetup(deal: Deal): void
 
   digest(deal: Deal) {
-    this.lastUpdated = Math.max(this.lastUpdated, deal.time)
+    this.updatedAt = Math.max(this.updatedAt, deal.time)
 
     if (!this.start) {
       this.start = deal
@@ -18,15 +17,11 @@ export abstract class Metric<T> {
     }
   }
 
-  async save() {
-    // const data = { key: this.key, value: this.data }
-    // await db.metric.upsert({
-    //   create: {
-    //     ...data,
-    //     arn: this.arn,
-    //   },
-    //   update: data,
-    //   where: { arn: this.arn },
-    // })
+  toJSON() {
+    return {
+      key: this.key,
+      updatedAt: new Date(this.updatedAt),
+      value: this.value,
+    }
   }
 }

@@ -10,16 +10,13 @@ type NewDeal = Omit<Deal, "id" | "arn" | "accountArn">
 export const action: ActionFunction = async ({ request }) => {
   const body = (await request.json()) as { deals: NewDeal[] }
   const account = await getAccountFromToken(request)
+  const { userId } = parseArn(account.arn)
 
   // Add the account ARN and generate a deal ARN
   const deals = body.deals.map(async (deal) => ({
     ...deal,
     accountArn: account.arn,
-    arn: createArn(
-      "deal",
-      parseArn(account.user.arn).userId,
-      await generateId()
-    ),
+    arn: createArn("deal", userId, await generateId()),
   }))
 
   await db.deal.createMany({

@@ -56,9 +56,7 @@ export function AccountsTable() {
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                      {account.lastUpdated
-                        ? timeAgo(account.lastUpdated)
-                        : "Never"}
+                      {account.updatedAt ? timeAgo(account.updatedAt) : "Never"}
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">

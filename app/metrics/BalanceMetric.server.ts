@@ -4,8 +4,8 @@ import { safeAdd } from "~/utils/math"
 import { Metric } from "./Metric.server"
 
 export class BalanceMetric extends Metric<number[]> {
-  constructor(arn: string) {
-    super(arn, "balance", [])
+  constructor() {
+    super("balance", [])
   }
 
   onSetup(deal: Deal) {
@@ -21,12 +21,6 @@ export class BalanceMetric extends Metric<number[]> {
     const index = dateDiff(midnight(deal.time), midnight(this.start.time))
 
     this.value[index] += profit
-  }
-
-  async save() {
-    console.log(this.value.reduce((a, b) => a + b, 0))
-
-    await super.save()
   }
 
   private getProfit(deal: Deal) {
