@@ -9,13 +9,41 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  arn      String @unique
-  accounts Account[]
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  arn       String @unique
 
-  email    String @unique
-  password String
-  name     String
+  // Meta
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  accounts  Account[]
+
+  // Other
+  email     String @unique
+  name      String
+  password  String
+}
+
+model Account {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  arn          String @unique
+  userArn      String
+
+  // Meta
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  user         User   @relation(fields: [userArn], references: [arn])
+  deals        Deal[]
+  metrics      Metric[]
+
+  // Other
+  token        String @unique
+  name         String
+  broker       String
+  type         AccountType
 }
 
 enum AccountType {
@@ -23,19 +51,38 @@ enum AccountType {
   LIVE
 }
 
-model Account {
-  id           String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  arn          String @unique
-  userArn      String
-  user         User   @relation(fields: [userArn], references: [arn])
-  deals        Deal[]
-  metrics      Metric[]
+type Metric {
+  key         String
+  value       Json
+  updatedAt   DateTime
+}
 
-  token        String @unique
-  name         String
-  broker       String
-  type         AccountType
-  lastUpdated  DateTime?
+model Deal {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  arn        String  @unique
+
+  // Relations
+  accountArn String
+  account    Account @relation(fields: [accountArn], references: [arn])
+  @@unique([accountArn, ticket])
+
+  // Other
+  comment    String?
+  commission Float?
+  entry      DealEntry
+  fee        Float?
+  magic      Int?
+  price      Float?
+  profit     Float?
+  reason     DealReason
+  sl         Float?
+  swap       Float?
+  symbol     String?
+  ticket     Int
+  time       Int
+  tp         Float?
+  type       DealType
+  volume     Float?
 }
 
 enum DealEntry {
@@ -77,40 +124,4 @@ enum DealType {
   DEAL_DIVIDEND
   DEAL_DIVIDEND_FRANKED
   DEAL_TAX
-}
-
-model Deal {
-  id         String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  arn        String  @unique
-  accountArn String
-  account    Account @relation(fields: [accountArn], references: [arn])
-
-  comment    String?
-  commission Float?
-  entry      DealEntry
-  fee        Float?
-  magic      Int?
-  price      Float?
-  profit     Float?
-  reason     DealReason
-  sl         Float?
-  swap       Float?
-  symbol     String?
-  ticket     Int
-  time       Int
-  tp         Float?
-  type       DealType
-  volume     Float?
-
-  @@unique([accountArn, ticket])
-}
-
-model Metric {
-  id         String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  arn        String  @unique
-  accountArn String
-  account    Account @relation(fields: [accountArn], references: [arn])
-
-  key        String
-  value      Json
 }
