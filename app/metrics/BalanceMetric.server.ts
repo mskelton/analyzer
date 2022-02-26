@@ -1,6 +1,6 @@
 import { Deal } from "@prisma/client"
 import { dateDiff, midnight } from "~/utils/date"
-import { safeAdd } from "~/utils/math"
+import { round, safeAdd } from "~/utils/math"
 import { Metric } from "./Metric.server"
 
 export class BalanceMetric extends Metric<number[]> {
@@ -26,7 +26,7 @@ export class BalanceMetric extends Metric<number[]> {
     // days balance by the previous day's balance. This produces a result where
     // each data point represents the current balance as of that day.
     for (let i = 0; i < this.value.length; i++) {
-      this.value[i] += this.value[i - 1] ?? 0
+      this.value[i] += round(this.value[i - 1] ?? 0)
     }
 
     return super.toJSON()

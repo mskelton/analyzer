@@ -29,7 +29,7 @@ export function Balance({ metric }: BalanceProps) {
           borderColor: "rgb(75, 192, 192)",
           data: value,
           label: "Balance",
-          tension: 0.1,
+          // tension: 0.1,
         },
       ],
       labels: value.map((_, i, arr) =>
@@ -66,7 +66,7 @@ export function Balance({ metric }: BalanceProps) {
           },
           y: {
             ticks: {
-              callback: (value) => formatCurrency(value as number),
+              callback: (value) => formatCurrency(value as number, 0),
             },
           },
         },
