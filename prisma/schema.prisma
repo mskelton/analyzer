@@ -52,9 +52,13 @@ enum AccountType {
 }
 
 type Metric {
-  key         String
+  key         MetricType
   value       Json
   updatedAt   DateTime
+}
+
+enum MetricType {
+  BALANCE
 }
 
 model Deal {

@@ -5,13 +5,11 @@ import { Metric } from "./Metric.server"
 
 export class BalanceMetric extends Metric<number[]> {
   constructor() {
-    super("balance", [])
+    super("BALANCE", [])
   }
 
-  onSetup(deal: Deal) {
-    const totalDays = dateDiff(Date.now(), deal.time) + 1
-
-    this.value = new Array(totalDays).fill(0)
+  setup(deal: Deal) {
+    this.value = new Array(dateDiff(Date.now(), deal.time) + 1).fill(0)
   }
 
   digest(deal: Deal) {
@@ -21,6 +19,17 @@ export class BalanceMetric extends Metric<number[]> {
     const index = dateDiff(midnight(deal.time), midnight(this.start.time))
 
     this.value[index] += profit
+  }
+
+  toJSON() {
+    // After calculating the balance change for each day, we can increase each
+    // days balance by the previous day's balance. This produces a result where
+    // each data point represents the current balance as of that day.
+    for (let i = 0; i < this.value.length; i++) {
+      this.value[i] += this.value[i - 1] ?? 0
+    }
+
+    return super.toJSON()
   }
 
   private getProfit(deal: Deal) {

@@ -1806,6 +1806,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.12.0
     autoprefixer: ^10.4.2
     bcrypt: ^5.0.1
+    chart.js: ^3.7.1
     clsx: ^1.1.1
     concurrently: ^7.0.0
     dotenv: ^16.0.0
@@ -1820,6 +1821,7 @@ __metadata:
     prettier-plugin-tailwindcss: ^0.1.7
     prisma: ^3.10.0
     react: ^17.0.2
+    react-chartjs-2: ^4.0.1
     react-dom: ^17.0.2
     react-icons: ^4.3.1
     remix: ^1.2.1
@@ -2317,6 +2319,13 @@ __metadata:
   version: 2.0.1
   resolution: "character-reference-invalid@npm:2.0.1"
   checksum: 98d3b1a52ae510b7329e6ee7f6210df14f1e318c5415975d4c9e7ee0ef4c07875d47c6e74230c64551f12f556b4a8ccc24d9f3691a2aa197019e72a95e9297ee
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "chart.js@npm:3.7.1"
+  checksum: f9d118d3b7dd3c36b6da7a8d71ac9e5d9673b81095cc66c3f61ff91674e20020c6700f8c9c6f93713fa8474eb471ded106114346ccc6afa88b4a7d0eb73dcea4
   languageName: node
   linkType: hard
 
@@ -6492,6 +6501,16 @@ __metadata:
     iconv-lite: 0.4.24
     unpipe: 1.0.0
   checksum: c6f8d6a75c65c0a047f888cb29efc97f60fb36e950ba2cb31fefce694f98186e844a03367920faa7dc5bffaf33df08aee0b9dd935280e366439fa6492a5b163e
+  languageName: node
+  linkType: hard
+
+"react-chartjs-2@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "react-chartjs-2@npm:4.0.1"
+  peerDependencies:
+    chart.js: ^3.5.0
+    react: ^16.8.0 || ^17.0.0
+  checksum: c22e994c73c0fba8140e9228703b3a94f54a053b00b7a70a53d7056139349f3032daf1512fa38bad23e8e348affc4e36ebbfea8beb5e4c5802bfc8c72d9c68d6
   languageName: node
   linkType: hard
 

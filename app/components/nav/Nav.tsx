@@ -1,6 +1,6 @@
 import { Disclosure } from "@headlessui/react"
 import clsx from "clsx"
-import { NavLink } from "remix"
+import { Link, NavLink } from "remix"
 import { AnalyzerLogo } from "~/components/common/AnalyzerLogo"
 import { navItems } from "~/components/nav/config"
 import { MobileMenuButton } from "~/components/nav/MobileMenuButton"
@@ -21,7 +21,9 @@ export function Nav() {
         <>
           <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <div className="flex items-center">
-              <AnalyzerLogo className="h-8 w-8 flex-shrink-0" />
+              <Link to="/">
+                <AnalyzerLogo className="h-8 w-8 flex-shrink-0" />
+              </Link>
 
               <div className="ml-10 hidden items-baseline space-x-4 md:flex">
                 {navItems.map((item) => (
