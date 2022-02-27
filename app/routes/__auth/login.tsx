@@ -1,7 +1,6 @@
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa"
 import {
   ActionFunction,
-  json,
   Link,
   LoaderFunction,
   MetaFunction,
@@ -15,6 +14,7 @@ import { AuthHeader } from "~/components/auth/AuthHeader"
 import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
 import { useFormError } from "~/hooks/useFormError"
+import { handleError } from "~/utils/errors.server"
 import { seo } from "~/utils/seo"
 import { commitUser, getUserArn } from "~/utils/session.server"
 
@@ -44,7 +44,7 @@ export const action: ActionFunction = async ({ request }) => {
 
     return commitUser(request, user.arn)
   } catch (err) {
-    return json({ error: (err as Error).message }, { status: 400 })
+    return handleError(err)
   }
 }
 

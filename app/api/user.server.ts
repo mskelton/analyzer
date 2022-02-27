@@ -1,4 +1,5 @@
 import { db } from "~/db.server"
+import { ClientError } from "~/utils/errors.server"
 import { getUserArn } from "~/utils/session.server"
 
 export async function getUser(request: Request) {
@@ -6,7 +7,7 @@ export async function getUser(request: Request) {
   const user = await db.user.findUnique({ where: { arn } })
 
   if (!user) {
-    throw new Error("User not found")
+    throw new ClientError("User not found")
   }
 
   return user

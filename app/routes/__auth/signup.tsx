@@ -1,4 +1,4 @@
-import { ActionFunction, json, MetaFunction } from "remix"
+import { ActionFunction, MetaFunction } from "remix"
 import invariant from "tiny-invariant"
 import { signUp } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
@@ -7,6 +7,7 @@ import { AuthHeader } from "~/components/auth/AuthHeader"
 import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
 import { useFormError } from "~/hooks/useFormError"
+import { handleError } from "~/utils/errors.server"
 import { seo } from "~/utils/seo"
 import { commitUser } from "~/utils/session.server"
 
@@ -33,7 +34,7 @@ export const action: ActionFunction = async ({ request }) => {
 
     return commitUser(request, user.arn)
   } catch (err) {
-    return json({ error: (err as Error).message }, { status: 400 })
+    return handleError(err)
   }
 }
 

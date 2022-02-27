@@ -1,7 +1,8 @@
-import { ActionFunction, json, MetaFunction, redirect } from "remix"
+import { ActionFunction, MetaFunction, redirect } from "remix"
 import { createAccount, validateAccountData } from "~/api/accounts.server"
 import { AccountForm } from "~/components/accounts/AccountForm"
 import { PageHeader } from "~/components/common/PageHeader"
+import { handleError } from "~/utils/errors.server"
 
 export const meta: MetaFunction = () => {
   return { title: "Create account" }
@@ -16,7 +17,7 @@ export const action: ActionFunction = async ({ request }) => {
 
     return redirect("/accounts")
   } catch (err) {
-    return json({ error: (err as Error).message }, { status: 400 })
+    return handleError(err)
   }
 }
 

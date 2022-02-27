@@ -1,7 +1,6 @@
 import { Account } from "@prisma/client"
 import {
   ActionFunction,
-  json,
   LoaderFunction,
   MetaFunction,
   redirect,
@@ -17,6 +16,7 @@ import {
 import { AccountForm } from "~/components/accounts/AccountForm"
 import { DeleteAccount } from "~/components/accounts/DeleteAccount"
 import { PageHeader } from "~/components/common/PageHeader"
+import { handleError } from "~/utils/errors.server"
 
 export const meta: MetaFunction = ({ data }) => {
   return { title: data.account.name }
@@ -41,7 +41,7 @@ export const action: ActionFunction = async ({ params, request }) => {
 
     return redirect("/accounts")
   } catch (err) {
-    return json({ error: (err as Error).message }, { status: 400 })
+    return handleError(err)
   }
 }
 
