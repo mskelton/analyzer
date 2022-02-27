@@ -15,9 +15,9 @@ export class ClientError extends Error {}
  */
 export function handleError(err: unknown, fallback = "Internal server error") {
   if (err instanceof ClientError) {
-    throw json({ error: err.message }, { status: 400 })
+    return json({ error: err.message }, { status: 400 })
   }
 
   console.log("Unhandled error: ", err)
-  throw json({ error: fallback }, { status: 400 })
+  return json({ error: fallback }, { status: 400 })
 }
