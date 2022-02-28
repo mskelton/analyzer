@@ -14,11 +14,17 @@ export async function login(email: string, password: string) {
   throw new ClientError("Invalid email or password")
 }
 
+const betaUsers = process.env.BETA_USERS?.split(",")
+
 export async function signUp(name: string, email: string, password: string) {
   const user = await db.user.findUnique({ where: { email } })
 
   if (user) {
     throw new ClientError("User already exists")
+  }
+
+  if (!betaUsers?.includes(email)) {
+    throw new ClientError("User not part of closed beta")
   }
 
   return db.user.create({
