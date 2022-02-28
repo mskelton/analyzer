@@ -1,15 +1,16 @@
 import { Popover, Transition } from "@headlessui/react"
 import { Fragment } from "react"
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa"
-import { HiChevronRight, HiMenu, HiX } from "react-icons/hi"
+import { HiMenu, HiX } from "react-icons/hi"
 import { Link } from "remix"
+import { Features } from "~/components/marketing/Features"
+import { Footer } from "~/components/marketing/Footer"
 import { HeroPattern } from "~/components/marketing/HeroPattern"
 
 const navigation = [
   { href: "/product", name: "Product" },
   { href: "/features", name: "Features" },
-  { href: "/marketplace", name: "Marketplace" },
-  { href: "/company", name: "Company" },
+  { href: "/about", name: "About" },
 ]
 
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
         <HeroPattern />
       </div>
 
-      <div className="relative pt-6 pb-16 sm:pb-24">
+      <div className="relative pt-6">
         <Popover>
           <nav
             aria-label="Global"
@@ -119,60 +120,39 @@ export default function Home() {
         </Popover>
 
         <main className="mt-16 sm:mt-24">
-          <div className="mx-auto max-w-7xl">
+          <div className="mx-auto mb-16 max-w-7xl">
             <div className="lg:grid lg:grid-cols-12 lg:gap-8">
               <div className="px-4 sm:px-6 sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
                 <div>
-                  <a
-                    className="inline-flex items-center rounded-full bg-gray-900 p-1 pr-2 text-white hover:text-gray-200 sm:text-base lg:text-sm xl:text-base"
-                    href="#"
-                  >
-                    <span className="rounded-full bg-indigo-500 px-3 py-0.5 text-xs font-semibold uppercase leading-5 tracking-wide text-white">
-                      We&rsquo;re hiring
-                    </span>
-                    <span className="ml-4 text-sm">Visit our careers page</span>
-                    <HiChevronRight
-                      aria-hidden="true"
-                      className="ml-2 h-5 w-5 text-gray-500"
-                    />
-                  </a>
                   <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-5xl xl:text-6xl">
-                    <span className="md:block">Data to enrich your</span>{" "}
+                    <span className="md:block">Gain insights in your</span>{" "}
                     <span className="text-indigo-400 md:block">
-                      online business
+                      Forex trading
                     </span>
                   </h1>
                   <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                    qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                    occaecat fugiat aliqua ad ad non deserunt sunt.
+                    Level up your Forex trading with our trading analysis tools.
+                    Aimed for simplicity and customization, you will find
+                    everything you need to monitor your accounts, track
+                    performance, and share your results with others.
                   </p>
-                  <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-white sm:mt-10">
-                    Used by
-                  </p>
-                  <div className="mt-5 w-full sm:mx-auto sm:max-w-lg lg:ml-0">
-                    <div className="flex flex-wrap items-start justify-between">
-                      <div className="flex justify-center px-1">
-                        <img
-                          alt="Tuple"
-                          className="h-9 sm:h-10"
-                          src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg"
-                        />
-                      </div>
-                      <div className="flex justify-center px-1">
-                        <img
-                          alt="Workcation"
-                          className="h-9 sm:h-10"
-                          src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"
-                        />
-                      </div>
-                      <div className="flex justify-center px-1">
-                        <img
-                          alt="StaticKit"
-                          className="h-9 sm:h-10"
-                          src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg"
-                        />
-                      </div>
+
+                  <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                    <div className="rounded-md shadow">
+                      <Link
+                        className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+                        to="/signup"
+                      >
+                        Get started
+                      </Link>
+                    </div>
+                    <div className="mt-3 sm:mt-0 sm:ml-3">
+                      <a
+                        className="btn-white flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-100 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-200 md:py-4 md:px-10 md:text-lg"
+                        href="#"
+                      >
+                        Read the docs
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -326,7 +306,11 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          <Features />
         </main>
+
+        <Footer />
       </div>
     </div>
   )
