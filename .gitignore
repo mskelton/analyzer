@@ -9,7 +9,7 @@ node_modules/
 
 # Remix
 .cache/
-api/
+/api/
 app/tailwind.css
 build/
 
