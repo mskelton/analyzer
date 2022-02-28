@@ -1,3 +1,4 @@
+api/
 build/
 lib/
 db/seed.js

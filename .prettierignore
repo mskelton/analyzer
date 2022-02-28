@@ -3,6 +3,7 @@
 .yarnrc.yml
 
 # Outputs
+api/
 app/tailwind.css
 build/
 lib/
