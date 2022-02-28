@@ -20,18 +20,18 @@ export function getUserSession(request: Request) {
   return storage.getSession(request.headers.get("Cookie"))
 }
 
-export async function getUserArn<T extends boolean = true>(
+export async function getUserArn<T extends boolean = false>(
   request: Request,
-  throwIfMissing?: T
-): Promise<T extends true ? string : string | undefined> {
+  dontThrow?: T
+): Promise<T extends false ? string : string | undefined> {
   const session = await getUserSession(request)
   const arn = session.get("userArn") as string | undefined
 
-  if (throwIfMissing && !arn) {
-    throw redirect("/login")
+  if (dontThrow || arn) {
+    return arn!
   }
 
-  return arn!
+  throw redirect("/login")
 }
 
 export async function getUserId(request: Request) {

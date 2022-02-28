@@ -27,7 +27,7 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async ({ request }) => {
   // Redirect to the home page if they are already signed in.
-  return (await getUserArn(request)) ? redirect("/dashboard") : null
+  return (await getUserArn(request, true)) ? redirect("/dashboard") : null
 }
 
 export const action: ActionFunction = async ({ request }) => {
