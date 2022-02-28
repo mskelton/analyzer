@@ -1,7 +1,7 @@
 import { Link, LoaderFunction, MetaFunction } from "remix"
 import { getAccounts } from "~/api/accounts.server"
 import { AccountsTable } from "~/components/accounts/AccountsTable"
-import { EmptyState } from "~/components/common/EmptyState"
+import { NoAccounts } from "~/components/accounts/NoAccounts"
 import { PageHeader } from "~/components/common/PageHeader"
 import { useAccounts } from "~/hooks/useAccounts"
 
@@ -33,14 +33,7 @@ export default function Accounts() {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
-            {accounts.length ? (
-              <AccountsTable />
-            ) : (
-              <EmptyState
-                description="Add your first account to get started with Analyzer."
-                title="No accounts"
-              />
-            )}
+            {accounts.length ? <AccountsTable /> : <NoAccounts />}
           </div>
         </div>
       </main>
