@@ -5,11 +5,11 @@ const prod = process.env.NODE_ENV === "production"
 
 export const storage = createCookieSessionStorage({
   cookie: {
-    domain: prod ? "mskelton.dev" : undefined,
+    domain: prod ? "analyzer.mskelton.dev" : undefined,
     httpOnly: true,
     maxAge: 60 * 60 * 24 * 7,
     name: "__session",
-    path: prod ? "/analyzer" : "/",
+    path: "/",
     sameSite: "lax",
     secrets: [process.env.SESSION_SECRET!],
     secure: true,

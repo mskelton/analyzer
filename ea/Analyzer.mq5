@@ -1,7 +1,7 @@
 #property copyright "Mark Skelton"
 #property link "https://github.com/mskelton/analyzer"
 #property version "1.00"
-#property description "Sends data to Analyzer for processing. For this EA to work properly, you must first allow it to access the Analyzer server. Go to Main Menu->Tools->Options and select the Expert Advisors tab. Then, check \"Allow WebRequest for listed URL\" and enter \"https://mskelton.dev\" to allow publishing trades to Analyzer."
+#property description "Sends data to Analyzer for processing. For this EA to work properly, you must first allow it to access the Analyzer server. Go to Main Menu->Tools->Options and select the Expert Advisors tab. Then, check \"Allow WebRequest for listed URL\" and enter \"https://analyzer.mskelton.dev\" to allow publishing trades to Analyzer."
 #property strict
 
 input int INTERVAL = 5;  // Interval (minutes)
@@ -13,7 +13,7 @@ input int INTERVAL = 5;  // Interval (minutes)
 input string BASE_URL = "http://a831-69-131-85-248.ngrok.io";  // Analyzer URL
 input string TOKEN = "74e8u3j1zucq";                           // Analyzer account token
 #else
-const string BASE_URL = "https://mskelton.dev/analyzer";  // Analyzer URL
+const string BASE_URL = "https://analyzer.mskelton.dev";  // Analyzer URL
 input string TOKEN;                                       // Analyzer account token
 #endif
 

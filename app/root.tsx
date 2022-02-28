@@ -27,7 +27,7 @@ export const meta: MetaFunction = ({ location }) => {
     charset: "utf-8",
     "og:site_name": "Analyzer",
     "og:type": "website",
-    "og:url": "https://mskelton.dev/analyzer" + location.pathname,
+    "og:url": "https://analyzer.mskelton.dev" + location.pathname,
     robots: "follow, index",
     "twitter:card": "summary",
     "twitter:site": "@mskelton0",
