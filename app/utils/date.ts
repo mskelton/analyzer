@@ -1,3 +1,5 @@
+import timeAgo from "@mskelton/time-ago"
+
 /**
  * Returns a new Date object based on a given epoch with the time set to
  * midnight, the start of the current day.
@@ -31,5 +33,18 @@ export function formatDate(date: Date | string) {
     day: "numeric",
     month: "short",
     timeZone: "UTC",
+  })
+}
+
+/**
+ * Formats a date using the relative time format.
+ */
+export function relativeDate(time: Date | number) {
+  return timeAgo(new Date(time), {
+    day: "numeric",
+    month: "short",
+    timeZone: "UTC",
+    timeZoneName: "short",
+    year: "numeric",
   })
 }

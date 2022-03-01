@@ -1,19 +1,9 @@
 import { Link } from "remix"
-import timeAgo from "@mskelton/time-ago"
 import { useAccounts } from "~/hooks/useAccounts"
 import { parseArn } from "~/utils/arn"
+import { relativeDate } from "~/utils/date"
 import { Badge } from "../common/Badge"
 import { TableHeader } from "../common/TableHeader"
-
-function formatDate(account: ReturnType<typeof useAccounts>["accounts"][0]) {
-  return !account.deals.length
-    ? "Never"
-    : timeAgo(new Date(account.deals[0].time), {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      })
-}
 
 export function AccountsTable() {
   const { accounts } = useAccounts()
@@ -66,7 +56,9 @@ export function AccountsTable() {
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                      {formatDate(account)}
+                      {account.deals.length
+                        ? relativeDate(account.deals[0].time)
+                        : "Never"}
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
