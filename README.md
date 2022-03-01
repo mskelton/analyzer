@@ -6,7 +6,7 @@ Forex trading analysis and sharing tool.
 
 ## Development
 
-The app and CSS watcher can be started with a single command thanks to
+The Remix app and CSS watcher can be started with a single command thanks to
 [concurrently](https://www.npmjs.com/package/concurrently).
 
 ```sh
