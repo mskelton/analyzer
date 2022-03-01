@@ -38,7 +38,8 @@ void OnTimer() {
 
   HistorySelect(getLastUpdateTime(), TimeCurrent());
   int total = HistoryDealsTotal();
-  JsonBuilder json;
+  int batch = 1;
+  DataBuilder data;
 
   for (int i = 0; i < total; i++) {
     JsonBuilder deal;
@@ -61,13 +62,21 @@ void OnTimer() {
     deal.setString("type", EnumToString(ENUM_DEAL_TYPE(HistoryDealGetInteger(ticket, DEAL_TYPE))));
     deal.setDouble("volume", HistoryDealGetDouble(ticket, DEAL_VOLUME));
 
-    json.append(deal.toObject());
+    data.append(deal.toObject());
+
+    // Send in batches of 100, resetting the JSON builder after each batch.
+    if (i % 100 == 0) {
+      Print("Sending batch ", batch++, " to Analyzer...");
+      sendData(data.toString());
+      data.clear();
+    }
   }
 
-  if (total) {
-    Print("Sending data to Analyzer...");
-    sendData("{\"deals\": " + json.toArray() + "}");
-  } else {
+  // If there is remaining data, send it before finishing
+  if (!data.empty()) {
+    Print("Sending final batch of data to Analyzer...");
+    sendData(data.toString());
+  } else if (!total) {
     Print("No new trades found");
   }
 }
@@ -126,6 +135,7 @@ request_result request(const string method, const string url, const string heade
 }
 
 class JsonBuilder {
+ private:
   string json;
 
   template <typename T>
@@ -134,6 +144,14 @@ class JsonBuilder {
   }
 
  public:
+  void clear() {
+    json = "";
+  }
+
+  bool empty() {
+    return !StringLen(json);
+  }
+
   void append(string value) {
     json += (StringLen(json) ? "," : "") + value;
   }
@@ -156,4 +174,11 @@ class JsonBuilder {
   string toArray() { return "[" + json + "]"; }
 
   string toObject() { return "{" + json + "}"; }
+};
+
+class DataBuilder : public JsonBuilder {
+ public:
+  string toString() {
+    return "{\"deals\": " + toArray() + "}";
+  }
 };
