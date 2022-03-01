@@ -42,7 +42,7 @@ export default function Dashboard() {
                       </Widget>
                     ) : (
                       <EmptyState
-                        description="Your account has not metrics yet. Connect the EA to your account to upload your account history."
+                        description="Your account has no metrics yet. Connect the EA to your account to upload your account history."
                         icon={<HiDatabase />}
                         title="No metrics found"
                       />

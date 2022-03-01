@@ -897,6 +897,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mskelton/time-ago@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@mskelton/time-ago@npm:1.0.1"
+  checksum: d1ca9fbd6e930bd8d88c4fe10e35655bed42eb1f6ab36a27b78690a674d6a99e67d1b587b643f81acd3ed94601cf5f67dfcc07f850a46eb83856e8401e8a8a7b
+  languageName: node
+  linkType: hard
+
 "@mskelton/tsconfig@npm:^1.1.1":
   version: 1.1.1
   resolution: "@mskelton/tsconfig@npm:1.1.1"
@@ -1851,6 +1858,7 @@ __metadata:
     "@babel/eslint-parser": ^7.17.0
     "@headlessui/react": ^1.5.0
     "@mskelton/eslint-config": ^7.1.0
+    "@mskelton/time-ago": ^1.0.1
     "@mskelton/tsconfig": ^1.1.1
     "@playwright/test": ^1.19.1
     "@prisma/client": ^3.10.0

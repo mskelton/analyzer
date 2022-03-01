@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
+    "@mskelton/time-ago": "^1.0.1",
     "@prisma/client": "^3.10.0",
     "@remix-run/react": "^1.2.1",
     "@vercel/node": "^1.13.0",
