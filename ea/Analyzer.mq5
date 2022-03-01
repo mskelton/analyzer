@@ -18,6 +18,13 @@ input string TOKEN;                                       // Analyzer account to
 #endif
 
 int OnInit() {
+#ifndef LOCAL
+  if (INTERVAL < 5) {
+    MessageBox("Interval must be at least 5 minutes.", "Error", MB_ICONERROR);
+    return INIT_PARAMETERS_INCORRECT;
+  }
+#endif
+
   // Setup a timer to send data to Analyzer and manually trigger the timer
   // once to send the initial data.
   EventSetTimer(INTERVAL * 60);
