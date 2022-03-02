@@ -12,6 +12,7 @@ node_modules/
 /api/
 app/tailwind.css
 build/
+/public/docs/
 
 # Environment
 .env*

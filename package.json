@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css",
-    "build": "yarn build:css --minify && NODE_ENV=production remix build",
+    "build": "yarn build:css --minify && NODE_ENV=production remix build && yarn workspace docs build",
     "db:generate": "prisma generate",
     "dev:app": "node -r dotenv/config node_modules/.bin/remix dev",
     "dev:css": "yarn build:css --watch",
