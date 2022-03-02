@@ -34,6 +34,13 @@ ln -s ~/dev/analyzer/ea/src/* ~/Library/Application\ Support/MetaTrader\ 5/Bottl
 _Unfortunately, we do not currently support compiling the EA without using the
 MetaEditor GUI._
 
+After compiling the EA in MetaEditor, you can copy the compiled expert into the
+repo for distribution with the following command.
+
+```sh
+cp ~/Library/Application\ Support/MetaTrader\ 5/Bottles/metatrader5/drive_c/Program\ Files/MetaTrader\ 5/MQL5/Experts/Analyzer.ex5 ~/dev/analyzer/ea
+```
+
 ### Testing
 
 End-to-end tests are run with [Playwright](https://playwright.dev).

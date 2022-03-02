@@ -11,11 +11,11 @@ input int INTERVAL = 5;  // Interval (minutes)
 input string TOKEN;      // Account token
 
 // When defined, allow changing the base URL to a local server.
-#define LOCAL
+// #define LOCAL
 
 #ifdef LOCAL
 input string BASE_URL = "";  // Analyzer URL
-#elif
+#else
 const string BASE_URL = "https://analyzer.mskelton.dev";  // Analyzer URL
 #endif
 
