@@ -6177,6 +6177,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"docs@workspace:docs":
+  version: 0.0.0-use.local
+  resolution: "docs@workspace:docs"
+  dependencies:
+    "@docusaurus/core": 2.0.0-beta.16
+    "@docusaurus/preset-classic": 2.0.0-beta.16
+    "@mdx-js/react": ^1.6.22
+    prism-react-renderer: ^1.2.1
+    react: ^17.0.1
+    react-dom: ^17.0.1
+  languageName: unknown
+  linkType: soft
+
 "doctrine@npm:^2.1.0":
   version: 2.1.0
   resolution: "doctrine@npm:2.1.0"
@@ -15183,20 +15196,6 @@ __metadata:
   checksum: 214a734b1d4d391eb8271ed1b11085f0efe6831e93f641229b292abfd6fea871422dce121612511c17ae8047522be6d65c1a2666cabb396c79549816a3612338
   languageName: node
   linkType: hard
-
-"website@workspace:docs":
-  version: 0.0.0-use.local
-  resolution: "website@workspace:docs"
-  dependencies:
-    "@docusaurus/core": 2.0.0-beta.16
-    "@docusaurus/preset-classic": 2.0.0-beta.16
-    "@mdx-js/react": ^1.6.22
-    clsx: ^1.1.1
-    prism-react-renderer: ^1.2.1
-    react: ^17.0.1
-    react-dom: ^17.0.1
-  languageName: unknown
-  linkType: soft
 
 "websocket-driver@npm:>=0.5.1, websocket-driver@npm:^0.7.4":
   version: 0.7.4
