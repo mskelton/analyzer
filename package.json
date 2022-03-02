@@ -4,6 +4,9 @@
   "author": "Mark Skelton",
   "license": "ISC",
   "packageManager": "yarn@3.2.0",
+  "workspaces": [
+    "docs"
+  ],
   "scripts": {
     "build:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css",
     "build": "yarn build:css --minify && NODE_ENV=production remix build",

@@ -84,7 +84,7 @@ export default function SignUp() {
             type="password"
           />
 
-          <AuthButton className="mt-4">Sign in</AuthButton>
+          <AuthButton className="mt-4">Sign up</AuthButton>
         </form>
       </AuthCard>
     </div>
