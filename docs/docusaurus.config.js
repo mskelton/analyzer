@@ -13,14 +13,13 @@ module.exports = {
       {
         blog: false,
         docs: {
-          editUrl: `https://github.com/mskelton/analyzer/tree/main/docs/docs/`,
+          editUrl: `https://github.com/mskelton/analyzer/tree/main/docs/`,
           routeBasePath: "/",
         },
       },
     ],
   ],
   projectName: "analyzer",
-  tagline: "Dinosaurs are cool",
   themeConfig: {
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} Mark Skelton. Built with Docusaurus.`,
