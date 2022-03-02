@@ -1,0 +1,83 @@
+---
+sidebar_position: 2
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+# Modifying the EA
+
+Analyzer uses a expert advisor (EA) to publish trades from the MetaTrader 5
+terminal to Analyzer. As trades are ingested, Analyzer will generate metrics
+such as current balance, profit over time, daily max drawdown, and more. These
+metrics are used to power charts and figures you select on your dashboards.
+
+## Prerequisites
+
+- [MetaTrader 5](https://www.metatrader5.com/en/download)
+- A demo MT5 account with some completed deals
+
+## Installation
+
+To install the EA locally, run the following command to symlink it to the
+MetaTrader `Experts` folder.
+
+<Tabs groupId="os">
+  <TabItem value="mac" label="macOS">
+
+```bash
+ln -s ~/dev/analyzer/ea/src/* \
+  ~/Library/Application\ Support/MetaTrader\ 5/Bottles/metatrader5/drive_c/Program\ Files/MetaTrader\ 5/MQL5/Experts
+```
+
+  </TabItem>
+
+  <TabItem value="win" label="Windows">
+    Coming soon...
+  </TabItem>
+</Tabs>
+
+## Compiling
+
+To test the EA, you first must compile the source code.
+
+<Tabs groupId="os">
+  <TabItem value="mac" label="macOS">
+    <ol>
+      <li>Open MetaTrader 5</li>
+      <li>Locate <b>Analyzer</b> in the list of expert advisors</li>
+      <li>Right click and select <b>Modify</b></li>
+      <li>In MetaEditor, click <b>Compile</b></li>
+    </ol>
+  </TabItem>
+
+  <TabItem value="win" label="Windows">
+    Coming soon...
+  </TabItem>
+</Tabs>
+
+## Testing
+
+After compiling the EA, drag it onto a chart in MetaTrader 5. Supply a base URL
+using Ngrok so you can connect to the local app and an account token. Check the
+**Experts** tab in the toolbox to view logs from the EA.
+
+## Distributing
+
+After compiling the EA in MetaEditor, you can copy the compiled expert into the
+repo for distribution with the following command.
+
+<Tabs groupId="os">
+  <TabItem value="mac" label="macOS">
+
+```bash
+cp ~/Library/Application\ Support/MetaTrader\ 5/Bottles/metatrader5/drive_c/Program\ Files/MetaTrader\ 5/MQL5/Experts/Analyzer.ex5 \
+  ~/dev/analyzer/ea
+```
+
+  </TabItem>
+
+  <TabItem value="win" label="Windows">
+    Coming soon...
+  </TabItem>
+</Tabs>
