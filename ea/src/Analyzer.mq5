@@ -4,6 +4,9 @@
 #property description "Sends data to Analyzer for processing. For this EA to work properly, you must first allow it to access the Analyzer server. Go to Main Menu->Tools->Options and select the Expert Advisors tab. Then, check \"Allow WebRequest for listed URL\" and enter \"https://analyzer.mskelton.dev\" to allow publishing trades to Analyzer."
 #property strict
 
+#include "DataBuilder.mqh"
+#include "JsonBuilder.mqh"
+
 input int INTERVAL = 5;  // Interval (minutes)
 
 // When defined, uses the ngrok URL which points to the local dev server
@@ -38,8 +41,15 @@ void OnTimer() {
 
   HistorySelect(getLastUpdateTime(), TimeCurrent());
   int total = HistoryDealsTotal();
-  int batch = 1;
+
+  // If there aren't any trades, we can return early.
+  if (!total) {
+    Print("No new trades found");
+    return;
+  }
+
   DataBuilder data;
+  int batch = 1;
 
   for (int i = 0; i < total; i++) {
     JsonBuilder deal;
@@ -62,6 +72,7 @@ void OnTimer() {
     deal.setString("type", EnumToString(ENUM_DEAL_TYPE(HistoryDealGetInteger(ticket, DEAL_TYPE))));
     deal.setDouble("volume", HistoryDealGetDouble(ticket, DEAL_VOLUME));
 
+    // Stringify the object and add it to the data builder
     data.append(deal.toObject());
 
     // Send in batches of 100, resetting the JSON builder after each batch.
@@ -76,11 +87,13 @@ void OnTimer() {
   if (!data.empty()) {
     Print("Sending final batch of data to Analyzer...");
     sendData(data.toString());
-  } else if (!total) {
-    Print("No new trades found");
   }
 }
 
+/**
+ * Gets the last updated time from Analyzer so we only have to select
+ * unprocessed trades from history.
+ */
 long getLastUpdateTime() {
   char data[];
   request_result res = request("GET", BASE_URL + "/api/deals/last-updated", NULL, data);
@@ -93,6 +106,10 @@ long getLastUpdateTime() {
   }
 
   PrintFormat("Failed to get last updated time with status code %d", res.status);
+
+  // If we can't get the last updated time, we'll just return the current time.
+  // This will result in no data being sent to Analyzer, which is marginally
+  // better, than always sending the full history.
   return TimeCurrent();
 }
 
@@ -126,59 +143,15 @@ request_result request(const string method, const string url, const string heade
   int status = WebRequest(method, url, tokenHeader + headers, 500, data, serverResult, serverHeaders);
   bool ok = status >= 200 && status < 300;
 
+  // A status code of -1 generally means that the user forgot to add the URL to
+  // the list of allowed WebRequest URLs.
   if (status == -1) {
-    MessageBox("Add the URL '" + BASE_URL + "' to the list of allowed URLs on tab 'Expert Advisors'", "Error", MB_ICONINFORMATION);
+    MessageBox(
+        "Add the URL '" + BASE_URL + "' to the list of allowed URLs on tab 'Expert Advisors'",
+        "Error",
+        MB_ICONINFORMATION);
   }
 
   request_result res = {ok, status, CharArrayToString(serverResult)};
   return res;
 }
-
-class JsonBuilder {
- private:
-  string json;
-
-  template <typename T>
-  void set(string key, T value) {
-    GetPointer(this).append("\"" + key + "\":" + value);
-  }
-
- public:
-  void clear() {
-    json = "";
-  }
-
-  bool empty() {
-    return !StringLen(json);
-  }
-
-  void append(string value) {
-    json += (StringLen(json) ? "," : "") + value;
-  }
-
-  void setString(string key, string value) {
-    if (StringLen(value))
-      GetPointer(this).set(key, "\"" + value + "\"");
-  }
-
-  void setInt(string key, ulong value) {
-    if (value)
-      GetPointer(this).set(key, string(value));
-  }
-
-  void setDouble(string key, double value) {
-    if (value)
-      GetPointer(this).set(key, string(value));
-  }
-
-  string toArray() { return "[" + json + "]"; }
-
-  string toObject() { return "{" + json + "}"; }
-};
-
-class DataBuilder : public JsonBuilder {
- public:
-  string toString() {
-    return "{\"deals\": " + toArray() + "}";
-  }
-};

@@ -28,7 +28,7 @@ To install the EA, run the following command to symlink it to the MT5 `Experts`
 folder:
 
 ```sh
-ln -s ~/dev/analyzer/ea/Analyzer.mq5 ~/Library/Application\ Support/MetaTrader\ 5/Bottles/metatrader5/drive_c/Program\ Files/MetaTrader\ 5/MQL5/Experts/Analyzer.mq5
+ln -s ~/dev/analyzer/ea/src/* ~/Library/Application\ Support/MetaTrader\ 5/Bottles/metatrader5/drive_c/Program\ Files/MetaTrader\ 5/MQL5/Experts
 ```
 
 _Unfortunately, we do not currently support compiling the EA without using the
