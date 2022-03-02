@@ -11,10 +11,10 @@ input int INTERVAL = 5;  // Interval (minutes)
 
 #ifdef LOCAL
 input string BASE_URL = "http://a831-69-131-85-248.ngrok.io";  // Analyzer URL
-input string TOKEN = "74e8u3j1zucq";                           // Analyzer account token
+input string TOKEN = "74e8u3j1zucq";                           // Account token
 #else
 const string BASE_URL = "https://analyzer.mskelton.dev";  // Analyzer URL
-input string TOKEN;                                       // Analyzer account token
+input string TOKEN;                                       // Account token
 #endif
 
 int OnInit() {

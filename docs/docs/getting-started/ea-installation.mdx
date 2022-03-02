@@ -20,22 +20,62 @@ Once downloaded, place it in the appropriate path for your operating system.
 
 <Tabs>
   <TabItem value="win" label="Windows">
-
-```
-C:\Program Files\MetaTrader 5\MQL5\Experts
-```
-
+    <pre>C:\Program Files\MetaTrader 5\MQL5\Experts</pre>
   </TabItem>
 
   <TabItem value="mac" label="macOS">
-
-```
-/Users/USERNAME/Library/Application Support/MetaTrader 5/Bottles/metatrader5/drive_c/Program Files/MetaTrader 5/MQL5/Experts/
-```
-
+    <pre>/Users/USERNAME/Library/Application Support/MetaTrader 5/Bottles/metatrader5/drive_c/Program Files/MetaTrader 5/MQL5/Experts/</pre>
   </TabItem>
 </Tabs>
 
-## Setup
+## Load the expert advisor
 
-Once downloaded, open your MetaTrader 5 terminal and ...
+Once downloaded, open your MetaTrader 5 terminal and following the steps below.
+
+1. Open the **Navigator** pane.
+1. Right click on **Expert Advisors**.
+1. Click **Refresh**.
+1. **Analyzer** should now be listed as an available EA.
+
+<details>
+  <summary>Screenshot</summary>
+  <img src={require("/img/ea/ea-list.png").default} alt="EA list" />
+</details>
+
+## Allow web requests
+
+Analyzer uses the MQL5
+[`WebRequest`](https://www.mql5.com/en/docs/network/webrequest) function to send
+data to Analyzer. This function requires you to allow the Analyzer URL, which
+you can do with the following steps.
+
+1. Open the **Tools** menu.
+1. Click **Options**.
+1. Select the **Expert Advisors** tab.
+1. Check the **Allow WebRequest for listed URL** checkbox.
+1. Add `https://analyzer.mskelton.dev` to the allowed URLs.
+1. Click **OK** to save your settings.
+
+<details>
+  <summary>Screenshot</summary>
+  <img
+    src={require("/img/ea/web-request-url.png").default}
+    alt="WebRequest URL settings"
+  />
+</details>
+
+## Start the expert advisor
+
+With the expert advisor loaded and web requests allowed, following the steps
+below to start the expert advisor.
+
+1. Right click **Analyzer**.
+1. Click **Attach to Chart**.
+1. Set the **Account token** to the token you copied from the account list in
+   Analyzer.
+1. Click **OK** to start the EA.
+
+<details>
+  <summary>Screenshot</summary>
+  <img src={require("/img/ea/settings.png").default} alt="EA settings" />
+</details>
