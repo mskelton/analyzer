@@ -11,6 +11,7 @@ const navigation = [
   { href: "/product", name: "Product" },
   { href: "/features", name: "Features" },
   { href: "/about", name: "About" },
+  { href: "/docs", name: "Documentation" },
 ]
 
 export default function Home() {
