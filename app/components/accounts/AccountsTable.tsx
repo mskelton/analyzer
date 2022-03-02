@@ -20,7 +20,7 @@ export function AccountsTable() {
                   <TableHeader>Broker</TableHeader>
                   <TableHeader>Type</TableHeader>
                   <TableHeader>Token</TableHeader>
-                  <TableHeader>Last Updated</TableHeader>
+                  <TableHeader>Last updated</TableHeader>
                   <TableHeader>
                     <span className="sr-only">Edit</span>
                   </TableHeader>

@@ -8,20 +8,21 @@
 #include "JsonBuilder.mqh"
 
 input int INTERVAL = 5;  // Interval (minutes)
+input string TOKEN;      // Account token
 
-// When defined, uses the ngrok URL which points to the local dev server
+// When defined, allow changing the base URL to a local server.
 #define LOCAL
 
 #ifdef LOCAL
-input string BASE_URL = "http://a831-69-131-85-248.ngrok.io";  // Analyzer URL
-input string TOKEN = "74e8u3j1zucq";                           // Account token
-#else
+input string BASE_URL = "";  // Analyzer URL
+#elif
 const string BASE_URL = "https://analyzer.mskelton.dev";  // Analyzer URL
-input string TOKEN;                                       // Account token
 #endif
 
 int OnInit() {
 #ifndef LOCAL
+  // Users can increase the interval to update less frequently, but to prevent
+  // overloading Analyzer, set the minimum interval to 5 minutes.
   if (INTERVAL < 5) {
     MessageBox("Interval must be at least 5 minutes.", "Error", MB_ICONERROR);
     return INIT_PARAMETERS_INCORRECT;
@@ -78,16 +79,22 @@ void OnTimer() {
     // Send in batches of 100, resetting the JSON builder after each batch.
     if (i % 100 == 0) {
       Print("Sending batch ", batch++, " to Analyzer...");
-      sendData(data.toString());
+      if (!ingestDeals(data.toString())) return;
       data.clear();
     }
   }
 
-  // If there is remaining data, send it before finishing
+  // Send any remaining data that didn't fill a batch
   if (!data.empty()) {
     Print("Sending final batch of data to Analyzer...");
-    sendData(data.toString());
+    if (!ingestDeals(data.toString())) return;
   }
+
+  // After ingesting all the deals, update the metrics for the account
+  Print("Updating metrics...");
+  if (!updateMetrics()) return;
+
+  Print("Successfully processed ", total, " deals");
 }
 
 /**
@@ -113,18 +120,36 @@ long getLastUpdateTime() {
   return TimeCurrent();
 }
 
-void sendData(string stringData) {
+/**
+ * Sends a batch of deals to Analyzer for ingestion.
+ */
+bool ingestDeals(string stringData) {
   // Convert the data string to the appropriate format
   uchar jsonData[];
   StringToCharArray(stringData, jsonData, 0, StringLen(stringData));
 
   request_result res = request("POST", BASE_URL + "/api/deals", "Content-Type:application/json", jsonData);
 
-  if (res.ok) {
-    Print("Successfully sent data to Analyzer");
-  } else {
-    PrintFormat("Failed to send data to Analyzer with status code %d", res.status);
+  if (!res.ok) {
+    PrintFormat("Failed to ingest deals with status code %d", res.status);
   }
+
+  return res.ok;
+}
+
+/**
+ * Sends a request to Analyzer to update metrics for a given account. This is
+ * called once after ingesting any new deals.
+ */
+bool updateMetrics() {
+  char data[];
+  request_result res = request("POST", BASE_URL + "/api/metrics", NULL, data);
+
+  if (!res.ok) {
+    PrintFormat("Failed to updated metrics with status code %d", res.status);
+  }
+
+  return res.ok;
 }
 
 struct request_result {
@@ -133,6 +158,9 @@ struct request_result {
   string data;
 };
 
+/**
+ * Simple wrapper around `WebRequest` to make it easier to use.
+ */
 request_result request(const string method, const string url, const string headers, char &data[]) {
   ResetLastError();
 
