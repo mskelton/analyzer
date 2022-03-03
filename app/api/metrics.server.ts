@@ -1,9 +1,10 @@
 import { db, streamFromDB } from "~/db.server"
 import { BalanceMetric } from "~/metrics/BalanceMetric.server"
+import { ProfitMetric } from "~/metrics/ProfitMetric.server"
 import { getAccountFromToken } from "./accounts.server"
 
 export async function updateMetrics(request: Request) {
-  const metrics = [new BalanceMetric()]
+  const metrics = [new BalanceMetric(), new ProfitMetric()]
 
   const account = await getAccountFromToken(request)
   const deals = streamFromDB((cursor) => {

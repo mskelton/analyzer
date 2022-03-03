@@ -59,6 +59,7 @@ type Metric {
 
 enum MetricType {
   BALANCE
+  PROFIT
 }
 
 model Deal {

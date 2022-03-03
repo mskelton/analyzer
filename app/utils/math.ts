@@ -1,8 +1,8 @@
 /**
- * Adds two numbers, defaulting each to zero if null.
+ * Adds two or more numbers, defaulting each to zero if null.
  */
-export function safeAdd(a: number | null, b: number | null) {
-  return (a ?? 0) + (b ?? 0)
+export function safeAdd(...args: (number | null)[]) {
+  return args.reduce<number>((acc, b) => acc + (b ?? 0), 0)
 }
 
 /**

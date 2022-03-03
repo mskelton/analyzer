@@ -1,24 +1,15 @@
 import { Deal } from "@prisma/client"
-import { dateDiff, midnight } from "~/utils/date"
-import { round, safeAdd } from "~/utils/math"
-import { Metric } from "./Metric.server"
+import { safeAdd } from "~/utils/math"
+import { DailyMetric } from "./DailyMetric.server"
 
-export class BalanceMetric extends Metric<number[]> {
+export class BalanceMetric extends DailyMetric {
   constructor() {
-    super("BALANCE", [])
-  }
-
-  setup(deal: Deal) {
-    this.value = new Array(dateDiff(Date.now(), deal.time) + 1).fill(0)
+    super("BALANCE")
   }
 
   digest(deal: Deal) {
     super.digest(deal)
-
-    const profit = this.getProfit(deal)
-    const index = dateDiff(midnight(deal.time), midnight(this.start.time))
-
-    this.value[index] += profit
+    this.value[this.getDayIndex(deal)] += this.getProfit(deal)
   }
 
   toJSON() {
@@ -26,7 +17,7 @@ export class BalanceMetric extends Metric<number[]> {
     // days balance by the previous day's balance. This produces a result where
     // each data point represents the current balance as of that day.
     for (let i = 0; i < this.value.length; i++) {
-      this.value[i] += round(this.value[i - 1] ?? 0)
+      this.value[i] += this.value[i - 1] ?? 0
     }
 
     return super.toJSON()
