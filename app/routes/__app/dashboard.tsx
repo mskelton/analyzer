@@ -7,6 +7,7 @@ import { EmptyState } from "~/components/common/EmptyState"
 import { PageHeader } from "~/components/common/PageHeader"
 import { Widget } from "~/components/dashboard/Widget"
 import { Balance } from "~/components/metrics/Balance"
+import { Profit } from "~/components/metrics/Profit"
 
 export const meta: MetaFunction = () => {
   return { title: "Dashboard" }
@@ -31,15 +32,27 @@ export default function Dashboard() {
                 <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   {accounts.length ? (
                     accounts[0].metrics.length ? (
-                      <Widget title="Account balance">
-                        <Balance
-                          metric={
-                            accounts[0].metrics.find(
-                              (m) => m.key === "BALANCE"
-                            )!
-                          }
-                        />
-                      </Widget>
+                      <>
+                        <Widget title="Profit">
+                          <Profit
+                            metric={
+                              accounts[0].metrics.find(
+                                (m) => m.key === "PROFIT"
+                              )!
+                            }
+                          />
+                        </Widget>
+
+                        <Widget title="Account balance">
+                          <Balance
+                            metric={
+                              accounts[0].metrics.find(
+                                (m) => m.key === "BALANCE"
+                              )!
+                            }
+                          />
+                        </Widget>
+                      </>
                     ) : (
                       <EmptyState
                         description="Your account has no metrics yet. Connect the EA to your account to upload your account history."
