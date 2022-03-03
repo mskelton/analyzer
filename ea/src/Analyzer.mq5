@@ -77,7 +77,7 @@ void OnTimer() {
     data.append(deal.toObject());
 
     // Send in batches of 100, resetting the JSON builder after each batch.
-    if (i % 100 == 0) {
+    if ((i + 1) % 100 == 0) {
       Print("Sending batch ", batch++, " to Analyzer...");
       if (!ingestDeals(data.toString())) return;
       data.clear();
