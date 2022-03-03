@@ -6,10 +6,10 @@ sidebar_position: 1
 
 :::tip
 
-Analyzer is built using [Remix](https://remix.run), [MongoDB](mongodb.com),
-[Tailwind CSS](https://tailwindcss.com). Before you start contributing, we
-recommend familiarizing yourself with these tools to get a basic understanding
-of how they work.
+Analyzer is built using [Remix](https://remix.run),
+[MongoDB](https://mongodb.com), [Tailwind CSS](https://tailwindcss.com). Before
+you start contributing, we recommend familiarizing yourself with these tools to
+get a basic understanding of how they work.
 
 :::
 
