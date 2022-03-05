@@ -29,21 +29,21 @@ export async function getAccountArn(request: Request, externalId: string) {
   return createArn("account", await getUserId(request), externalId)
 }
 
-export type EditableAccountData = Pick<Account, "broker" | "name" | "type">
+export type EditableAccountData = Pick<Account, "number" | "name" | "type">
 
 export async function validateAccountData(
   formData: FormData
 ): Promise<EditableAccountData> {
   const name = formData.get("name")
-  const broker = formData.get("broker")
+  const number = +(formData.get("number") ?? 0)
   const type = formData.get("type")
 
   // Validate form data
   invariant(typeof name === "string")
-  invariant(typeof broker === "string")
+  invariant(typeof number === "number")
   invariant(type === "DEMO" || type === "LIVE")
 
-  return { broker, name, type }
+  return { name, number, type }
 }
 
 export async function createAccount(

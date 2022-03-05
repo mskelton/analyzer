@@ -42,7 +42,7 @@ model Account {
   // Other
   token        String @unique
   name         String
-  broker       String
+  number       Int?
   type         AccountType
 }
 

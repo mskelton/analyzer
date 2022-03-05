@@ -11,12 +11,12 @@ export function AccountsTable() {
   const { accounts } = useAccounts()
 
   return (
-    <div className="overflow-x-auto rounded-lg shadow relative">
+    <div className="relative overflow-x-auto rounded-lg shadow">
       <table className="w-full divide-y divide-gray-200 ">
         <thead className="bg-gray-50">
           <tr>
             <TableHeader>Name</TableHeader>
-            <TableHeader>Broker</TableHeader>
+            <TableHeader>Account number</TableHeader>
             <TableHeader>Type</TableHeader>
             <TableHeader>Token</TableHeader>
             <TableHeader>Last updated</TableHeader>
@@ -33,7 +33,7 @@ export function AccountsTable() {
               className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
             >
               <td className={`${row} font-medium`}>{account.name}</td>
-              <td className={row}>{account.broker}</td>
+              <td className={row}>{account.number}</td>
 
               <td className="whitespace-nowrap px-6 py-4">
                 {account.type === "LIVE" ? (

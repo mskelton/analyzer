@@ -23,7 +23,7 @@ export default function Accounts() {
     <>
       <PageHeader
         extra={
-          <Link className="btn-primary" to="new">
+          <Link className="btn-primary btn-small" to="new">
             Add account
           </Link>
         }

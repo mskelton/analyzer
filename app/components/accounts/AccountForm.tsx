@@ -33,12 +33,11 @@ export function AccountForm() {
 
             <TextField
               autoComplete="off"
-              defaultValue={data?.account.broker}
-              label="Broker"
-              name="broker"
-              placeholder="ex. OspreyFX"
-              required
-              type="text"
+              defaultValue={data?.account.number}
+              label="Account number"
+              name="number"
+              placeholder="ex. 123456"
+              type="number"
             />
 
             <Select

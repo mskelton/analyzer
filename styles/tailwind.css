@@ -23,6 +23,10 @@
     @apply btn border-transparent bg-red-600 font-medium text-white shadow-sm hover:bg-red-700 focus-visible:ring-red-500;
   }
 
+  .btn-small {
+    @apply px-3 leading-4;
+  }
+
   .link {
     @apply text-primary-600 hover:text-primary-900;
   }

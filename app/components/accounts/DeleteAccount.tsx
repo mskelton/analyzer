@@ -8,7 +8,7 @@ export function DeleteAccount() {
 
   return (
     <>
-      <button className="btn-danger" onClick={() => setOpen(true)}>
+      <button className="btn-danger btn-small" onClick={() => setOpen(true)}>
         Delete account
       </button>
 

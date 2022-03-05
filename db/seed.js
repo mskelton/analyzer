@@ -12,7 +12,7 @@ db.User.insert({
 
 db.Account.insert({
   arn: "arn:account:jii36zh8:ecowczk9",
-  broker: "OspreyFX",
+  number: 123456,
   createdAt: new Date(),
   name: "Growth account",
   token: "74e8u3j1zucq",
