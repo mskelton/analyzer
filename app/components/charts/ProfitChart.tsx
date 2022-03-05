@@ -3,6 +3,7 @@ import { useMemo } from "react"
 import { Line } from "react-chartjs-2"
 import { addDays, formatDate, midnight } from "~/utils/date"
 import { round } from "~/utils/math"
+import { aggregate } from "~/utils/metrics"
 
 export interface ProfitChartProps {
   metric: Metric
@@ -10,17 +11,12 @@ export interface ProfitChartProps {
 
 export function ProfitChart({ metric }: ProfitChartProps) {
   const data = useMemo(() => {
-    const value = metric.value as number[]
+    const value = aggregate(metric.value as number[])
     const end = midnight(metric.updatedAt)
 
     return {
       datasets: [
-        {
-          borderColor: "rgb(75, 192, 192)",
-          data: value,
-          label: "Profit",
-          // tension: 0.1,
-        },
+        { borderColor: "rgb(75, 192, 192)", data: value, label: "Profit" },
       ],
       labels: value.map((_, i, arr) =>
         formatDate(addDays(end, -arr.length + i + 1))
