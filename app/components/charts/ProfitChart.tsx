@@ -1,24 +1,14 @@
 import { Metric } from "@prisma/client"
-import {
-  CategoryScale,
-  Chart,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Tooltip,
-} from "chart.js"
 import { useMemo } from "react"
 import { Line } from "react-chartjs-2"
 import { addDays, formatDate, midnight } from "~/utils/date"
 import { round } from "~/utils/math"
 
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip)
-
-export interface ProfitProps {
+export interface ProfitChartProps {
   metric: Metric
 }
 
-export function Profit({ metric }: ProfitProps) {
+export function ProfitChart({ metric }: ProfitChartProps) {
   const data = useMemo(() => {
     const value = metric.value as number[]
     const end = midnight(metric.updatedAt)

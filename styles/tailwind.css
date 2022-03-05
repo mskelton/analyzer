@@ -22,4 +22,8 @@
   .btn-danger {
     @apply btn border-transparent bg-red-600 font-medium text-white shadow-sm hover:bg-red-700 focus-visible:ring-red-500;
   }
+
+  .link {
+    @apply text-primary-600 hover:text-primary-900;
+  }
 }

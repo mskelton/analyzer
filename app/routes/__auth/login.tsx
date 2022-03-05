@@ -80,10 +80,7 @@ export default function Login() {
           <TextField
             autoComplete="password"
             extra={
-              <Link
-                className="text-sm font-medium text-primary-600 hover:text-primary-500"
-                to="/forgot-password"
-              >
+              <Link className="link text-sm font-medium" to="/forgot-password">
                 Forgot password?
               </Link>
             }

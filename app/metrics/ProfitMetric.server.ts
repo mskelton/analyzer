@@ -14,17 +14,6 @@ export class ProfitMetric extends DailyMetric {
     this.value[this.getDayIndex(deal)] += this.getProfit(deal)
   }
 
-  toJSON() {
-    // After calculating the profit change for each day, we can increase each
-    // days profit by the previous day's profit. This produces a result where
-    // each data point represents the total profit as of that day.
-    for (let i = 0; i < this.value.length; i++) {
-      this.value[i] += this.value[i - 1] ?? 0
-    }
-
-    return super.toJSON()
-  }
-
   private getProfit(deal: Deal) {
     switch (true) {
       // When a deposit is made, we update the total deposits amount as that

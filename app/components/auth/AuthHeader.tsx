@@ -25,10 +25,7 @@ export function AuthHeader({
 
       <p className="mt-2 text-center text-sm text-gray-600">
         {hint}{" "}
-        <Link
-          className="font-medium text-primary-600 hover:text-primary-500"
-          to={hintLink}
-        >
+        <Link className="link font-medium" to={hintLink}>
           {hintLinkText}
         </Link>
       </p>
