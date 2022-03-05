@@ -33,7 +33,7 @@ export function AccountForm() {
 
             <TextField
               autoComplete="off"
-              defaultValue={data?.account.number}
+              defaultValue={data?.account.number ?? undefined}
               label="Account number"
               name="number"
               placeholder="ex. 123456"
@@ -41,7 +41,7 @@ export function AccountForm() {
             />
 
             <Select
-              defaultValue={data?.account.type}
+              defaultValue={data?.account.type ?? "LIVE"}
               label="Account type"
               name="type"
               options={[

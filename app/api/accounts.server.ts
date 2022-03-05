@@ -35,12 +35,12 @@ export async function validateAccountData(
   formData: FormData
 ): Promise<EditableAccountData> {
   const name = formData.get("name")
-  const number = +(formData.get("number") ?? 0)
+  const number = formData.get("number") ? +formData.get("number")! : null
   const type = formData.get("type")
 
   // Validate form data
   invariant(typeof name === "string")
-  invariant(typeof number === "number")
+  invariant(typeof number === "number" || number == null)
   invariant(type === "DEMO" || type === "LIVE")
 
   return { name, number, type }

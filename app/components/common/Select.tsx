@@ -1,33 +1,62 @@
 import { Listbox, Transition } from "@headlessui/react"
 import clsx from "clsx"
-import { Fragment, useState } from "react"
+import { Fragment } from "react"
 import { HiCheck, HiSelector } from "react-icons/hi"
+import { useControlled } from "~/hooks/useControlled"
+
+interface Option {
+  id: string
+  name: string
+}
 
 export interface SelectProps {
   defaultValue?: string
+  hideLabel?: true
   label: string
-  name: string
-  options: { id: string; name: string }[]
+  name?: string
+  onChange?(value: string | undefined): void
+  options: Option[]
+  value?: string
 }
 
-export function Select({ defaultValue, label, name, options }: SelectProps) {
-  const [selected, setSelected] = useState(
-    () => options.find((o) => o.id === defaultValue) ?? options[0]
-  )
+export function Select({
+  defaultValue,
+  hideLabel,
+  label,
+  name,
+  onChange,
+  options,
+  value: valueProp,
+}: SelectProps) {
+  const [value, setValue] = useControlled({
+    controlled: valueProp,
+    default: defaultValue,
+  })
+  const selectedOption = options.find((o) => o.id === value)
+
+  function handleChange(option: Option) {
+    setValue(option.id)
+    onChange?.(option.id)
+  }
 
   return (
-    <Listbox onChange={setSelected} value={selected}>
+    <Listbox onChange={handleChange} value={selectedOption}>
       {({ open }) => (
         <div>
-          <input name={name} type="hidden" value={selected.id} />
+          <input name={name} type="hidden" value={value} />
 
-          <Listbox.Label className="block text-sm font-medium text-gray-700">
+          <Listbox.Label
+            className={clsx(
+              "mb-2 text-sm font-medium text-gray-700",
+              hideLabel ? "hidden" : "block"
+            )}
+          >
             {label}
           </Listbox.Label>
 
-          <div className="relative mt-2">
+          <div className="relative">
             <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 sm:text-sm">
-              <span className="block truncate">{selected.name}</span>
+              <span className="block truncate">{selectedOption?.name}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <HiSelector
                   aria-hidden="true"
