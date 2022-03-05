@@ -1,7 +1,7 @@
 #property copyright "Mark Skelton"
 #property link "https://github.com/mskelton/analyzer"
-#property version "1.00"
-#property description "Sends data to Analyzer for processing. For this EA to work properly, you must first allow it to access the Analyzer server. Go to Main Menu->Tools->Options and select the Expert Advisors tab. Then, check \"Allow WebRequest for listed URL\" and enter \"https://analyzer.mskelton.dev\" to allow publishing trades to Analyzer."
+#property version "1.01"
+#property description "Get ready to level up your Forex trading with our custom trading analysis tools! Aimed for simplicity and customization, you will find everything you need to monitor your accounts, track performance, and share your results with others.\n\nTo use this EA, you must first allow it to access the Analyzer server.Go to Main Menu->Tools->Options and select the Expert Advisors tab.Then, check \"Allow WebRequest for listed URL\" and enter \"https://analyzer.mskelton.dev\" to allow publishing trades to Analyzer."
 #property strict
 
 #include "DataBuilder.mqh"

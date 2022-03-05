@@ -132,8 +132,8 @@ export default function Home() {
                     </span>
                   </h1>
                   <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                    Level up your Forex trading with our trading analysis tools.
-                    Aimed for simplicity and customization, you will find
+                    Level up your Forex trading with our custom trading analysis
+                    tools. Aimed for simplicity and customization, you will find
                     everything you need to monitor your accounts, track
                     performance, and share your results with others.
                   </p>
