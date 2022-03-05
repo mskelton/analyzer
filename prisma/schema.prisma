@@ -35,7 +35,7 @@ model Account {
   updatedAt    DateTime @updatedAt
 
   // Relations
-  user         User   @relation(fields: [userArn], references: [arn])
+  user         User   @relation(fields: [userArn], references: [arn], onDelete: Cascade)
   deals        Deal[]
   metrics      Metric[]
 
@@ -68,7 +68,7 @@ model Deal {
 
   // Relations
   accountArn String
-  account    Account @relation(fields: [accountArn], references: [arn])
+  account    Account @relation(fields: [accountArn], references: [arn], onDelete: Cascade)
   @@unique([accountArn, ticket])
 
   // Other

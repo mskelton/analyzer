@@ -12,6 +12,7 @@
     "build": "yarn build:css --minify && NODE_ENV=production remix build && yarn workspace docs build",
     "docs": "yarn workspace docs start",
     "db:generate": "prisma generate",
+    "db:shell": "mongosh 'mongodb://root:local@localhost/analyzer?authSource=admin'",
     "dev:app": "node -r dotenv/config node_modules/.bin/remix dev",
     "dev:css": "yarn build:css --watch",
     "dev": "concurrently -n app,css -c 'blue.bold,magenta.bold' 'yarn dev:app' 'yarn dev:css'",
