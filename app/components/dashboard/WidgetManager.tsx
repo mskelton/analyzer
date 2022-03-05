@@ -10,14 +10,14 @@ export interface WidgetManagerProps {
 
 export function WidgetManager({ metrics }: WidgetManagerProps) {
   return (
-    <>
-      <Widget title="Profit">
-        <ProfitChart metric={metrics.find((m) => m.key === "PROFIT")!} />
-      </Widget>
-
+    <div className="grid grid-cols-12 gap-4">
       <Widget title="Account balance">
         <BalanceChart metric={metrics.find((m) => m.key === "BALANCE")!} />
       </Widget>
-    </>
+
+      <Widget title="Profit">
+        <ProfitChart metric={metrics.find((m) => m.key === "PROFIT")!} />
+      </Widget>
+    </div>
   )
 }
