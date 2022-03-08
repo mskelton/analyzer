@@ -4,6 +4,7 @@ import { Link, LoaderFunction, MetaFunction } from "remix"
 import { getAccounts } from "~/api/accounts.server"
 import { NoAccounts } from "~/components/accounts/NoAccounts"
 import { EmptyState } from "~/components/common/EmptyState"
+import { PageContent } from "~/components/common/PageContent"
 import { PageHeader } from "~/components/common/PageHeader"
 import { AccountSelect } from "~/components/dashboard/AccountSelect"
 import { WidgetManager } from "~/components/dashboard/WidgetManager"
@@ -29,7 +30,7 @@ export default function Dashboard() {
         Dashboard
       </PageHeader>
 
-      <main className="py-6 px-4 sm:px-6 lg:px-8">
+      <PageContent>
         {!account ? (
           <NoAccounts>
             <Link className="btn-primary mt-6" to="/accounts/new">
@@ -45,7 +46,7 @@ export default function Dashboard() {
         ) : (
           <WidgetManager metrics={account.metrics} />
         )}
-      </main>
+      </PageContent>
     </>
   )
 }

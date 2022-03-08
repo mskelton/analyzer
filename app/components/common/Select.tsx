@@ -48,14 +48,14 @@ export function Select({
           <Listbox.Label
             className={clsx(
               "mb-2 text-sm font-medium text-gray-700",
-              hideLabel ? "hidden" : "block"
+              hideLabel ? "sr-only" : "block"
             )}
           >
             {label}
           </Listbox.Label>
 
           <div className="relative">
-            <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 sm:text-sm">
+            <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:outline-none focus-visible:border-primary-500 focus-visible:ring-1 focus-visible:ring-primary-500 sm:text-sm">
               <span className="block truncate">{selectedOption?.name}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <HiSelector
@@ -78,8 +78,8 @@ export function Select({
                     key={option.id}
                     className={({ active }) =>
                       clsx(
-                        active ? "bg-primary-600 text-white" : "text-gray-900",
-                        "relative cursor-default select-none py-2 pl-3 pr-9"
+                        "relative cursor-default select-none py-2 pl-3 pr-9",
+                        active ? "bg-primary-600 text-white" : "text-gray-900"
                       )
                     }
                     value={option}
@@ -88,23 +88,23 @@ export function Select({
                       <>
                         <span
                           className={clsx(
-                            selected ? "font-semibold" : "font-normal",
-                            "block truncate"
+                            "block truncate",
+                            selected ? "font-semibold" : "font-normal"
                           )}
                         >
                           {option.name}
                         </span>
 
-                        {selected ? (
+                        {selected && (
                           <span
                             className={clsx(
-                              active ? "text-white" : "text-primary-600",
-                              "absolute inset-y-0 right-0 flex items-center pr-4"
+                              "absolute inset-y-0 right-0 flex items-center pr-4",
+                              active ? "text-white" : "text-primary-600"
                             )}
                           >
                             <HiCheck aria-hidden="true" className="h-5 w-5" />
                           </span>
-                        ) : null}
+                        )}
                       </>
                     )}
                   </Listbox.Option>

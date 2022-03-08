@@ -1,7 +1,7 @@
 import "~/components/charts/register"
 import { Account } from "@prisma/client"
-import { BalanceChart } from "../charts/BalanceChart"
-import { ProfitChart } from "../charts/ProfitChart"
+import { ChartTabs } from "../charts/ChartTabs"
+import { QuickStats } from "../charts/QuickStats"
 import { Widget } from "./Widget"
 
 export interface WidgetManagerProps {
@@ -11,12 +11,10 @@ export interface WidgetManagerProps {
 export function WidgetManager({ metrics }: WidgetManagerProps) {
   return (
     <div className="grid grid-cols-12 gap-4">
-      <Widget title="Account balance">
-        <BalanceChart metric={metrics.find((m) => m.key === "BALANCE")!} />
-      </Widget>
+      <QuickStats metrics={metrics} />
 
-      <Widget title="Profit">
-        <ProfitChart metric={metrics.find((m) => m.key === "PROFIT")!} />
+      <Widget>
+        <ChartTabs metrics={metrics} />
       </Widget>
     </div>
   )

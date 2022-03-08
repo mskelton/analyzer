@@ -1,12 +1,20 @@
+import clsx from "clsx"
+
 export interface WidgetProps {
   children: React.ReactNode
-  title: string
+  noBackground?: boolean
+  title?: string
 }
 
-export function Widget({ children, title }: WidgetProps) {
+export function Widget({ children, noBackground, title }: WidgetProps) {
   return (
-    <div className="col-span-12 rounded-md bg-white p-4 shadow-sm lg:col-span-6">
-      <h2 className="mb-6 text-xl font-semibold">{title}</h2>
+    <div
+      className={clsx(
+        "col-span-12 rounded-md",
+        !noBackground && "bg-white p-4 shadow-sm"
+      )}
+    >
+      {title && <h2 className="mb-4 text-xl font-semibold">{title}</h2>}
       <div>{children}</div>
     </div>
   )

@@ -1,9 +1,8 @@
 import { Metric } from "@prisma/client"
 import { useMemo } from "react"
 import { Line } from "react-chartjs-2"
-import { formatCurrency } from "~/utils/currency"
 import { addDays, formatDate, midnight } from "~/utils/date"
-import { aggregate } from "~/utils/metrics"
+import { aggregate, formatCurrency } from "~/utils/metrics"
 
 export interface BalanceChartProps {
   metric: Metric

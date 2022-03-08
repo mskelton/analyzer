@@ -12,3 +12,10 @@ export function round(value: number, decimals = 2) {
   const factor = 10 ** decimals
   return Math.round(value * factor) / factor
 }
+
+/**
+ * Sums an array of numbers.
+ */
+export function sum(values: number[]) {
+  return values.reduce((acc, cur) => acc + cur, 0)
+}
