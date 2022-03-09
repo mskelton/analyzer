@@ -2674,25 +2674,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/node@npm:1.2.2":
-  version: 1.2.2
-  resolution: "@remix-run/node@npm:1.2.2"
-  dependencies:
-    "@remix-run/server-runtime": 1.2.2
-    "@types/busboy": ^0.3.1
-    "@types/node-fetch": ^2.5.12
-    "@web-std/file": ^3.0.0
-    abort-controller: ^3.0.0
-    blob-stream: ^0.1.3
-    busboy: ^0.3.1
-    cookie-signature: ^1.1.0
-    form-data: ^4.0.0
-    node-fetch: ^2.6.1
-    source-map-support: ^0.5.21
-  checksum: 1b2be3101fb460137abfe8d2ebcd0e198b3bfe72cbe94a01e115f5f481869482598bb606b24d08f59be26faf5eeb3a34a18d65bc35cbd3273f16e43b61fb430c
-  languageName: node
-  linkType: hard
-
 "@remix-run/react@npm:^1.2.1":
   version: 1.2.1
   resolution: "@remix-run/react@npm:1.2.1"
@@ -2734,35 +2715,6 @@ __metadata:
     react: ">=16.8"
     react-dom: ">=16.8"
   checksum: b3eb5f6f3b998415d005979022f0a16567ac85f84ce240f61ec72b1d7ca7920721f1ae6566708504dfb9abcfb7e11911910844b838fbd381c0809c1a965ca57a
-  languageName: node
-  linkType: hard
-
-"@remix-run/server-runtime@npm:1.2.2":
-  version: 1.2.2
-  resolution: "@remix-run/server-runtime@npm:1.2.2"
-  dependencies:
-    "@types/cookie": ^0.4.0
-    cookie: ^0.4.1
-    jsesc: ^3.0.1
-    react-router-dom: ^6.2.1
-    set-cookie-parser: ^2.4.8
-    source-map: ^0.7.3
-  peerDependencies:
-    react: ">=16.8"
-    react-dom: ">=16.8"
-  checksum: 68f2afebd508659a6f1f1eb3437e266513f65260f2ff66bbca53ddfafc28c23b3b9cb670ca775aeee898cc69b1fc169b8e72699e1c834c3e878a56fb544ee279
-  languageName: node
-  linkType: hard
-
-"@remix-run/vercel@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@remix-run/vercel@npm:1.2.2"
-  dependencies:
-    "@remix-run/node": 1.2.2
-    "@remix-run/server-runtime": 1.2.2
-  peerDependencies:
-    "@vercel/node": ^1.8.3
-  checksum: a22a6aa2300d6aadd96f22103a34aeec7ad674127176dbe8ac0a56ce17e730c7e15af2b8cb25dee5fc5b801493bdacbca172d6014efc95f6435ea92b0da60ab2
   languageName: node
   linkType: hard
 
@@ -4151,7 +4103,6 @@ __metadata:
     "@remix-run/dev": ^1.2.1
     "@remix-run/react": ^1.2.1
     "@remix-run/serve": ^1.2.1
-    "@remix-run/vercel": ^1.2.2
     "@tailwindcss/forms": ^0.4.0
     "@types/bcrypt": ^5.0.0
     "@types/react": ^17.0.39
@@ -13616,7 +13567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-support@npm:^0.5.17, source-map-support@npm:^0.5.21, source-map-support@npm:~0.5.20":
+"source-map-support@npm:^0.5.17, source-map-support@npm:~0.5.20":
   version: 0.5.21
   resolution: "source-map-support@npm:0.5.21"
   dependencies:
