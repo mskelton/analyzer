@@ -20,6 +20,7 @@
     "lint": "eslint .",
     "postinstall": "remix setup node && yarn db:generate",
     "test": "playwright test",
+    "start": "remix-serve build",
     "ts": "tsc -b"
   },
   "dependencies": {

@@ -5,12 +5,12 @@ import { Readable } from "stream"
 // require cache is cleared.
 declare global {
   // eslint-disable-next-line no-var
-  var _prisma: PrismaClient | undefined
+  var __db__: PrismaClient | undefined
 }
 
-global._prisma ??= new PrismaClient()
+global.__db__ ??= new PrismaClient()
 
-export const db = global._prisma
+export const db = global.__db__
 
 /**
  * Helper function to stream results from the database when paging through

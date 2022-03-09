@@ -1,0 +1,6 @@
+.cache
+.yarn/cache
+build
+public/build
+lib
+node_modules
