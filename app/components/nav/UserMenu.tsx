@@ -15,6 +15,7 @@ export function UserMenu() {
       <Transition
         action="/logout"
         as="form"
+        className="absolute right-0 z-20 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus-visible:outline-none"
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
@@ -23,7 +24,7 @@ export function UserMenu() {
         leaveTo="transform opacity-0 scale-95"
         method="post"
       >
-        <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus-visible:outline-none">
+        <Menu.Items>
           <MenuItem href="/user/profile">Your profile</MenuItem>
           <MenuItem href="/user/settings">Settings</MenuItem>
           <MenuItem href="/docs">Documentation</MenuItem>
