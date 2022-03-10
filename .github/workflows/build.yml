@@ -16,36 +16,18 @@ jobs:
       - uses: mskelton/setup-yarn@v1
       - run: yarn ts
 
-  deploy-temp:
-    name: Deploy to temp environment
-    runs-on: ubuntu-latest
-    needs: [lint, ts]
-    steps:
-      - uses: actions/checkout@v1
-      - name: Deploy
-        uses: ./.github/actions/deploy
-
-  integ:
-    name: Integration tests
-    runs-on: ubuntu-latest
-    needs: [deploy-temp]
-    steps:
-      - uses: mskelton/setup-yarn@v1
-      - run: yarn test:integ
-
   e2e:
     name: End-to-end tests
     runs-on: ubuntu-latest
-    needs: [deploy-temp]
     steps:
       - uses: mskelton/setup-yarn@v1
-      - run: yarn test:e2e
+      - run: yarn test
 
-  deploy-prod:
+  deploy:
     name: Deploy to prod environment
     runs-on: ubuntu-latest
-    needs: [integ, e2e]
+    needs: [lint, ts, e2e]
     steps:
       - uses: actions/checkout@v1
-      - name: Deploy
-        uses: ./.github/actions/deploy
+      - run: yarn setup
+      - run: flyctl

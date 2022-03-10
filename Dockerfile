@@ -30,8 +30,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 COPY . .
 
-RUN SKIP_POSTINSTALL=1 \
-  yarn workspaces focus --all --production
+RUN yarn workspaces focus --all --production
 
 ###############################################################################
 ### BUILD THE APP #############################################################
@@ -43,8 +42,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 COPY . .
 
-RUN yarn postinstall
-RUN yarn db:generate
+RUN yarn setup
 RUN yarn build
 
 ###############################################################################
