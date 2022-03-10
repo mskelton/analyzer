@@ -30,7 +30,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 COPY . .
 
-RUN yarn workspaces focus --all --production
+RUN SKIP_POSTINSTALL=1 \
+  yarn workspaces focus --all --production
 
 ###############################################################################
 ### BUILD THE APP #############################################################
