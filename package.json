@@ -18,7 +18,8 @@
     "dev": "concurrently -n app,css -c 'blue.bold,magenta.bold' 'yarn dev:app' 'yarn dev:css'",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "postinstall": "test -n \"$SKIP_POSTINSTALL\" || remix setup node && yarn db:generate",
+    "setup": "remix setup node && yarn db:generate",
+    "postinstall": "test -n \"$SKIP_POSTINSTALL\" || yarn setup",
     "test": "playwright test",
     "start": "remix-serve build",
     "ts": "tsc -b"
