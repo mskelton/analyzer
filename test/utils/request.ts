@@ -1,6 +1,7 @@
-import fetch, { RequestInit } from "node-fetch"
+import type { RequestInit } from "node-fetch"
 
 export async function request<T>(url: string, init: RequestInit) {
+  const { default: fetch } = await import("node-fetch")
   const res = await fetch(`http://localhost:3000${url}`, init)
 
   if (!res.ok) {

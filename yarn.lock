@@ -4115,6 +4115,8 @@ __metadata:
     prettier: ^2.5.1
     prettier-plugin-tailwindcss: ^0.1.7
     prisma: ^3.10.0
+    "pw:fixtures": "link:./test/fixtures"
+    "pw:utils": "link:./test/utils"
     react: ^17.0.2
     react-chartjs-2: ^4.0.1
     react-dom: ^17.0.2
@@ -12167,6 +12169,18 @@ __metadata:
   checksum: 646d8bed6e6eab89affdd5e2c11f607a85b631a7fb03c061dfa658eb4dc4806881a15feed2ac5fd8c0bad8c00c632c640d5b1cb8b9a972e6e947393a1329371b
   languageName: node
   linkType: hard
+
+"pw:fixtures@link:./test/fixtures::locator=analyzer%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "pw:fixtures@link:./test/fixtures::locator=analyzer%40workspace%3A."
+  languageName: node
+  linkType: soft
+
+"pw:utils@link:./test/utils::locator=analyzer%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "pw:utils@link:./test/utils::locator=analyzer%40workspace%3A."
+  languageName: node
+  linkType: soft
 
 "qs@npm:6.9.6":
   version: 6.9.6
