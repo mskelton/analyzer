@@ -1,9 +1,9 @@
 import { DeleteButton } from "../common/DeleteButton"
 
-export function DeleteAccount() {
+export function DeleteUser() {
   return (
     <DeleteButton title="Delete account">
-      Are you sure you want to delete this account? All account data will be
+      Are you sure you want to delete your user account? All user data will be
       permanently removed. This action cannot be undone.
     </DeleteButton>
   )

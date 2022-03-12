@@ -25,8 +25,7 @@ export function UserMenu() {
         method="post"
       >
         <Menu.Items>
-          <MenuItem href="/user/profile">Your profile</MenuItem>
-          <MenuItem href="/user/settings">Settings</MenuItem>
+          <MenuItem href="/user/settings">User settings</MenuItem>
           <MenuItem href="/docs">Documentation</MenuItem>
           <MenuItem as="button" className="w-full text-left">
             Sign out
