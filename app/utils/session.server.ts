@@ -1,17 +1,16 @@
 import { createCookieSessionStorage, redirect } from "remix"
 import { parseArn } from "./arn"
-
-const prod = process.env.NODE_ENV === "production"
+import { env } from "./env.server"
 
 export const storage = createCookieSessionStorage({
   cookie: {
-    domain: prod ? "analyzer.mskelton.dev" : undefined,
+    domain: env.prod ? "analyzer.mskelton.dev" : undefined,
     httpOnly: true,
     maxAge: 60 * 60 * 24 * 7,
     name: "__session",
     path: "/",
     sameSite: "lax",
-    secrets: [process.env.SESSION_SECRET!],
+    secrets: [env.sessionSecret],
     secure: true,
   },
 })

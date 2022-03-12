@@ -1,6 +1,7 @@
 import * as bcrypt from "bcrypt"
 import { db } from "~/db.server"
 import { createArn } from "~/utils/arn"
+import { env } from "~/utils/env.server"
 import { ClientError } from "~/utils/errors.server"
 import { generateId } from "~/utils/id.server"
 
@@ -14,8 +15,6 @@ export async function login(email: string, password: string) {
   throw new ClientError("Invalid email or password")
 }
 
-const betaUsers = process.env.BETA_USERS?.split(",")
-
 export async function signUp(name: string, email: string, password: string) {
   const user = await db.user.findUnique({ where: { email } })
 
@@ -23,7 +22,7 @@ export async function signUp(name: string, email: string, password: string) {
     throw new ClientError("User already exists")
   }
 
-  if (!betaUsers?.includes(email)) {
+  if (!env.betaUsers.includes(email)) {
     throw new ClientError("User not part of closed beta")
   }
 
