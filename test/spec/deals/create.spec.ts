@@ -2,7 +2,7 @@ import { expect, test } from "../../fixtures"
 import { createDeal } from "../../utils/deal"
 
 test.describe("Deal creation", () => {
-  test("single deal", async () => {
+  test.skip("single deal", async () => {
     const req = createDeal()
     const res = await create(req)
     expect(res.status).toBe(201)
@@ -13,7 +13,7 @@ test.describe("Deal creation", () => {
     expect(deal.reason).toBe("DEAL_REASON_EXPERT")
   })
 
-  test("multiple deals", async () => {
+  test.skip("multiple deals", async () => {
     const req = [
       createDeal({ symbol: "USDCAD", type: "DEAL_TYPE_BUY", volume: 0.1 }),
       createDeal({ symbol: "EURUSD", type: "DEAL_TYPE_SELL", volume: 0.01 }),
@@ -33,7 +33,7 @@ test.describe("Deal creation", () => {
     expect(deal2.volume).toBe(0.01)
   })
 
-  test("fails to create deal without required data", async () => {
+  test.skip("fails to create deal without required data", async () => {
     const res = await create({ ticket: 12345 })
 
     expect(res.status).toBe(400)

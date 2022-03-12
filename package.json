@@ -47,7 +47,7 @@
     "@babel/eslint-parser": "^7.17.0",
     "@mskelton/eslint-config": "^7.1.0",
     "@mskelton/tsconfig": "^1.1.1",
-    "@playwright/test": "^1.19.1",
+    "@playwright/test": "^1.19.2",
     "@remix-run/dev": "^1.2.1",
     "@tailwindcss/forms": "^0.4.0",
     "@types/bcrypt": "^5.0.0",
