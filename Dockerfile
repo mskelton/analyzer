@@ -3,8 +3,9 @@
 ###############################################################################
 FROM node:16-bullseye-slim as base
 
-# Set the NODE_ENV for all images
+# Environment variables for all steps
 ENV NODE_ENV production
+ENV CI true
 
 # Install openssl for Prisma
 RUN apt-get update && apt-get install -y openssl
