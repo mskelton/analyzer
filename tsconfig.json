@@ -2,11 +2,12 @@
   "extends": "@mskelton/tsconfig",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "rootDir": "app",
+    "rootDir": ".",
     "noEmit": true,
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
+      "pw:*": ["./test/*"]
     }
   },
-  "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx"]
+  "include": ["remix.env.d.ts", "app", "test"]
 }
