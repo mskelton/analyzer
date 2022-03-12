@@ -18,7 +18,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn install --immutable --immutable-cache
+RUN yarn install --immutable
 
 ###############################################################################
 ### INSTALL PRODUCTION DEPS ###################################################
