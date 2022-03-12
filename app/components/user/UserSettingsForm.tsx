@@ -38,7 +38,7 @@ export function UserSettingsForm() {
         />
 
         <div className="flex justify-end gap-3">
-          <Link className="btn-white" to="/accounts">
+          <Link className="btn-white" to="/dashboard">
             Cancel
           </Link>
 
