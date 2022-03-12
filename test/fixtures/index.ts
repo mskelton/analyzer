@@ -1,2 +1,2 @@
 export { expect } from "@playwright/test"
-export { test } from "./base"
+export { test } from "./data"
