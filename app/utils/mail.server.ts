@@ -27,12 +27,11 @@ export async function sendEmail(message: MailgunMessage) {
   }
 }
 
-export function sendForgotPasswordEmail(to: string) {
-  const link = "https://analyzer.mskelton.dev"
+export function sendForgotPasswordEmail(to: string, url: URL) {
   const text = `
 You are receiving this email because you (or someone else) have requested the reset of a password for your account. Follow the link below to reset your password.
 
-${link}
+${url}
 
 If you didn't request to reset your password, simply disregard this email. Rest assured, your account is safe.
 `.trim()

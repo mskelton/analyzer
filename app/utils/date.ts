@@ -22,12 +22,22 @@ export function dateDiff(a: Date | number, b: Date | number) {
 }
 
 /**
- * Adjust a date by a given number of days returning a new date.
+ * Adjust a date by a given number of days, returning a new date.
  */
 export function addDays(date: Date, days: number) {
   return new Date(date.getTime() + days * 864e5)
 }
 
+/**
+ * Adjust a date by a given number of hours, returning a new date.
+ */
+export function addHours(date: Date, hours: number) {
+  return new Date(date.getTime() + hours * 36e5)
+}
+
+/**
+ * Formats a date in UTC using month and day only.
+ */
 export function formatDate(date: Date | string) {
   return new Date(date).toLocaleDateString(undefined, {
     day: "numeric",

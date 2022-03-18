@@ -5,8 +5,10 @@ import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
 import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
+import { addHours } from "~/utils/date"
 import { sendForgotPasswordEmail } from "~/utils/mail.server"
 import { seo } from "~/utils/seo"
+import { hmac } from "~/utils/signing.server"
 
 export const meta: MetaFunction = () => {
   return seo({
@@ -20,7 +22,16 @@ export const action: ActionFunction = async ({ request }) => {
   const email = formData.get("email")
 
   invariant(typeof email === "string")
-  await sendForgotPasswordEmail(email)
+
+  // Use the forgot password URL as the base for the reset password URL
+  const url = new URL(`${new URL(request.url).origin}/reset-password`)
+
+  // Add the email, expiration, and signature to the URL
+  url.searchParams.set("email", email)
+  url.searchParams.set("expires", addHours(new Date(), 1).getTime().toString())
+  url.searchParams.set("signature", hmac(url.href))
+
+  await sendForgotPasswordEmail(email, url)
 
   return { message: "Check your inbox for a link to reset your password." }
 }
@@ -50,10 +61,11 @@ export default function ForgotPassword() {
             autoComplete="email"
             label="Email address"
             name="email"
+            placeholder="Enter your email address"
             type="email"
           />
 
-          <AuthButton>Send me a link</AuthButton>
+          <AuthButton>Send password reset email</AuthButton>
         </form>
       </AuthCard>
     </div>

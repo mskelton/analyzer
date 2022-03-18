@@ -15,6 +15,10 @@ export async function login(email: string, password: string) {
   throw new ClientError("Invalid email or password")
 }
 
+export function hashPassword(password: string) {
+  return bcrypt.hash(password, 10)
+}
+
 export async function signUp(name: string, email: string, password: string) {
   const user = await db.user.findUnique({ where: { email } })
 
@@ -31,7 +35,7 @@ export async function signUp(name: string, email: string, password: string) {
       arn: createArn("user", await generateId(), ""),
       email,
       name,
-      password: await bcrypt.hash(password, 10),
+      password: await hashPassword(password),
     },
   })
 }
