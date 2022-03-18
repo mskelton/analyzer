@@ -1,12 +1,10 @@
 import { User } from "@prisma/client"
 import { Link, useLoaderData } from "remix"
-import { useFormError } from "~/hooks/useFormError"
-import { Alert } from "../common/Alert"
+import { FormError } from "../common/FormError"
 import { TextField } from "../common/TextField"
 
 export function UserSettingsForm() {
   const { user } = useLoaderData<{ user: User }>()
-  const { error } = useFormError()
 
   return (
     <div className="mx-auto max-w-xl py-6 sm:px-6 lg:px-8">
