@@ -10,11 +10,7 @@ export function UserSettingsForm() {
 
   return (
     <div className="mx-auto max-w-xl py-6 sm:px-6 lg:px-8">
-      {error && (
-        <Alert className="mb-5" type="danger">
-          {error}
-        </Alert>
-      )}
+      <FormError />
 
       <form className="flex flex-col gap-5" method="post">
         <TextField

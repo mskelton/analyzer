@@ -4,10 +4,9 @@ import { hashPassword } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
-import { Alert } from "~/components/common/Alert"
+import { FormError } from "~/components/common/FormError"
 import { TextField } from "~/components/common/TextField"
 import { db } from "~/db.server"
-import { useFormError } from "~/hooks/useFormError"
 import { seo } from "~/utils/seo"
 import { validateURL } from "~/utils/signing.server"
 
@@ -50,8 +49,6 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function ResetPassword() {
-  const { error } = useFormError()
-
   return (
     <div data-testid="reset-password">
       <AuthHeader
@@ -63,11 +60,7 @@ export default function ResetPassword() {
       </AuthHeader>
 
       <AuthCard>
-        {error && (
-          <Alert className="mb-6" type="danger">
-            {error}
-          </Alert>
-        )}
+        <FormError />
 
         <form className="flex flex-col gap-6" method="POST">
           <TextField

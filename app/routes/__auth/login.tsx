@@ -11,9 +11,7 @@ import { login } from "~/api/auth.server"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
 import { AuthHeader } from "~/components/auth/AuthHeader"
-import { Alert } from "~/components/common/Alert"
 import { TextField } from "~/components/common/TextField"
-import { useFormError } from "~/hooks/useFormError"
 import { handleError } from "~/utils/errors.server"
 import { seo } from "~/utils/seo"
 import { commitUser, getUserArn } from "~/utils/session.server"
@@ -49,8 +47,6 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function Login() {
-  const { error } = useFormError()
-
   return (
     <div data-testid="sign-up">
       <AuthHeader
@@ -62,11 +58,7 @@ export default function Login() {
       </AuthHeader>
 
       <AuthCard>
-        {error && (
-          <Alert className="mb-6" type="danger">
-            {error}
-          </Alert>
-        )}
+        <FormError />
 
         <form className="flex flex-col gap-6" method="post">
           <TextField
