@@ -6,3 +6,5 @@
 app/tailwind.css
 build/
 lib/
+docs/.docusaurus/
+public/docs/
