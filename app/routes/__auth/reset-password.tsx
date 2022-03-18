@@ -13,8 +13,8 @@ import { validateURL } from "~/utils/signing.server"
 
 export const meta: MetaFunction = () => {
   return seo({
-    description: `Reset your password to regain access to your Analyzer account.`,
-    title: "Reset password",
+    description: `Change your password to regain access to your Analyzer account.`,
+    title: "Change password",
   })
 }
 

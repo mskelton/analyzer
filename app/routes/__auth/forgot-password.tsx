@@ -1,4 +1,10 @@
-import { ActionFunction, MetaFunction, useActionData } from "remix"
+import {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+  useActionData,
+  useLoaderData,
+} from "remix"
 import invariant from "tiny-invariant"
 import { AuthButton } from "~/components/auth/AuthButton"
 import { AuthCard } from "~/components/auth/AuthCard"
@@ -15,6 +21,13 @@ export const meta: MetaFunction = () => {
     description: `Forgot your password? No problem, we'll send you a link to reset it.`,
     title: "Forgot password",
   })
+}
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const url = new URL(request.url)
+  const error = url.searchParams.get("error")
+
+  return { error }
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -37,6 +50,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function ForgotPassword() {
+  const { error } = useLoaderData<{ error: string | undefined }>()
   const data = useActionData<{ message: string }>()
 
   return (
@@ -50,13 +64,23 @@ export default function ForgotPassword() {
       </AuthHeader>
 
       <AuthCard>
+        {error && (
+          <Alert className="mb-6" type="danger">
+            {error}
+          </Alert>
+        )}
+
         {data?.message && (
           <Alert className="mb-6" type="success">
             {data.message}
           </Alert>
         )}
 
-        <form className="flex flex-col gap-6" method="POST">
+        <form
+          action="/forgot-password"
+          className="flex flex-col gap-6"
+          method="POST"
+        >
           <TextField
             autoComplete="email"
             label="Email address"
