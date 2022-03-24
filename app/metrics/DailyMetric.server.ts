@@ -1,10 +1,10 @@
-import { Deal, MetricType } from "@prisma/client"
+import { Deal } from "@prisma/client"
 import { dateDiff, midnight } from "~/utils/date"
 import { Metric } from "./Metric.server"
 
 export abstract class DailyMetric extends Metric<number[]> {
-  constructor(protected key: MetricType) {
-    super(key, [])
+  constructor() {
+    super([])
   }
 
   setup(deal: Deal) {

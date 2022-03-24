@@ -1,5 +1,3 @@
-import { Metric } from "@prisma/client"
-
 /**
  * This function accepts a metric and aggregates the data so that each day
  * includes the data from the day before. This is useful for displaying metrics
@@ -10,13 +8,6 @@ export function aggregate(metric: number[]) {
     acc[i] = (acc[i - 1] ?? 0) + cur
     return acc
   }, [])
-}
-
-/**
- * Finds a given metric in the list of account metrics by key.
- */
-export function findByKey(metrics: Metric[], key: Metric["key"]) {
-  return metrics.find((metric) => metric.key === key)!
 }
 
 /**

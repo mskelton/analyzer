@@ -1,10 +1,10 @@
-import { Metric } from "@prisma/client"
+import { Account } from "@prisma/client"
 import { HiCash, HiTrendingDown, HiTrendingUp } from "react-icons/hi"
 import { useQuickStats } from "~/hooks/useQuickStats"
 import { QuickStat } from "./QuickStat"
 
 export interface QuickStatsProps {
-  metrics: Metric[]
+  metrics: NonNullable<Account["metrics"]>
 }
 
 export function QuickStats({ metrics }: QuickStatsProps) {
@@ -14,12 +14,7 @@ export function QuickStats({ metrics }: QuickStatsProps) {
     <dl className="col-span-12 grid grid-cols-12 gap-4">
       <QuickStat icon={<HiTrendingUp />} name="Profit" {...profit} />
       <QuickStat icon={<HiCash />} name="Balance" {...balance} />
-      <QuickStat
-        comingSoon
-        icon={<HiTrendingDown />}
-        name="Drawdown"
-        {...drawdown}
-      />
+      <QuickStat icon={<HiTrendingDown />} name="Drawdown" {...drawdown} />
     </dl>
   )
 }

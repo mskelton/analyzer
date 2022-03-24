@@ -1,17 +1,17 @@
-import { Metric } from "@prisma/client"
+import { BalanceMetric } from "@prisma/client"
 import { useMemo } from "react"
 import { Line } from "react-chartjs-2"
 import { addDays, formatDate, midnight } from "~/utils/date"
 import { aggregate, formatCurrency } from "~/utils/metrics"
 
 export interface BalanceChartProps {
-  metric: Metric
+  metric: BalanceMetric | null
 }
 
 export function BalanceChart({ metric }: BalanceChartProps) {
   const data = useMemo(() => {
-    const value = aggregate(metric.value as number[])
-    const end = midnight(metric.updatedAt)
+    const value = aggregate(metric?.value ?? [])
+    const end = midnight(metric?.updatedAt ?? new Date())
 
     return {
       datasets: [{ borderColor: "#0d9488", data: value, label: "Balance" }],

@@ -5,7 +5,7 @@ import { QuickStats } from "../charts/QuickStats"
 import { Widget } from "./Widget"
 
 export interface WidgetManagerProps {
-  metrics: Account["metrics"]
+  metrics: NonNullable<Account["metrics"]>
 }
 
 export function WidgetManager({ metrics }: WidgetManagerProps) {

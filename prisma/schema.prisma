@@ -37,7 +37,7 @@ model Account {
   // Relations
   user         User   @relation(fields: [userArn], references: [arn], onDelete: Cascade)
   deals        Deal[]
-  metrics      Metric[]
+  metrics      Metrics?
 
   // Other
   token        String @unique
@@ -51,15 +51,26 @@ enum AccountType {
   LIVE
 }
 
-type Metric {
-  key         MetricType
-  value       Json
-  updatedAt   DateTime
+type Metrics {
+  balance   BalanceMetric?
+  profit    ProfitMetric?
+  drawdown  DrawdownMetric?
 }
 
-enum MetricType {
-  BALANCE
-  PROFIT
+type BalanceMetric {
+  updatedAt  DateTime
+  value      Float[]
+}
+
+type ProfitMetric {
+  updatedAt  DateTime
+  value      Float[]
+}
+
+type DrawdownMetric {
+  updatedAt  DateTime
+  value      Float[]
+  current    Float
 }
 
 model Deal {

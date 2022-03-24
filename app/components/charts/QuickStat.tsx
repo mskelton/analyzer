@@ -4,23 +4,24 @@ import { HiArrowSmDown, HiArrowSmUp } from "react-icons/hi"
 
 export interface QuickStatProps {
   change: string
-  comingSoon?: boolean
   icon: React.ReactElement
   name: string
-  type: "increase" | "decrease"
+  status?: "improvement" | "regression"
+  trending: "up" | "down"
   value: string
 }
 
 export function QuickStat({
   change,
-  comingSoon,
   icon,
   name,
-  type,
+  status: statusProp,
+  trending,
   value,
 }: QuickStatProps) {
-  const increase = type === "increase"
-  const ChangeIcon = increase ? HiArrowSmUp : HiArrowSmDown
+  const ChangeIcon = trending === "up" ? HiArrowSmUp : HiArrowSmDown
+  const status =
+    statusProp ?? (trending === "up" ? "improvement" : "regression")
 
   return (
     <div className="col-span-4 flex items-center gap-4 overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:px-6 sm:py-6">
@@ -35,31 +36,27 @@ export function QuickStat({
         <dt className="truncate text-sm font-medium text-gray-500">{name}</dt>
 
         <dd className="flex items-baseline">
-          <p className="text-2xl font-semibold text-gray-900">
-            {comingSoon ? "Coming soon!" : value}
-          </p>
+          <p className="text-2xl font-semibold text-gray-900">{value}</p>
 
-          {!comingSoon && (
-            <p
+          <p
+            className={clsx(
+              "ml-2 flex items-baseline text-sm font-semibold",
+              status === "improvement" ? "text-green-600" : "text-red-600"
+            )}
+          >
+            <ChangeIcon
+              aria-hidden="true"
               className={clsx(
-                "ml-2 flex items-baseline text-sm font-semibold",
-                increase ? "text-green-600" : "text-red-600"
+                "h-5 w-5 flex-shrink-0 self-center",
+                status === "improvement" ? "text-green-500" : "text-red-500"
               )}
-            >
-              <ChangeIcon
-                aria-hidden="true"
-                className={clsx(
-                  "h-5 w-5 flex-shrink-0 self-center",
-                  increase ? "text-green-500" : "text-red-500"
-                )}
-              />
+            />
 
-              <span className="sr-only">
-                {increase ? "Increased" : "Decreased"} by
-              </span>
-              {change}
-            </p>
-          )}
+            <span className="sr-only">
+              {trending === "up" ? "Increased" : "Decreased"} by
+            </span>
+            {change}
+          </p>
         </dd>
       </div>
     </div>

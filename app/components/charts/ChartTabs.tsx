@@ -1,13 +1,12 @@
 import { Tab } from "@headlessui/react"
 import { Account } from "@prisma/client"
 import { HiCash, HiTrendingDown, HiTrendingUp } from "react-icons/hi"
-import { findByKey } from "~/utils/metrics"
 import { IconTab } from "../common/tabs/IconTab"
 import { BalanceChart } from "./BalanceChart"
 import { ProfitChart } from "./ProfitChart"
 
 export interface ChartTabsProps {
-  metrics: Account["metrics"]
+  metrics: NonNullable<Account["metrics"]>
 }
 
 export function ChartTabs({ metrics }: ChartTabsProps) {
@@ -21,11 +20,11 @@ export function ChartTabs({ metrics }: ChartTabsProps) {
 
       <Tab.Panels>
         <Tab.Panel>
-          <ProfitChart metric={findByKey(metrics, "PROFIT")} />
+          <ProfitChart metric={metrics.profit} />
         </Tab.Panel>
 
         <Tab.Panel>
-          <BalanceChart metric={findByKey(metrics, "BALANCE")} />
+          <BalanceChart metric={metrics.balance} />
         </Tab.Panel>
 
         <Tab.Panel>Coming soon!</Tab.Panel>

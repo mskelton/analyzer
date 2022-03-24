@@ -12,7 +12,11 @@ export const test = base.extend<DataFixtures>({
       arn: "mark",
       createdAt: new Date(),
       id: "1",
-      metrics: [],
+      metrics: {
+        balance: null,
+        drawdown: null,
+        profit: null,
+      },
       name: "mark",
       number: 1,
       token: "yo",

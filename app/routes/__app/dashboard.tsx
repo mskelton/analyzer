@@ -21,6 +21,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Dashboard() {
   const { accounts } = useDashboard()
   const [account, setAccount] = useState(accounts[0])
+  console.log(account)
 
   return (
     <>
@@ -37,7 +38,7 @@ export default function Dashboard() {
               Add account
             </Link>
           </NoAccounts>
-        ) : !account.metrics.length ? (
+        ) : !account.metrics ? (
           <EmptyState
             description="This account has no metrics yet. Connect the EA to your account to upload your account history."
             icon={<HiDatabase />}

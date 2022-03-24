@@ -3,10 +3,6 @@ import { safeAdd } from "~/utils/math"
 import { DailyMetric } from "./DailyMetric.server"
 
 export class BalanceMetric extends DailyMetric {
-  constructor() {
-    super("BALANCE")
-  }
-
   digest(deal: Deal) {
     super.digest(deal)
     this.value[this.getDayIndex(deal)] += this.getProfit(deal)

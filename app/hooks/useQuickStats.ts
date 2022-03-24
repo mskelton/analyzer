@@ -1,30 +1,40 @@
-import { Metric } from "@prisma/client"
+import { Account, DrawdownMetric } from "@prisma/client"
 import { QuickStatProps } from "~/components/charts/QuickStat"
 import { sum } from "~/utils/math"
-import { findByKey, formatCurrency, formatPercentage } from "~/utils/metrics"
+import { formatCurrency, formatPercentage } from "~/utils/metrics"
 
 function getStatInfo(
-  metric: Metric,
+  value: number[] = [],
   format: (value: number) => string
-): Pick<QuickStatProps, "change" | "value" | "type"> {
-  const value = metric.value as number[]
+): Pick<QuickStatProps, "change" | "value" | "trending"> {
   const total = sum(value)
   const thisWeek = sum(value.slice(-7))
 
   return {
     change: format(thisWeek),
-    type: thisWeek >= 0 ? "increase" : "decrease",
+    trending: thisWeek >= 0 ? "up" : "down",
     value: format(total),
   }
 }
 
-export function useQuickStats(metrics: Metric[]) {
-  const balance = getStatInfo(findByKey(metrics, "BALANCE"), formatCurrency)
-  const profit = getStatInfo(findByKey(metrics, "PROFIT"), formatPercentage)
+function getDrawdownInfo(
+  metric: DrawdownMetric | null
+): Pick<QuickStatProps, "change" | "value" | "trending" | "status"> {
+  const yesterday = metric?.value?.at(-2) ?? 0
+  const current = metric?.current ?? 0
 
   return {
-    balance,
-    drawdown: null as any,
-    profit,
+    change: formatPercentage(current - yesterday),
+    status: current > yesterday ? "regression" : "improvement",
+    trending: current > yesterday ? "up" : "down",
+    value: formatPercentage(current),
+  }
+}
+
+export function useQuickStats(metrics: NonNullable<Account["metrics"]>) {
+  return {
+    balance: getStatInfo(metrics.profit?.value, formatCurrency),
+    drawdown: getDrawdownInfo(metrics.drawdown),
+    profit: getStatInfo(metrics.balance?.value, formatPercentage),
   }
 }

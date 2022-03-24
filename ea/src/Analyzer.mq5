@@ -11,7 +11,7 @@ input int INTERVAL = 5;  // Interval (minutes)
 input string TOKEN;      // Account token
 
 // When defined, allow changing the base URL to a local server.
-// #define LOCAL
+#define LOCAL
 
 #ifdef LOCAL
 input string BASE_URL = "";  // Analyzer URL
@@ -38,6 +38,11 @@ int OnInit() {
 }
 
 void OnTimer() {
+  IngestTrades();
+  UpdateDrawdown();
+}
+
+void IngestTrades() {
   Print("Searching for new trades to ingest...");
 
   HistorySelect(getLastUpdateTime(), TimeCurrent());
@@ -95,6 +100,32 @@ void OnTimer() {
   if (!updateMetrics()) return;
 
   Print("Successfully processed ", total, " deals");
+}
+
+void UpdateDrawdown() {
+  Print("Updating drawdown...");
+
+  double drawdown = calculateDrawdown();
+  string json = "{\"drawdown\": " + DoubleToString(drawdown) + "}";
+
+  // Convert the data string to the appropriate format
+  uchar data[];
+  StringToCharArray(json, data, 0, StringLen(json));
+
+  request_result res = request("POST", BASE_URL + "/api/drawdown", NULL, data);
+
+  if (res.ok) {
+    PrintFormat("Successfully updated drawdown. Currently at %.2f%%", drawdown);
+  } else {
+    PrintFormat("Failed to updated drawdown with status code %d", res.status);
+  }
+}
+
+double calculateDrawdown() {
+  double balance = AccountInfoDouble(ACCOUNT_BALANCE);
+  double equity = AccountInfoDouble(ACCOUNT_EQUITY);
+
+  return ((balance - equity) * 100) / equity;
 }
 
 /**

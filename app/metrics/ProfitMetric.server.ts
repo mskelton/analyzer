@@ -5,10 +5,6 @@ import { DailyMetric } from "./DailyMetric.server"
 export class ProfitMetric extends DailyMetric {
   private deposits = 0
 
-  constructor() {
-    super("PROFIT")
-  }
-
   digest(deal: Deal) {
     super.digest(deal)
     this.value[this.getDayIndex(deal)] += this.getProfit(deal)

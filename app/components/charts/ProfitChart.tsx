@@ -1,4 +1,4 @@
-import { Metric } from "@prisma/client"
+import { ProfitMetric } from "@prisma/client"
 import { useMemo } from "react"
 import { Line } from "react-chartjs-2"
 import { addDays, formatDate, midnight } from "~/utils/date"
@@ -6,13 +6,13 @@ import { round } from "~/utils/math"
 import { aggregate } from "~/utils/metrics"
 
 export interface ProfitChartProps {
-  metric: Metric
+  metric: ProfitMetric | null
 }
 
 export function ProfitChart({ metric }: ProfitChartProps) {
   const data = useMemo(() => {
-    const value = aggregate(metric.value as number[])
-    const end = midnight(metric.updatedAt)
+    const value = aggregate(metric?.value ?? [])
+    const end = midnight(metric?.updatedAt ?? new Date())
 
     return {
       datasets: [

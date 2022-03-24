@@ -1,9 +1,9 @@
-import type { Deal, MetricType } from "@prisma/client"
+import type { Deal } from "@prisma/client"
 
 export abstract class Metric<T> {
   protected start: Deal = null!
 
-  constructor(protected key: MetricType, protected value: T) {}
+  constructor(protected value: T) {}
 
   abstract setup(deal: Deal): void
 
@@ -16,7 +16,6 @@ export abstract class Metric<T> {
 
   toJSON() {
     return {
-      key: this.key,
       updatedAt: new Date(),
       value: this.value,
     }
