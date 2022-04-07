@@ -1,6 +1,6 @@
 import { Link } from "remix"
 import { useAccounts } from "~/hooks/useAccounts"
-import { parseArn } from "~/utils/arn"
+import { getArnId } from "~/utils/arn"
 import { relativeDate } from "~/utils/date"
 import { Badge } from "../common/Badge"
 import { TableHeader } from "../common/TableHeader"
@@ -56,7 +56,7 @@ export function AccountsTable() {
               </td>
 
               <td className={`${row} text-right font-medium`}>
-                <Link className="link" to={parseArn(account.arn).id}>
+                <Link className="link" to={getArnId(account.arn)}>
                   Edit
                 </Link>
               </td>

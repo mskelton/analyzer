@@ -4,7 +4,7 @@ import { Select } from "../common/Select"
 
 export interface AccountSelectProps {
   onChange(account: Account): void
-  value: Account
+  value: Account | undefined
 }
 
 export function AccountSelect({ onChange, value }: AccountSelectProps) {
@@ -15,11 +15,9 @@ export function AccountSelect({ onChange, value }: AccountSelectProps) {
       <Select
         hideLabel
         label="Account"
-        onChange={(value) => {
-          onChange(accounts.find((a) => a.id === value)!)
-        }}
+        onChange={(value) => onChange(accounts.find((a) => a.id === value)!)}
         options={accounts}
-        value={value.id}
+        value={value?.id}
       />
     </div>
   )

@@ -1,6 +1,11 @@
-import { useState } from "react"
 import { HiDatabase } from "react-icons/hi"
-import { Link, LoaderFunction, MetaFunction } from "remix"
+import {
+  Link,
+  LoaderFunction,
+  MetaFunction,
+  redirect,
+  useNavigate,
+} from "remix"
 import { getAccounts } from "~/api/accounts.server"
 import { NoAccounts } from "~/components/accounts/NoAccounts"
 import { EmptyState } from "~/components/common/EmptyState"
@@ -9,23 +14,50 @@ import { PageHeader } from "~/components/common/PageHeader"
 import { AccountSelect } from "~/components/dashboard/AccountSelect"
 import { WidgetManager } from "~/components/dashboard/WidgetManager"
 import { useDashboard } from "~/hooks/useDashboard"
+import { getArnId } from "~/utils/arn"
 
 export const meta: MetaFunction = () => {
   return { title: "Dashboard" }
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  return { accounts: await getAccounts(request) }
+export const loader: LoaderFunction = async ({ params, request }) => {
+  const accounts = await getAccounts(request)
+  const arnId = params["*"]
+
+  // If there are no accounts, don't try to load the account
+  if (!accounts.length) {
+    return { accounts }
+  }
+
+  // If no arnId is provided, redirect to the first account
+  if (!arnId) {
+    return redirect(`/dashboard/${getArnId(accounts[0].arn)}`)
+  }
+
+  // Find the selected account by the arnId
+  const account = accounts.find((account) => getArnId(account.arn) === arnId)
+
+  // If the provided arnId doesn't exist, throw a 404
+  if (!account) {
+    throw new Response("Not Found", { status: 404 })
+  }
+
+  return { account, accounts }
 }
 
 export default function Dashboard() {
-  const { accounts } = useDashboard()
-  const [account, setAccount] = useState(accounts[0])
+  const { account } = useDashboard()
+  const navigate = useNavigate()
 
   return (
     <>
       <PageHeader
-        extra={<AccountSelect onChange={setAccount} value={account} />}
+        extra={
+          <AccountSelect
+            onChange={(account) => navigate(getArnId(account.arn))}
+            value={account}
+          />
+        }
       >
         Dashboard
       </PageHeader>

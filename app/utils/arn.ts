@@ -13,3 +13,5 @@ export function parseArn(arn: string) {
     userId,
   }
 }
+
+export const getArnId = (arn: string) => parseArn(arn).id
