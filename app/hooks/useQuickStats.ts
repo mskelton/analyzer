@@ -33,8 +33,8 @@ function getDrawdownInfo(
 
 export function useQuickStats(metrics: NonNullable<Account["metrics"]>) {
   return {
-    balance: getStatInfo(metrics.profit?.value, formatCurrency),
+    balance: getStatInfo(metrics.balance?.value, formatCurrency),
     drawdown: getDrawdownInfo(metrics.drawdown),
-    profit: getStatInfo(metrics.balance?.value, formatPercentage),
+    profit: getStatInfo(metrics.profit?.value, formatPercentage),
   }
 }
