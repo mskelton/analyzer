@@ -21,7 +21,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Dashboard() {
   const { accounts } = useDashboard()
   const [account, setAccount] = useState(accounts[0])
-  console.log(account)
 
   return (
     <>

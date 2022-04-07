@@ -3,6 +3,7 @@ import { Account } from "@prisma/client"
 import { HiCash, HiTrendingDown, HiTrendingUp } from "react-icons/hi"
 import { IconTab } from "../common/tabs/IconTab"
 import { BalanceChart } from "./BalanceChart"
+import { DrawdownChart } from "./DrawdownChart"
 import { ProfitChart } from "./ProfitChart"
 
 export interface ChartTabsProps {
@@ -27,7 +28,9 @@ export function ChartTabs({ metrics }: ChartTabsProps) {
           <BalanceChart metric={metrics.balance} />
         </Tab.Panel>
 
-        <Tab.Panel>Coming soon!</Tab.Panel>
+        <Tab.Panel>
+          <DrawdownChart metric={metrics.drawdown} />
+        </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>
   )
